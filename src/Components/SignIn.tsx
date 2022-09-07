@@ -2,7 +2,6 @@ import React from "react";
 import { signInWithGoogle } from "../firebase";
 
 const SignIn = () => {
-  console.log(process.env.REACT_APP_FB_API_KEY);
   return (
     <div className="sign-in">
       <h2 className="text-5xl font-medium text-neutral-800 mb-5">Sign In</h2>

@@ -6,18 +6,12 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_REACT_APP_FB_API_KEY,
-  authDomain: process.env.REACT_APP_REACT_APP_FB_AUTHDOMAIN,
-  projectId: process.env.REACT_APP_REACT_APP_FB_PROJECTID,
-  storageBucket: process.env.REACT_APP_REACT_APP_FB_STORAGEBUCKET,
-  messagingSenderId: process.env.REACT_APP_REACT_APP_FB_MESSAGINGSENDERID,
-  appId: process.env.REACT_APP_REACT_APP_FB_APPID,
-  //   apiKey: "AIzaSyC4Y1e63N7HwYEqvHU5V9MCd-w6EMls8jg",
-  //   authDomain: "todo-app-695d0.firebaseapp.com",
-  //   projectId: "todo-app-695d0",
-  //   storageBucket: "todo-app-695d0.appspot.com",
-  //   messagingSenderId: "1078684406745",
-  //   appId: "1:1078684406745:web:8db7f98a9acf73d48b3fc8",
+  apiKey: process.env.REACT_APP_FB_API_KEY,
+  authDomain: process.env.REACT_APP_FB_AUTHDOMAIN,
+  projectId: process.env.REACT_APP_FB_PROJECTID,
+  storageBucket: process.env.REACT_APP_FB_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_FB_MESSAGINGSENDERID,
+  appId: process.env.REACT_APP_FB_APPID,
 };
 
 // Initialize Firebase
