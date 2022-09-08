@@ -16,11 +16,11 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const googleAuth = getAuth(app);
+export const globalAuth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
 export const signInWithGoogle = () => {
-  signInWithPopup(googleAuth, googleProvider)
+  signInWithPopup(globalAuth, googleProvider)
     .then((data) => console.log(data))
     .catch((err) => console.log(err));
 };
