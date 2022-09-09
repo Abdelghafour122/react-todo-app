@@ -25,8 +25,21 @@ const SignIn = () => {
         await userSignIn(emailRef.current?.value, passwordRef.current?.value);
       navigate("/dashboard");
     } catch {
-      setErrorMessage("Unable to sign in.");
+      setErrorMessage("An error has occurred, can't log in.");
     }
+    setLoading(false);
+  }
+
+  async function handleSignIn() {
+    try {
+      setErrorMessage("");
+      setLoading(true);
+      await signInWithGoogle();
+      navigate("/dashboard");
+    } catch (error) {
+      setErrorMessage("An error has occurred, can't log in.");
+    }
+    setLoading(false);
   }
 
   return (
@@ -68,11 +81,9 @@ const SignIn = () => {
         </button>
       </p>
       <button
-        onClick={async () => {
-          await signInWithGoogle();
-          navigate("/dashboard");
-        }}
-        className="bg-stone-600 rounded text-white p-2 cursor-pointer"
+        onClick={handleSignIn}
+        disabled={loading}
+        className="bg-stone-600 rounded text-white disabled:text-stone-400 p-2 cursor-pointer disabled:cursor-not-allowed disabled:bg-stone-700"
       >
         Continue with Google
       </button>
