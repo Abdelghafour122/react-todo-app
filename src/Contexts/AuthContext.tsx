@@ -5,7 +5,15 @@ import React, {
   ReactNode,
   useEffect,
 } from "react";
-import { createUserWithEmailAndPassword, User } from "firebase/auth";
+
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  User,
+  signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { globalAuth } from "../firebase";
 import { AuthContextType } from "../Utils/types";
 
@@ -29,6 +37,22 @@ export default function AuthContext({ children }: AuthProviderProps) {
     return createUserWithEmailAndPassword(globalAuth, email, password);
   };
 
+  const userSignIn = (email: string, password: string) => {
+    return signInWithEmailAndPassword(globalAuth, email, password);
+  };
+
+  const googleProvider = new GoogleAuthProvider();
+
+  const signInWithGoogle = () => {
+    return signInWithPopup(globalAuth, googleProvider);
+    // .then((data) => console.log(data))
+    // .catch((err) => console.log(err));
+  };
+
+  const userSignOut = () => {
+    return signOut(globalAuth);
+  };
+
   useEffect(() => {
     const unlog = globalAuth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -40,7 +64,12 @@ export default function AuthContext({ children }: AuthProviderProps) {
   const contextValue: AuthContextType = {
     currentUser,
     userSignUp,
+    userSignIn,
+    signInWithGoogle,
+    userSignOut,
   };
+
+  console.log(globalAuth.currentUser?.email);
 
   return (
     <AuthenticationContext.Provider value={contextValue}>

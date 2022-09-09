@@ -13,14 +13,6 @@ const SignUp = () => {
   const [errormessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // const handleSubmit = (
-  //   e: Event
-  // ): FormEventHandler<HTMLFormElement> | undefined => {
-  //   e.preventDefault();
-  //   console.log(emailRef, passwordRef, confirmPasswordRef);
-  //   return;
-  // };
-
   async function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
     console.log(
@@ -35,15 +27,17 @@ const SignUp = () => {
     try {
       setErrorMessage("");
       setLoading(true);
-      if (emailRef.current?.value && passwordRef.current?.value !== undefined)
+      if (
+        emailRef.current?.value !== undefined &&
+        passwordRef.current?.value !== undefined
+      )
         await userSignUp(emailRef.current?.value, passwordRef.current?.value);
+      navigate("/dashboard");
     } catch {
-      setErrorMessage("Unable to signup.");
+      setErrorMessage("Unable to sign up.");
     }
 
     setLoading(false);
-
-    // return;
   }
 
   return (
@@ -104,7 +98,7 @@ const SignUp = () => {
         <p>Already have an account?</p>
         <button
           className="text-xl font-bold text-stone-200 underline decoration-stone-200"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/signin")}
         >
           Sign In
         </button>
