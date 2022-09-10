@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 // import { signInWithGoogle } from "../firebase";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthentication } from "../Contexts/AuthContext";
 
 const SignIn = () => {
@@ -61,6 +61,15 @@ const SignIn = () => {
           placeholder="Your Password"
           ref={passwordRef}
         />
+        <div className="forgot-password">
+          <p className="text-lg text-stone-900">Forgot your password?</p>
+          <Link
+            className="text-xl font-bold text-stone-200 underline decoration-stone-200"
+            to={"/forgottenpassword"}
+          >
+            Reset your password
+          </Link>
+        </div>
         <button
           className="bg-stone-800 rounded text-white p-2 cursor-pointer"
           type="submit"
