@@ -1,10 +1,10 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import Dashboard from "./Components/Dashboard";
-import Homepage from "./Components/Homepage";
-import SignIn from "./Components/SignIn";
-import SignUp from "./Components/SignUp";
+import Dashboard from "./Routes/Dashboard";
+import Homepage from "./Routes/Homepage";
+import SignIn from "./Routes/SignIn";
+import SignUp from "./Routes/SignUp";
 
 import AuthContext from "./Contexts/AuthContext";
 import PrivateRoute from "./Utils/PrivateRoute";
