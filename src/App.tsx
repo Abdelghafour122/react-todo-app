@@ -7,8 +7,9 @@ import SignIn from "./Routes/SignIn";
 import SignUp from "./Routes/SignUp";
 
 import AuthContext from "./Contexts/AuthContext";
-import PrivateRoute from "./Utils/PrivateRoute";
+import PrivateLoggedRoute from "./Utils/PrivateLoggedRoute";
 import ForgottenPassword from "./Routes/ForgottenPassword";
+import PrivateUnloggedRoute from "./Utils/PrivateUnloggedRoute";
 document.body.classList.add("bg-zinc-700");
 
 function App() {
@@ -16,13 +17,19 @@ function App() {
     <AuthContext>
       <div className="App">
         <Routes>
-          <Route element={<PrivateRoute />}>
+          <Route element={<PrivateLoggedRoute />}>
             <Route element={<Dashboard />} path="/dashboard" />
           </Route>
+          <Route element={<PrivateUnloggedRoute />}>
+            <Route element={<SignIn />} path="/signin" />
+          </Route>
+          <Route element={<PrivateUnloggedRoute />}>
+            <Route element={<SignUp />} path="/signup" />
+          </Route>
+          <Route element={<PrivateUnloggedRoute />}>
+            <Route element={<ForgottenPassword />} path="/forgottenpassword" />
+          </Route>
           <Route element={<Homepage />} path="/" />
-          <Route element={<SignIn />} path="/signin" />
-          <Route element={<SignUp />} path="/signup" />
-          <Route element={<ForgottenPassword />} path="/forgottenpassword" />
         </Routes>
       </div>
     </AuthContext>

@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-// import { signInWithGoogle } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthentication } from "../Contexts/AuthContext";
 
@@ -54,20 +53,21 @@ const SignIn = () => {
           type="email"
           placeholder="Your Email"
           ref={emailRef}
+          required
         />
         <input
           className="border-2 border-slate-900 rounded-sm px-2 py-1 text-slate-900"
           type="password"
           placeholder="Your Password"
           ref={passwordRef}
+          required
         />
         <div className="forgot-password">
-          <p className="text-lg text-stone-900">Forgot your password?</p>
           <Link
             className="text-xl font-bold text-stone-200 underline decoration-stone-200"
             to={"/forgottenpassword"}
           >
-            Reset your password
+            Forgot your password?
           </Link>
         </div>
         <button
@@ -85,6 +85,7 @@ const SignIn = () => {
         <button
           className="text-xl font-bold text-stone-200 underline decoration-stone-200"
           onClick={() => navigate("/signup")}
+          disabled={loading}
         >
           Sign Up
         </button>
