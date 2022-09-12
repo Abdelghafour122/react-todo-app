@@ -34,6 +34,8 @@ export default function AuthContext({ children }: AuthProviderProps) {
   const [currentUser, setCurrentUser] = useState<User | null>();
   const [loading, setLoading] = useState(true);
 
+  const EMAIL_REGEX = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
   const userSignUp = (email: string, password: string) => {
     return createUserWithEmailAndPassword(globalAuth, email, password);
   };
@@ -50,8 +52,6 @@ export default function AuthContext({ children }: AuthProviderProps) {
 
   const signInWithGoogle = () => {
     return signInWithPopup(globalAuth, googleProvider);
-    // .then((data) => console.log(data))
-    // .catch((err) => console.log(err));
   };
 
   const userSignOut = () => {
@@ -73,6 +73,7 @@ export default function AuthContext({ children }: AuthProviderProps) {
     signInWithGoogle,
     userSignOut,
     resetPassword,
+    EMAIL_REGEX,
   };
 
   console.log(globalAuth.currentUser?.email);

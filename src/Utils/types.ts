@@ -7,4 +7,5 @@ export type AuthContextType = {
   signInWithGoogle: () => Promise<UserCredential>;
   userSignOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
+  EMAIL_REGEX: RegExp;
 };

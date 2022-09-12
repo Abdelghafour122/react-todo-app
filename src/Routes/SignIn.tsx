@@ -1,13 +1,18 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Container from "../Components/Container";
 import { useAuthentication } from "../Contexts/AuthContext";
 
+import { FcGoogle } from "react-icons/fc";
+
 const SignIn = () => {
   const navigate = useNavigate();
-  const { userSignIn, signInWithGoogle } = useAuthentication();
+  const { userSignIn, signInWithGoogle, EMAIL_REGEX } = useAuthentication();
 
   const emailRef = useRef<HTMLInputElement | null>(null);
+  const [validEmail, setValidEmail] = useState(true);
+  const [emailFocus, setEmailFocus] = useState(false);
+
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const [errormessage, setErrorMessage] = useState("");
@@ -42,6 +47,11 @@ const SignIn = () => {
     setLoading(false);
   }
 
+  useEffect(() => {
+    if (emailRef.current?.value !== undefined && emailRef.current?.value !== "")
+      setValidEmail(EMAIL_REGEX.test(emailRef.current?.value));
+  }, [emailRef.current?.value, EMAIL_REGEX]);
+
   return (
     <div className="sign-in">
       <Container>
@@ -55,8 +65,11 @@ const SignIn = () => {
             type="email"
             placeholder="Your Email"
             ref={emailRef}
+            onFocus={() => setEmailFocus(true)}
+            onBlur={() => setEmailFocus(false)}
             required
           />
+          {emailFocus && !validEmail && <p>Invalid Email Address</p>}
           <input
             className="border-2 border-slate-900 rounded-sm px-2 py-1 text-slate-900"
             type="password"
@@ -95,8 +108,9 @@ const SignIn = () => {
         <button
           onClick={handleGoogleSignIn}
           disabled={loading}
-          className="bg-stone-600 rounded text-white disabled:text-stone-400 p-2 cursor-pointer disabled:cursor-not-allowed disabled:bg-stone-700"
+          className="flex justify-center items-center  bg-stone-600 rounded text-white disabled:text-stone-400 p-2 cursor-pointer disabled:cursor-not-allowed disabled:bg-stone-700"
         >
+          <FcGoogle size="2rem" />
           Continue with Google
         </button>
       </Container>
