@@ -13,6 +13,7 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { globalAuth } from "../firebase";
 import { AuthContextType } from "../Utils/types";
@@ -41,6 +42,10 @@ export default function AuthContext({ children }: AuthProviderProps) {
     return signInWithEmailAndPassword(globalAuth, email, password);
   };
 
+  const resetPassword = (email: string) => {
+    return sendPasswordResetEmail(globalAuth, email);
+  };
+
   const googleProvider = new GoogleAuthProvider();
 
   const signInWithGoogle = () => {
@@ -67,6 +72,7 @@ export default function AuthContext({ children }: AuthProviderProps) {
     userSignIn,
     signInWithGoogle,
     userSignOut,
+    resetPassword,
   };
 
   console.log(globalAuth.currentUser?.email);

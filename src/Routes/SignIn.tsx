@@ -29,7 +29,7 @@ const SignIn = () => {
     setLoading(false);
   }
 
-  async function handleSignIn() {
+  async function handleGoogleSignIn() {
     try {
       setErrorMessage("");
       setLoading(true);
@@ -80,8 +80,8 @@ const SignIn = () => {
           Sign In
         </button>
       </form>
-      <p className="note flex gap-5 text-lg font-medium items-center justify-center">
-        Don't have an account?
+      <div className="note flex gap-5 text-lg font-medium items-center justify-center">
+        <p>Don't have an account?</p>
         <button
           className="text-xl font-bold text-stone-200 underline decoration-stone-200"
           onClick={() => navigate("/signup")}
@@ -89,9 +89,9 @@ const SignIn = () => {
         >
           Sign Up
         </button>
-      </p>
+      </div>
       <button
-        onClick={handleSignIn}
+        onClick={handleGoogleSignIn}
         disabled={loading}
         className="bg-stone-600 rounded text-white disabled:text-stone-400 p-2 cursor-pointer disabled:cursor-not-allowed disabled:bg-stone-700"
       >
