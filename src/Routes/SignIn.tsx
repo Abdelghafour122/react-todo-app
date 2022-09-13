@@ -55,38 +55,58 @@ const SignIn = () => {
   return (
     <div className="sign-in">
       <Container>
-        <h2 className="text-5xl font-bold text-neutral-900 mb-5">Sign In</h2>
+        <h2 className="form-title">Sign In</h2>
         {errormessage !== "" && (
           <p className="text-lg text-red-700">{errormessage}</p>
         )}
-        <form className="flex flex-col items-center my-3 gap-3" action="">
-          <input
-            className="border-2 border-slate-900 rounded-sm px-2 py-1 text-slate-900"
-            type="email"
-            placeholder="Your Email"
-            ref={emailRef}
-            onFocus={() => setEmailFocus(true)}
-            onBlur={() => setEmailFocus(false)}
-            required
-          />
-          {emailFocus && !validEmail && <p>Invalid Email Address</p>}
-          <input
-            className="border-2 border-slate-900 rounded-sm px-2 py-1 text-slate-900"
-            type="password"
-            placeholder="Your Password"
-            ref={passwordRef}
-            required
-          />
+        <form
+          className="flex flex-col items-center justify-center my-3 mx-auto gap-3 w-max md:w-80 lg:w-96"
+          action=""
+        >
+          <div className="email flex flex-col justify-center items-center w-full">
+            <label
+              htmlFor="email"
+              className="form-label after:content-['*'] after:ml-0.5 after:text-red-500"
+            >
+              Email:
+            </label>
+            <input
+              id="email"
+              className="form-input"
+              type="email"
+              ref={emailRef}
+              onFocus={() => setEmailFocus(true)}
+              onBlur={() => setEmailFocus(false)}
+              required
+            />
+            {emailFocus && !validEmail && <p>Invalid Email Address</p>}
+          </div>
+
+          <div className="password flex flex-col justify-center items-center w-full">
+            <label
+              htmlFor="password"
+              className="form-label after:content-['*'] after:ml-0.5 after:text-red-500"
+            >
+              Password:
+            </label>
+            <input
+              id="password"
+              className="form-input"
+              type="password"
+              ref={passwordRef}
+              required
+            />
+          </div>
           <div className="forgot-password">
             <Link
-              className="text-xl font-bold text-stone-200 underline decoration-stone-200"
+              className="link hover:text-stone-400"
               to={"/forgottenpassword"}
             >
               Forgot your password?
             </Link>
           </div>
           <button
-            className="bg-stone-800 rounded text-white p-2 cursor-pointer"
+            className="button disabled:opacity-20 disabled:cursor-not-allowed"
             type="submit"
             value="Sign In"
             onClick={handleSubmit}
@@ -97,18 +117,14 @@ const SignIn = () => {
         </form>
         <div className="note flex gap-5 text-lg font-medium items-center justify-center">
           <p>Don't have an account?</p>
-          <button
-            className="text-xl font-bold text-stone-200 underline decoration-stone-200"
-            onClick={() => navigate("/signup")}
-            disabled={loading}
-          >
+          <Link to="/signup" className="link hover:text-stone-400">
             Sign Up
-          </button>
+          </Link>
         </div>
         <button
           onClick={handleGoogleSignIn}
           disabled={loading}
-          className="flex justify-center items-center  bg-stone-600 rounded text-white disabled:text-stone-400 p-2 cursor-pointer disabled:cursor-not-allowed disabled:bg-stone-700"
+          className="button flex justify-center items-center mt-3 mb-0 mx-auto disabled:opacity-20 cursor-pointer disabled:cursor-not-allowed"
         >
           <FcGoogle size="2rem" />
           Continue with Google

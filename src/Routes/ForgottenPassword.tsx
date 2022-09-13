@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { BsArrowLeftSquareFill } from "react-icons/bs";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useAuthentication } from "../Contexts/AuthContext";
 
@@ -28,39 +29,49 @@ function ForgottenPassword() {
 
   return (
     <div className="forgotten-password">
-      <button
-        className="flex items-center justify-center gap-2 text-lg"
-        onClick={() => navigate(-1)}
-      >
-        <BsArrowLeftSquareFill size="2em" />
-        Go Back
-      </button>
-      <form
-        className="flex flex-col items-center justify-center my-3 mx-auto gap-3 w-max"
-        action=""
-      >
-        {message !== "" && <p>{message}</p>}
-        <div className="email flex flex-col justify-center items-center w-full">
-          <label htmlFor="email-address" className="text-lg self-start">
-            Email:
-          </label>
-          <input
-            type="email"
-            id="email-address"
-            className="border-2 border-slate-900 rounded-sm px-2 py-1 text-slate-900"
-            ref={emailRef}
-            required
-          />
+      <div className="container">
+        <h2 className="form-title">Reset your password</h2>
+        <div className="form-info-message w-60 md:w-80 lg:w-96 ">
+          <AiOutlineInfoCircle size="2rem" />
+          <p className="text-sm font-medium text-left">
+            If you have an account, you will recieve an email to reset your
+            password in your inbox.
+          </p>
         </div>
-        <button
-          type="submit"
-          className="bg-stone-200 font-semibold py-1 px-3 rounded-md border-2 border-slate-900 disabled:opacity-20"
-          disabled={loading}
-          onClick={handleSubmit}
+        <form
+          className="flex flex-col items-center justify-center my-3 mx-auto gap-3 w-max md:w-80 lg:w-96"
+          action=""
         >
-          Reset password
+          {message !== "" && <p>{message}</p>}
+          <div className="email flex flex-col justify-center items-center w-full">
+            <label htmlFor="email-address" className="form-label">
+              Email:
+            </label>
+            <input
+              type="email"
+              id="email-address"
+              className="form-input"
+              ref={emailRef}
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="button"
+            disabled={loading}
+            onClick={handleSubmit}
+          >
+            Reset password
+          </button>
+        </form>
+        <button
+          className="flex items-center justify-center gap-2 w-max mt-3 mb-0 mx-auto text-lg font-semibold underline text-stone-300"
+          onClick={() => navigate(-1)}
+        >
+          <BsArrowLeftSquareFill size="1.5em" color="#e7e5e4" />
+          Go Back
         </button>
-      </form>
+      </div>
     </div>
   );
 }
