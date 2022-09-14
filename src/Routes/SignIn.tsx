@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Container from "../Components/Container";
 import { useAuthentication } from "../Contexts/AuthContext";
+import { VscError } from "react-icons/vsc";
 
 import { FcGoogle } from "react-icons/fc";
 
@@ -57,7 +58,10 @@ const SignIn = () => {
       <Container>
         <h2 className="form-title">Sign In</h2>
         {errormessage !== "" && (
-          <p className="text-lg text-red-700">{errormessage}</p>
+          <div className="form-error-message w-60 md:w-80 lg:w-96">
+            <VscError size="1.5rem" />
+            <p>{errormessage}</p>
+          </div>
         )}
         <form
           className="flex flex-col items-center justify-center my-3 mx-auto gap-3 w-max md:w-80 lg:w-96"

@@ -10,6 +10,7 @@ import AuthContext from "./Contexts/AuthContext";
 import PrivateLoggedRoute from "./Utils/PrivateLoggedRoute";
 import ForgottenPassword from "./Routes/ForgottenPassword";
 import PrivateUnloggedRoute from "./Utils/PrivateUnloggedRoute";
+import ErrorPage from "./Routes/ErrorPage";
 document.body.classList.add("bg-zinc-700");
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route element={<ForgottenPassword />} path="/forgottenpassword" />
           </Route>
           <Route element={<Homepage />} path="/" />
+          <Route element={<ErrorPage />} path="*" />
         </Routes>
       </div>
     </AuthContext>

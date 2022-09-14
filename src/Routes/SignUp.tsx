@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useAuthentication } from "../Contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import { VscError } from "react-icons/vsc";
 
 const SignUp = () => {
   const { userSignUp } = useAuthentication();
@@ -45,7 +46,10 @@ const SignUp = () => {
       <div className="container">
         <h2 className="form-title">Sign Up</h2>
         {errormessage !== "" && (
-          <p className="text-lg text-red-700">{errormessage}</p>
+          <div className="form-error-message w-60 md:w-80 lg:w-96">
+            <VscError size="1.5rem" />
+            <p>{errormessage}</p>
+          </div>
         )}
         <form
           action=""
