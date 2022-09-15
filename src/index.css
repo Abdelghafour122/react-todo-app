@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/*after:content-['*'] after:ml-0.5 after:text-red-500*/
 @layer components {
   .container {
     width: 100vw;
