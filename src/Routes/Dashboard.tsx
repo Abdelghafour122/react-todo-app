@@ -1,16 +1,87 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthentication } from "../Contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
+
+import { HiOutlineLightBulb } from "react-icons/hi";
+import { FiEdit3 } from "react-icons/fi";
+import { MdLabelOutline } from "react-icons/md";
+import { BsArchive, BsTrash } from "react-icons/bs";
+import Todos from "./Dashboard/Todos";
 
 type Props = {};
 
 function Dashboard({}: Props) {
   const { currentUser, userSignOut } = useAuthentication();
+  const [profilePic, setProfilePic] = useState<string | undefined>();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (currentUser?.photoURL !== null) setProfilePic(currentUser?.photoURL);
+    else
+      setProfilePic(process.env.PUBLIC_URL + "/Assets/defaultProfilePic.webp");
+  }, [currentUser]);
+
   const navigate = useNavigate();
+
+  const NAV_LINKS = [
+    {
+      linkName: "Todos",
+      icon: HiOutlineLightBulb,
+      execute: () => console.log("/Todos"),
+    },
+    {
+      linkName: "Labels",
+      icon: MdLabelOutline,
+      execute: () => console.log("Labels"),
+    },
+    {
+      linkName: "Edit Labels",
+      icon: FiEdit3,
+      execute: () => console.log("Edit Labels"),
+    },
+    {
+      linkName: "Archived",
+      icon: BsArchive,
+      execute: () => console.log("Archived"),
+    },
+    { linkName: "Trash", icon: BsTrash, execute: () => console.log("Trash") },
+  ];
+
   return (
-    <div className="dashboard">
-      <h2 className="text-5xl font-bold text-neutral-900 mb-5">Dashboard</h2>
-      <p>{`Welcome ${currentUser?.email}`}</p>
+    <div className="dashboard h-full w-full">
+      <nav className="py-2 px-0 w-full border-b-[1px] border-b-stone-400">
+        <div className="container flex items-center justify-between gap-2">
+          <p className="text-3xl text-orange-300 font-sans font-extrabold">
+            Dooit
+          </p>
+          <div className="funcs basis-2/4">
+            <ul className="flex items-center justify-center gap-3">
+              {NAV_LINKS.map((link, ind) => {
+                return (
+                  <li
+                    key={ind}
+                    className="flex flex-col items-center justify-between p-1 rounded-lg basis-1/5 cursor-pointer bg-stone-700 hover:shadow-lg active:bg-stone-500"
+                    onClick={link.execute}
+                  >
+                    <link.icon color="rgb(214, 211, 209)" size={"1.5rem"} />
+                    <span className="text-stone-300">{link.linkName}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <button className="rounded-full hover:box">
+            <img className="h-12 rounded-full" src={profilePic} alt="" />
+          </button>
+        </div>
+      </nav>
+      <div className="dashboard-body">
+        {/* FIGURE OUT HOW TO MAKE THIS WORK */}
+        <Routes>
+          <Route element={<Todos />} path="/todos" />
+        </Routes>
+      </div>
+
       <button
         className="px-3 py-1 bg-stone-700 text-stone-200"
         onClick={async () => {

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Container from "../Components/Container";
 import { useAuthentication } from "../Contexts/AuthContext";
 import { VscError } from "react-icons/vsc";
 
@@ -55,85 +54,80 @@ const SignIn = () => {
 
   return (
     <div className="sign-in">
-      <Container>
-        <h2 className="form-title">Sign In</h2>
-        {errormessage !== "" && (
-          <div className="form-error-message w-60 md:w-80 lg:w-96">
-            <VscError size="1.5rem" />
-            <p>{errormessage}</p>
-          </div>
-        )}
-        <form
-          className="flex flex-col items-center justify-center my-3 mx-auto gap-3 w-max md:w-80 lg:w-96"
-          action=""
-        >
-          <div className="email flex flex-col justify-center items-center w-full">
-            <label
-              htmlFor="email"
-              className="form-label after:content-['*'] after:ml-0.5 after:text-red-500"
-            >
-              Email:
-            </label>
-            <input
-              id="email"
-              className="form-input"
-              type="email"
-              ref={emailRef}
-              onFocus={() => setEmailFocus(true)}
-              onBlur={() => setEmailFocus(false)}
-              required
-            />
-            {emailFocus && !validEmail && <p>Invalid Email Address</p>}
-          </div>
-
-          <div className="password flex flex-col justify-center items-center w-full">
-            <label
-              htmlFor="password"
-              className="form-label after:content-['*'] after:ml-0.5 after:text-red-500"
-            >
-              Password:
-            </label>
-            <input
-              id="password"
-              className="form-input"
-              type="password"
-              ref={passwordRef}
-              required
-            />
-          </div>
-          <div className="forgot-password">
-            <Link
-              className="link hover:text-stone-400"
-              to={"/forgottenpassword"}
-            >
-              Forgot your password?
-            </Link>
-          </div>
-          <button
-            className="button disabled:opacity-20 disabled:cursor-not-allowed"
-            type="submit"
-            value="Sign In"
-            onClick={handleSubmit}
-            disabled={loading}
+      <h2 className="form-title">Sign In</h2>
+      {errormessage !== "" && (
+        <div className="form-error-message w-60 md:w-80 lg:w-96">
+          <VscError size="1.5rem" />
+          <p>{errormessage}</p>
+        </div>
+      )}
+      <form
+        className="flex flex-col items-center justify-center my-3 mx-auto gap-3 w-max md:w-80 lg:w-96"
+        action=""
+      >
+        <div className="email flex flex-col justify-center items-center w-full">
+          <label
+            htmlFor="email"
+            className="form-label after:content-['*'] after:ml-0.5 after:text-red-500"
           >
-            Sign In
-          </button>
-        </form>
-        <div className="note flex gap-5 text-lg font-medium items-center justify-center">
-          <p>Don't have an account?</p>
-          <Link to="/signup" className="link hover:text-stone-400">
-            Sign Up
+            Email:
+          </label>
+          <input
+            id="email"
+            className="form-input"
+            type="email"
+            ref={emailRef}
+            onFocus={() => setEmailFocus(true)}
+            onBlur={() => setEmailFocus(false)}
+            required
+          />
+          {emailFocus && !validEmail && <p>Invalid Email Address</p>}
+        </div>
+
+        <div className="password flex flex-col justify-center items-center w-full">
+          <label
+            htmlFor="password"
+            className="form-label after:content-['*'] after:ml-0.5 after:text-red-500"
+          >
+            Password:
+          </label>
+          <input
+            id="password"
+            className="form-input"
+            type="password"
+            ref={passwordRef}
+            required
+          />
+        </div>
+        <div className="forgot-password">
+          <Link className="link hover:text-stone-400" to={"/forgottenpassword"}>
+            Forgot your password?
           </Link>
         </div>
         <button
-          onClick={handleGoogleSignIn}
+          className="button disabled:opacity-20 disabled:cursor-not-allowed"
+          type="submit"
+          value="Sign In"
+          onClick={handleSubmit}
           disabled={loading}
-          className="button flex justify-center items-center mt-3 mb-0 mx-auto disabled:opacity-20 cursor-pointer disabled:cursor-not-allowed"
         >
-          <FcGoogle size="2rem" />
-          Continue with Google
+          Sign In
         </button>
-      </Container>
+      </form>
+      <div className="note flex gap-5 text-lg font-medium items-center justify-center">
+        <p>Don't have an account?</p>
+        <Link to="/signup" className="link hover:text-stone-400">
+          Sign Up
+        </Link>
+      </div>
+      <button
+        onClick={handleGoogleSignIn}
+        disabled={loading}
+        className="button flex justify-center items-center mt-3 mb-0 mx-auto disabled:opacity-20 cursor-pointer disabled:cursor-not-allowed"
+      >
+        <FcGoogle size="2rem" />
+        Continue with Google
+      </button>
     </div>
   );
 };
