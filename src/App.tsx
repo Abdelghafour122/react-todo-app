@@ -12,6 +12,8 @@ import ForgottenPassword from "./Routes/ForgottenPassword";
 import PrivateUnloggedRoute from "./Utils/PrivateUnloggedRoute";
 import ErrorPage from "./Routes/ErrorPage";
 import Todos from "./Routes/Dashboard/Todos";
+import Archived from "./Routes/Dashboard/Archived";
+import Trash from "./Routes/Dashboard/Trash";
 document.body.classList.add("bg-zinc-700");
 
 function App() {
@@ -20,10 +22,11 @@ function App() {
       <div className="App">
         <Routes>
           <Route element={<PrivateLoggedRoute />}>
-            <Route element={<Todos />} path="/todos" />
-          </Route>
-          <Route element={<PrivateLoggedRoute />}>
-            <Route element={<Dashboard />} path="/dashboard" />
+            <Route element={<Dashboard />} path="dashboard/*">
+              <Route index element={<Todos />} />
+              <Route element={<Trash />} path="trash" />
+              <Route element={<Archived />} path="archived" />
+            </Route>
           </Route>
           <Route element={<PrivateUnloggedRoute />}>
             <Route element={<SignIn />} path="/signin" />

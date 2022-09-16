@@ -33,6 +33,13 @@ export function useAuthentication() {
 export default function AuthContext({ children }: AuthProviderProps) {
   const [currentUser, setCurrentUser] = useState<User | null>();
   const [loading, setLoading] = useState(true);
+  const [profilePic, setProfilePic] = useState<string | undefined>();
+
+  useEffect(() => {
+    if (currentUser?.photoURL !== null) setProfilePic(currentUser?.photoURL);
+    else
+      setProfilePic(process.env.PUBLIC_URL + "/Assets/defaultProfilePic.webp");
+  }, [currentUser]);
 
   const EMAIL_REGEX = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
@@ -68,6 +75,7 @@ export default function AuthContext({ children }: AuthProviderProps) {
 
   const contextValue: AuthContextType = {
     currentUser,
+    profilePic,
     userSignUp,
     userSignIn,
     signInWithGoogle,

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useAuthentication } from "../Contexts/AuthContext";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 import { HiOutlineLightBulb } from "react-icons/hi";
 import { FiEdit3 } from "react-icons/fi";
 import { MdLabelOutline } from "react-icons/md";
 import { BsArchive, BsTrash } from "react-icons/bs";
-import Todos from "./Dashboard/Todos";
+import ProfileSettingsPopup from "../Components/Dashboard/ProfileSettingsPopup";
 
 type Props = {};
 
@@ -14,6 +14,8 @@ function Dashboard({}: Props) {
   const { currentUser, userSignOut } = useAuthentication();
   const [profilePic, setProfilePic] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
+
+  const [openProfilePopup, setOpenProfilePopup] = useState(false);
 
   useEffect(() => {
     if (currentUser?.photoURL !== null) setProfilePic(currentUser?.photoURL);
@@ -27,12 +29,12 @@ function Dashboard({}: Props) {
     {
       linkName: "Todos",
       icon: HiOutlineLightBulb,
-      execute: () => console.log("/Todos"),
+      execute: () => navigate(""),
     },
     {
       linkName: "Labels",
       icon: MdLabelOutline,
-      execute: () => console.log("Labels"),
+      execute: () => console.log("labels"),
     },
     {
       linkName: "Edit Labels",
@@ -42,9 +44,9 @@ function Dashboard({}: Props) {
     {
       linkName: "Archived",
       icon: BsArchive,
-      execute: () => console.log("Archived"),
+      execute: () => navigate("archived"),
     },
-    { linkName: "Trash", icon: BsTrash, execute: () => console.log("Trash") },
+    { linkName: "Trash", icon: BsTrash, execute: () => navigate("trash") },
   ];
 
   return (
@@ -60,7 +62,7 @@ function Dashboard({}: Props) {
                 return (
                   <li
                     key={ind}
-                    className="flex flex-col items-center justify-between p-1 rounded-lg basis-1/5 cursor-pointer bg-stone-700 hover:shadow-lg active:bg-stone-500"
+                    className="flex flex-col items-center justify-between p-1 border-2 border-stone-300 rounded-lg basis-1/5 cursor-pointer bg-stone-700 hover:shadow-lg active:bg-stone-500"
                     onClick={link.execute}
                   >
                     <link.icon color="rgb(214, 211, 209)" size={"1.5rem"} />
@@ -70,16 +72,23 @@ function Dashboard({}: Props) {
               })}
             </ul>
           </div>
-          <button className="rounded-full hover:box">
-            <img className="h-12 rounded-full" src={profilePic} alt="" />
-          </button>
+          <div className="profile relative">
+            <button
+              className="rounded-full hover:box"
+              onClick={() => setOpenProfilePopup(!openProfilePopup)}
+            >
+              <img
+                className="h-12 rounded-full"
+                src={profilePic}
+                alt="profile-img"
+              />
+            </button>
+            {openProfilePopup === true && <ProfileSettingsPopup />}
+          </div>
         </div>
       </nav>
       <div className="dashboard-body">
-        {/* FIGURE OUT HOW TO MAKE THIS WORK */}
-        <Routes>
-          <Route element={<Todos />} path="/todos" />
-        </Routes>
+        <Outlet />
       </div>
 
       <button
