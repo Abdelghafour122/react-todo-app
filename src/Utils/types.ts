@@ -10,3 +10,28 @@ export type AuthContextType = {
   resetPassword: (email: string) => Promise<void>;
   EMAIL_REGEX: RegExp;
 };
+
+export type TodoContextType = {
+  dispatch: React.Dispatch<Actions>;
+  todoList: Todos;
+  addTodoItem: (todoItemContent: any) => void;
+  removeTodoItem: (todoItemId: any) => void;
+  markAsCompleted: (todoItemId: any) => void;
+};
+
+export type Actions = {
+  type: string;
+  payload: string | number;
+};
+
+export type InitialReducerStateType = {
+  todoList: Todos;
+};
+
+interface Todo {
+  id: number;
+  text: string;
+  completed: boolean;
+}
+
+export type Todos = Todo[];

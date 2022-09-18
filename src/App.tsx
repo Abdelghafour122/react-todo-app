@@ -7,6 +7,7 @@ import SignIn from "./Routes/SignIn";
 import SignUp from "./Routes/SignUp";
 
 import AuthContext from "./Contexts/AuthContext";
+import TodoContext from "./Contexts/TodoContext";
 import PrivateLoggedRoute from "./Utils/PrivateLoggedRoute";
 import ForgottenPassword from "./Routes/ForgottenPassword";
 import PrivateUnloggedRoute from "./Utils/PrivateUnloggedRoute";
@@ -19,28 +20,33 @@ document.body.classList.add("bg-zinc-700");
 function App() {
   return (
     <AuthContext>
-      <div className="App">
-        <Routes>
-          <Route element={<PrivateLoggedRoute />}>
-            <Route element={<Dashboard />} path="dashboard/*">
-              <Route index element={<Todos />} />
-              <Route element={<Trash />} path="trash" />
-              <Route element={<Archived />} path="archived" />
+      <TodoContext>
+        <div className="App">
+          <Routes>
+            <Route element={<PrivateLoggedRoute />}>
+              <Route element={<Dashboard />} path="dashboard/*">
+                <Route index element={<Todos />} />
+                <Route element={<Trash />} path="trash" />
+                <Route element={<Archived />} path="archived" />
+              </Route>
             </Route>
-          </Route>
-          <Route element={<PrivateUnloggedRoute />}>
-            <Route element={<SignIn />} path="/signin" />
-          </Route>
-          <Route element={<PrivateUnloggedRoute />}>
-            <Route element={<SignUp />} path="/signup" />
-          </Route>
-          <Route element={<PrivateUnloggedRoute />}>
-            <Route element={<ForgottenPassword />} path="/forgottenpassword" />
-          </Route>
-          <Route element={<Homepage />} path="/" />
-          <Route element={<ErrorPage />} path="*" />
-        </Routes>
-      </div>
+            <Route element={<PrivateUnloggedRoute />}>
+              <Route element={<SignIn />} path="/signin" />
+            </Route>
+            <Route element={<PrivateUnloggedRoute />}>
+              <Route element={<SignUp />} path="/signup" />
+            </Route>
+            <Route element={<PrivateUnloggedRoute />}>
+              <Route
+                element={<ForgottenPassword />}
+                path="/forgottenpassword"
+              />
+            </Route>
+            <Route element={<Homepage />} path="/" />
+            <Route element={<ErrorPage />} path="*" />
+          </Routes>
+        </div>
+      </TodoContext>
     </AuthContext>
   );
 }

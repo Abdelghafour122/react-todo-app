@@ -74,7 +74,7 @@ function Dashboard({}: Props) {
           </div>
           <div className="profile relative">
             <button
-              className="rounded-full hover:box"
+              className="rounded-full hover:shadow-[0_0_0px_2px_black]"
               onClick={() => setOpenProfilePopup(!openProfilePopup)}
             >
               <img
@@ -90,16 +90,6 @@ function Dashboard({}: Props) {
       <div className="dashboard-body">
         <Outlet />
       </div>
-
-      <button
-        className="px-3 py-1 bg-stone-700 text-stone-200"
-        onClick={async () => {
-          await userSignOut();
-          navigate("/");
-        }}
-      >
-        Sign out
-      </button>
     </div>
   );
 }

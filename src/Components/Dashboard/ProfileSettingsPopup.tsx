@@ -23,7 +23,7 @@ const ProfileSettingsPopup = (props: Props) => {
       </div>
       <hr className="bg-zinc-800 h-[1px] w-full" />
       <button
-        className="m-4"
+        className="m-4 button"
         onClick={async () => {
           await userSignOut();
           navigate("/");
