@@ -11,12 +11,12 @@ export type AuthContextType = {
   EMAIL_REGEX: RegExp;
 };
 
-export type TodoContextType = {
+export type TodoContextValueType = {
   dispatch: React.Dispatch<Actions>;
   todoList: Todos;
-  addTodoItem: (todoItemContent: any) => void;
-  removeTodoItem: (todoItemId: any) => void;
-  markAsCompleted: (todoItemId: any) => void;
+  addTodoItem: (todoItemContent: string) => void;
+  removeTodoItem: (todoItemId: number) => void;
+  markAsCompleted: (todoItemId: number) => void;
 };
 
 export type Actions = {
@@ -30,7 +30,7 @@ export type InitialReducerStateType = {
 
 interface Todo {
   id: number;
-  text: string;
+  content: string;
   completed: boolean;
 }
 

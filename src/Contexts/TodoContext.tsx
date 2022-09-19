@@ -1,13 +1,15 @@
 import React, { ReactNode, createContext, useContext, useReducer } from "react";
 import { todoReducer } from "../Reducers/todoReducer";
 import { initialState, actions } from "../Reducers/todoReducerActionsState";
-import { TodoContextType } from "../Utils/types";
+import { TodoContextValueType } from "../Utils/types";
 
 type TodoContextProps = {
   children: ReactNode;
 };
 
-const TodosContext = createContext<TodoContextType>({} as TodoContextType);
+const TodosContext = createContext<TodoContextValueType>(
+  {} as TodoContextValueType
+);
 
 export function useTodoContext() {
   return useContext(TodosContext);
@@ -15,7 +17,7 @@ export function useTodoContext() {
 
 const TodoContext = ({ children }: TodoContextProps) => {
   const [state, dispatch] = useReducer(todoReducer, initialState.todoList);
-  const contextValue = {
+  const contextValue: TodoContextValueType = {
     dispatch: dispatch,
     todoList: state,
     addTodoItem: (todoItemContent: string) => {
