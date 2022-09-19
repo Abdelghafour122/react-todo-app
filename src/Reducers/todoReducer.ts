@@ -19,23 +19,27 @@ export const todoReducer = (
     case actions.ADD_TODO_ITEM:
       return [
         ...state,
-        { id: 1222, content: payload as string, completed: false },
+        { id: 1222, content: payload.content as string, completed: false },
       ];
 
     case actions.EDIT_TODO_ITEM:
       return [
         ...state.map((todo) =>
           payload.id === todo.id
-            ? { ...todo, content: payload as string }
+            ? { ...todo, content: payload.content as string }
             : todo
         ),
       ];
 
     case actions.REMOVE_TODO_ITEM:
-      return state;
+      return [...state.filter((todo) => todo.id !== payload.id)];
 
     case actions.TOGGLE_COMPLETED:
-      return state;
+      return [
+        ...state.map((todo) =>
+          todo.id === payload.id ? { ...todo, completed: true } : todo
+        ),
+      ];
 
     default:
       return state;
