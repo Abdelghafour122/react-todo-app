@@ -12,16 +12,23 @@ export type AuthContextType = {
 };
 
 export type TodoContextValueType = {
-  dispatch: React.Dispatch<Actions>;
   todoList: Todos;
-  addTodoItem: (todoItemContent: string) => void;
-  removeTodoItem: (todoItemId: number) => void;
-  markAsCompleted: (todoItemId: number) => void;
+  addTodoItem: ({ content }: EditTodoPayloadType) => void;
+  // addTodoItem: (todoItemContent: string) => void;
+  // editTodoItem: (todoItemId: number, todoItemContent: string) => void;
+  editTodoItem: ({ id, content }: EditTodoPayloadType) => void;
+  removeTodoItem: ({ id }: EditTodoPayloadType) => void;
+  markAsCompleted: ({ id }: EditTodoPayloadType) => void;
+};
+
+export type EditTodoPayloadType = {
+  id?: number;
+  content?: string | undefined;
 };
 
 export type Actions = {
   type: string;
-  payload: string | number;
+  payload: EditTodoPayloadType;
 };
 
 export type InitialReducerStateType = {
@@ -30,7 +37,7 @@ export type InitialReducerStateType = {
 
 interface Todo {
   id: number;
-  content: string;
+  content: string | number;
   completed: boolean;
 }
 

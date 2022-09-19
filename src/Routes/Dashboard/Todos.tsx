@@ -3,11 +3,14 @@ import { useTodoContext } from "../../Contexts/TodoContext";
 type Props = {};
 
 const Todos = (props: Props) => {
-  const { addTodoItem } = useTodoContext();
+  const { addTodoItem, todoList, editTodoItem } = useTodoContext();
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log(addTodoItem("lflzefzbeufb"));
+    // addTodoItem({ content: "mjazodjoajd" });
+
+    editTodoItem({ id: 1222, content: "this is the new content!" });
   };
+  console.log(todoList);
   return (
     <div className="todos mt-3">
       <div className="container">
