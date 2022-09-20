@@ -82,4 +82,14 @@
     margin: 0 auto;
     padding: theme("spacing.1");
   }
+
+  .todo-form-input {
+    padding: 0px 15px;
+    border-radius: 7px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: theme("colors.stone.100");
+    caret-color: theme("colors.stone.100");
+  }
 }

@@ -31,26 +31,31 @@ const TodoForm = (props: Props) => {
   return (
     <form
       action=""
-      className="make-todo w-full flex flex-col gap-2"
+      className="make-todo w-full flex flex-col mb-8 p-3 bg-stone-700 rounded-xl gap-5 border-2 border-slate-900"
       onSubmit={handleSubmit}
     >
       <input
         type="text"
+        className="todo-form-input font-semibold text-2xl placeholder:text-stone-300"
         value={todoTitle}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setTodoTitle(e.target.value)
         }
         placeholder="Add a title..."
       />
-      <input
-        type="text"
+      <textarea
+        className="todo-form-input resize-none placeholder:text-stone-300"
+        rows={7}
+        maxLength={2000}
         value={todoContent}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setTodoContent(e.target.value)
-        }
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+          setTodoContent(e.target.value);
+        }}
         placeholder="Write a task..."
       />
-      <button type="submit">Finish</button>
+      <button type="submit" className="button w-max self-center">
+        Finish
+      </button>
     </form>
   );
 };
