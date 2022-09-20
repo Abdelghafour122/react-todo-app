@@ -14,8 +14,6 @@ export type AuthContextType = {
 export type TodoContextValueType = {
   todoList: Todos;
   addTodoItem: ({ content }: EditTodoPayloadType) => void;
-  // addTodoItem: (todoItemContent: string) => void;
-  // editTodoItem: (todoItemId: number, todoItemContent: string) => void;
   editTodoItem: ({ id, content }: EditTodoPayloadType) => void;
   removeTodoItem: ({ id }: EditTodoPayloadType) => void;
   markAsCompleted: ({ id }: EditTodoPayloadType) => void;
@@ -23,6 +21,7 @@ export type TodoContextValueType = {
 
 export type EditTodoPayloadType = {
   id?: number;
+  title?: string | undefined;
   content?: string | undefined;
 };
 
@@ -37,7 +36,8 @@ export type InitialReducerStateType = {
 
 interface Todo {
   id: number;
-  content: string | number;
+  title: string;
+  content: string;
   completed: boolean;
 }
 

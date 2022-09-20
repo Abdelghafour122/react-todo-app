@@ -1,7 +1,7 @@
 import React, { ReactNode, createContext, useContext, useReducer } from "react";
 import { todoReducer } from "../Reducers/todoReducer";
 import { initialState, actions } from "../Reducers/todoReducerActionsState";
-import { TodoContextValueType, EditTodoPayloadType } from "../Utils/types";
+import { TodoContextValueType } from "../Utils/types";
 
 type TodoContextProps = {
   children: ReactNode;
@@ -19,18 +19,24 @@ const TodoContext = ({ children }: TodoContextProps) => {
   const [state, dispatch] = useReducer(todoReducer, initialState.todoList);
   const contextValue: TodoContextValueType = {
     todoList: state,
-    addTodoItem: ({ content: todoItemContent }) => {
-      //   typeof todoItemContent === "string" &&
+    addTodoItem: ({ title: todoItemTitle, content: todoItemContent }) => {
       dispatch({
         type: actions.ADD_TODO_ITEM,
-        payload: { content: todoItemContent as string },
+        payload: { title: todoItemTitle, content: todoItemContent },
       });
-      // dispatch({ type: actions.ADD_TODO_ITEM, payload: todoItemContent as string });
     },
-    editTodoItem: ({ id: todoItemId, content: todoItemContent }) => {
+    editTodoItem: ({
+      id: todoItemId,
+      title: todoItemTitle,
+      content: todoItemContent,
+    }) => {
       dispatch({
         type: actions.ADD_TODO_ITEM,
-        payload: { id: todoItemId, content: todoItemContent },
+        payload: {
+          id: todoItemId,
+          title: todoItemTitle,
+          content: todoItemContent,
+        },
       });
     },
     removeTodoItem: ({ id: todoItemId }) => {

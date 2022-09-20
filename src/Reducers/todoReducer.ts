@@ -1,32 +1,31 @@
 import { Actions, Todos } from "../Utils/types";
 import { actions } from "./todoReducerActionsState";
 
-// export const todoReducer = (state: Todos, action: Actions) => {
 export const todoReducer = (
   state: Todos,
   { type, payload }: Actions
 ): Todos => {
-  //   switch (action.type) {
   switch (type) {
-    // case actions.ADD_TODO_ITEM:
-    //   return {
-    //     state: [
-    //       ...state,
-    //       { id: 1222, content: "what the fuck", completed: false },
-    //     ],
-    //   };
-
     case actions.ADD_TODO_ITEM:
       return [
         ...state,
-        { id: 1222, content: payload.content as string, completed: false },
+        {
+          id: Math.floor(Math.random() * 1000000),
+          title: payload.title as string,
+          content: payload.content as string,
+          completed: false,
+        },
       ];
 
     case actions.EDIT_TODO_ITEM:
       return [
         ...state.map((todo) =>
           payload.id === todo.id
-            ? { ...todo, content: payload.content as string }
+            ? {
+                ...todo,
+                title: payload.title as string,
+                content: payload.content as string,
+              }
             : todo
         ),
       ];

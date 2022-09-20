@@ -1,35 +1,37 @@
-import React, { SyntheticEvent } from "react";
+import React from "react";
 import { useTodoContext } from "../../Contexts/TodoContext";
+
+import Todo from "./Todos/Todo";
+import Message from "./Todos/Message";
+import TodoForm from "./Todos/TodoForm";
+
 type Props = {};
 
 const Todos = (props: Props) => {
-  const {
-    addTodoItem,
-    todoList,
-    removeTodoItem,
-    markAsCompleted,
-    editTodoItem,
-  } = useTodoContext();
-  const handleSubmit = (e: SyntheticEvent) => {
-    e.preventDefault();
-    // addTodoItem({ content: "mjazodjoajd" });
+  const { todoList } = useTodoContext();
 
-    editTodoItem({ id: 1222, content: "edited todo text" });
-    // markAsCompleted({ id: 1222 });
-  };
-  console.log(todoList);
   return (
     <div className="todos mt-3">
       <div className="container">
-        <form
-          action=""
-          className="make-todo w-full flex flex-col gap-2"
-          onSubmit={handleSubmit}
-        >
-          <input type="text" placeholder="Add a title..." />
-          <input type="text" placeholder="Write a task..." />
-          <button type="submit">Finish</button>
-        </form>
+        <TodoForm />
+        <div className="todos-container w-full flex flex-wrap gap-2">
+          {todoList.length === 0 ? (
+            <Message message={"No todos to show!"} />
+          ) : (
+            <>
+              {todoList.map((todo) => {
+                return (
+                  <Todo
+                    key={todo.id}
+                    todoId={todo.id}
+                    todoContent={todo.content}
+                    todoTitle={todo.title}
+                  />
+                );
+              })}
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
