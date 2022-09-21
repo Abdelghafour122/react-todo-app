@@ -14,7 +14,7 @@ export type AuthContextType = {
 export type TodoContextValueType = {
   todoList: Todos;
   addTodoItem: ({ content }: EditTodoPayloadType) => void;
-  editTodoItem: ({ id, content }: EditTodoPayloadType) => void;
+  editTodoItem: ({ id, title, content }: EditTodoPayloadType) => void;
   removeTodoItem: ({ id }: EditTodoPayloadType) => void;
   markAsCompleted: ({ id }: EditTodoPayloadType) => void;
 };

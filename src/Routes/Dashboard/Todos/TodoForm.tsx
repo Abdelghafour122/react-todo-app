@@ -1,21 +1,17 @@
 import React, { useState, SyntheticEvent } from "react";
 import { useTodoContext } from "../../../Contexts/TodoContext";
 
-type Props = {};
+type Props = {
+  handleOpen: () => void;
+  handleClose: () => void;
+};
 
-const TodoForm = (props: Props) => {
+const TodoForm = ({ handleOpen, handleClose }: Props) => {
   const { addTodoItem } = useTodoContext();
   const [todoTitle, setTodoTitle] = useState<string>("");
   const [todoContent, setTodoContent] = useState<string>("");
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    // console.log(todoContentRef.current?.value);
-    // console.log(todoTitleRef.current?.value);
-
-    // todoContentRef.current?.value.length !== 0 &&
-    //   addTodoItem({ content: todoContentRef.current?.value });
-
-    // console.log(todoContentRef.current?.value);
 
     console.log(todoTitle);
     console.log(todoContent);
@@ -25,13 +21,12 @@ const TodoForm = (props: Props) => {
 
     setTodoContent("");
     setTodoTitle("");
-
-    // console.log(todoList);
   };
+
   return (
     <form
       action=""
-      className="make-todo w-full flex flex-col mb-8 p-3 bg-stone-700 rounded-xl gap-5 border-2 border-slate-900"
+      className="make-todo w-full flex flex-col  p-3 bg-stone-700 rounded-xl gap-5 border-2 border-slate-900"
       onSubmit={handleSubmit}
     >
       <input
@@ -53,9 +48,14 @@ const TodoForm = (props: Props) => {
         }}
         placeholder="Write a task..."
       />
-      <button type="submit" className="button w-max self-center">
-        Finish
-      </button>
+      <div className="form-buttons flex items-center justify-around">
+        <button className="button" onClick={handleClose}>
+          Close the form
+        </button>
+        <button type="submit" className="button w-max self-center">
+          Finish
+        </button>
+      </div>
     </form>
   );
 };

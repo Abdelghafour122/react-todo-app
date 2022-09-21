@@ -5,7 +5,9 @@ type Props = {
 };
 
 const Message = ({ message }: Props) => {
-  return <p className="text-center text-lg text-stone-400">{message}</p>;
+  return (
+    <p className="self-center text-center text-lg text-stone-400">{message}</p>
+  );
 };
 
 export default Message;

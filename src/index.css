@@ -47,6 +47,7 @@
     font-weight: theme("fontWeight.semibold");
     border-radius: theme("borderRadius.md");
     border: 2px solid theme("colors.slate.900");
+    color: theme("colors.slate.900");
     padding: 0.25rem 0.5rem;
   }
 
@@ -84,11 +85,11 @@
   }
 
   .todo-form-input {
-    padding: 0px 15px;
+    padding: 5px 15px;
     border-radius: 7px;
     border: none;
     outline: none;
-    background-color: transparent;
+    background-color: theme("colors.stone.900");
     color: theme("colors.stone.100");
     caret-color: theme("colors.stone.100");
   }
