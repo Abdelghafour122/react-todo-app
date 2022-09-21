@@ -8,6 +8,7 @@ import ProfileSettingsPopup from "../../Components/Dashboard/ProfileSettingsPopu
 import { useNavigate } from "react-router-dom";
 
 import { useAuthentication } from "../../Contexts/AuthContext";
+import Tooltip from "./Navbar/Tooltip";
 
 type Props = {};
 
@@ -48,37 +49,34 @@ const Navbar = (props: Props) => {
   ];
 
   return (
-    <nav className="py-2 px-0 w-full border-b-[1px] border-b-stone-400">
-      <div className="container flex items-center justify-between gap-2">
-        <p className="text-3xl text-orange-300 font-sans font-extrabold">
+    <nav className="py-2 px-2 h-full bg-stone-900">
+      <div className="flex flex-col items-center justify-between gap-2">
+        <p className="text-2xl text-orange-300 font-sans font-extrabold border-b-2 border-b-stone-500">
           Dooit
         </p>
-        <div className="funcs basis-2/4">
-          <ul className="flex items-center justify-center gap-3">
+        <div className="funcs">
+          <ul className="flex flex-col items-center justify-center gap-3">
             {NAV_LINKS.map((link, ind) => {
               return (
-                <li
-                  key={ind}
-                  className="flex flex-col items-center justify-between p-1 border-2 border-stone-300 rounded-lg basis-1/5 cursor-pointer bg-stone-700 hover:shadow-lg active:bg-stone-500"
-                  onClick={link.execute}
-                >
-                  <link.icon color="rgb(214, 211, 209)" size={"1.5rem"} />
-                  <span className="text-stone-300">{link.linkName}</span>
+                <li key={ind} className="relative group">
+                  <button
+                    className="p-3 bg-stone-700 transition-all rounded-[50%] duration-150 ease-linear hover:rounded-[10px] hover:bg-stone-600 active:bg-stone-500 focus:bg-stone-400 focus:rounded-[10px]"
+                    onClick={link.execute}
+                  >
+                    <link.icon color="rgb(253 186 116)" size={"1.7rem"} />
+                  </button>
+                  <Tooltip tooltipContent={link.linkName} />
                 </li>
               );
             })}
           </ul>
         </div>
-        <div className="profile relative">
+        <div className="profile relative mt-2">
           <button
-            className="rounded-full hover:shadow-[0_0_0px_2px_black]"
+            className="transition-all rounded-[50%] duration-200 ease-linear hover:rounded-[10px] overflow-hidden"
             onClick={() => setOpenProfilePopup(!openProfilePopup)}
           >
-            <img
-              className="h-12 rounded-full"
-              src={profilePic}
-              alt="profile-img"
-            />
+            <img className="h-12 " src={profilePic} alt="profile-img" />
           </button>
           {openProfilePopup === true && <ProfileSettingsPopup />}
         </div>

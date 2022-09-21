@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthentication } from "../Contexts/AuthContext";
 type Props = {};
 
-function Homepage({}: Props) {
+function Homepage(props: Props) {
   const { currentUser } = useAuthentication();
   const navigate = useNavigate();
   return (

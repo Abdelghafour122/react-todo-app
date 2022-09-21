@@ -6,7 +6,7 @@ type Props = {};
 
 function Dashboard(props: Props) {
   return (
-    <div className="dashboard h-full w-full">
+    <div className="dashboard h-full w-full flex items-start justify-start">
       <Navbar />
       <div className="dashboard-body">
         <Outlet />

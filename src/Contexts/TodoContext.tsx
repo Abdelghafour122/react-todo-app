@@ -22,42 +22,42 @@ const DUMMY_DATA: Todos = [
     content: "amfjejfmoajefojaef",
     completed: false,
   },
-  // {
-  //   id: 3423,
-  //   title: "bullshizazat",
-  //   content: "amfjejdazazdazazfmoajefojaef",
-  //   completed: false,
-  // },
-  // {
-  //   id: 34232,
-  //   title: "bullsh azdazd ait",
-  //   content: "amfjejzaz a za fmoajefojaef",
-  //   completed: false,
-  // },
-  // {
-  //   id: 342323,
-  //   title: "bullshfazfafe e afit",
-  //   content: "amfjejfm adae a afaef oajefojaef",
-  //   completed: false,
-  // },
-  // {
-  //   id: 3423235,
-  //   title: "bullshit crap",
-  //   content: "amfjejfmoajefojaef ckuefkuzefuzgef gdgazgiu",
-  //   completed: false,
-  // },
-  // {
-  //   id: 34232352,
-  //   title: "bullshitfzefze ezfzfe",
-  //   content: "amfjejfmoajefojae fefafa eafef",
-  //   completed: false,
-  // },
-  // {
-  //   id: 342323523,
-  //   title: "bullshi aefeaft",
-  //   content: "amfjejfmoajefoj eeeee  a aeaeeaef",
-  //   completed: false,
-  // },
+  {
+    id: 3423,
+    title: "bullshizazat",
+    content: "amfjejdazazdazazfmoajefojaef",
+    completed: false,
+  },
+  {
+    id: 34232,
+    title: "bullsh azdazd ait",
+    content: "amfjejzaz a za fmoajefojaef",
+    completed: false,
+  },
+  {
+    id: 342323,
+    title: "bullshfazfafe e afit",
+    content: "amfjejfm adae a afaef oajefojaef",
+    completed: false,
+  },
+  {
+    id: 3423235,
+    title: "bullshit crap",
+    content: "amfjejfmoajefojaef ckuefkuzefuzgef gdgazgiu",
+    completed: false,
+  },
+  {
+    id: 34232352,
+    title: "bullshitfzefze ezfzfe",
+    content: "amfjejfmoajefojae fefafa eafef",
+    completed: false,
+  },
+  {
+    id: 342323523,
+    title: "bullshi aefeaft",
+    content: "amfjejfmoajefoj eeeee  a aeaeeaef",
+    completed: false,
+  },
 ];
 
 const TodoContext = ({ children }: TodoContextProps) => {
