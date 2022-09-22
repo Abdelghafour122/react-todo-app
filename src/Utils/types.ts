@@ -17,6 +17,7 @@ export type TodoContextValueType = {
   editTodoItem: ({ id, title, content }: EditTodoPayloadType) => void;
   removeTodoItem: ({ id }: EditTodoPayloadType) => void;
   permanentlyRemoveTodoItem: ({ id }: EditTodoPayloadType) => void;
+  restoreTodoItem: ({ id }: EditTodoPayloadType) => void;
   markAsCompleted: ({ id }: EditTodoPayloadType) => void;
   archiveTodoItem: ({ id, deleted }: ArchiveTodoType) => void;
 };

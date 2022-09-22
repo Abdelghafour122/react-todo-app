@@ -39,6 +39,13 @@ export const todoReducer = (
         ),
       ];
 
+    case actions.RESTORE_TODO_ITEM:
+      return [
+        ...state.map((todo) =>
+          todo.id === payload.id ? { ...todo, deleted: false } : todo
+        ),
+      ];
+
     case actions.PERMANENTLY_REMOVE_TODO_ITEM:
       return [...state.filter((todo) => todo.id !== payload.id)];
 

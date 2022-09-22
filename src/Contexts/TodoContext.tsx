@@ -111,6 +111,12 @@ const TodoContext = ({ children }: TodoContextProps) => {
         payload: { id: todoItemId as number },
       });
     },
+    restoreTodoItem: ({ id: todoItemId }) => {
+      dispatch({
+        type: actions.RESTORE_TODO_ITEM,
+        payload: { id: todoItemId as number },
+      });
+    },
     markAsCompleted: ({ id: todoItemId }) => {
       dispatch({
         type: actions.TOGGLE_COMPLETED,

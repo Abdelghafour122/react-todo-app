@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTodoContext } from "../../Contexts/TodoContext";
 import FinishedTodosContainer from "./Todos/FinishedTodosContainer";
 import Message from "./Todos/Message";
@@ -33,11 +33,6 @@ const Finished = (props: Props) => {
         ) : (
           <FinishedTodosContainer />
         )}
-        {/* {noFinishedTodos === true || todoList.length === 0 ? (
-          <Message message={"Your finished todos will be moved in here!"} />
-        ) : (
-          <FinishedTodosContainer />
-        )} */}
       </div>
     </div>
   );
