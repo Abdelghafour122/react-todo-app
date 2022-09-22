@@ -9,11 +9,13 @@ type Props = {
   todoContent: string;
   todoTitle?: string;
   todoId?: number;
+  todoDone: boolean;
 };
 
-const Todo = ({ todoContent, todoTitle, todoId }: Props) => {
+const Todo = ({ todoContent, todoTitle, todoId, todoDone }: Props) => {
   const { removeTodoItem, todoList } = useTodoContext();
   const [openEditTodoBackdrop, setOpenEditTodoBackdrop] = useState(false);
+  const [todoIsDone, setTodoIsDone] = useState(todoDone);
 
   const handleOpenEditTodoBackdrop = () => {
     return setOpenEditTodoBackdrop(true);
@@ -26,13 +28,19 @@ const Todo = ({ todoContent, todoTitle, todoId }: Props) => {
   console.log(todoList);
   return (
     <div className="todo bg-slate-800 text-stone-300 rounded-md flex flex-col items-start justify-between p-3 basis-1/5">
-      <h1 className="text-xl font-semibold text-stone-200">
+      <h1 className="text-xl font-bold text-stone-100 mb-3">
         {todoTitle?.length === 0 ? "No title" : todoTitle}
       </h1>
-      <p className="">{todoContent}</p>
-      {/* <input type="checkbox" checked={todo.completed}>
-        Completed
-      </input> */}
+      <p className="text-lg ">{todoContent}</p>
+      <div className="todo-checked">
+        <input
+          type="checkbox"
+          id={`${todoId}`}
+          checked={todoIsDone}
+          onChange={() => setTodoIsDone(!todoIsDone)}
+        />
+        <label htmlFor={`${todoId}`}>Completed</label>
+      </div>
       <div className="flex items-center justify-around w-full mt-3">
         <button
           className="p-2 rounded-full hover:bg-slate-700 active:bg-slate-500"

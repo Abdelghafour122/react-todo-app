@@ -15,6 +15,7 @@ const TodosContainer = (props: Props) => {
             todoId={todo.id}
             todoContent={todo.content}
             todoTitle={todo.title}
+            todoDone={todo.completed}
           />
         );
       })}

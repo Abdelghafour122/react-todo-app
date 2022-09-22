@@ -3,6 +3,7 @@ import { HiOutlineLightBulb } from "react-icons/hi";
 import { FiEdit3 } from "react-icons/fi";
 import { MdLabelOutline } from "react-icons/md";
 import { BsArchive, BsTrash } from "react-icons/bs";
+import { MdOutlineDoneOutline } from "react-icons/md";
 import ProfileSettingsPopup from "../../Components/Dashboard/ProfileSettingsPopup";
 
 import { useNavigate } from "react-router-dom";
@@ -29,6 +30,11 @@ const Navbar = (props: Props) => {
       linkName: "Todos",
       icon: HiOutlineLightBulb,
       execute: () => navigate(""),
+    },
+    {
+      linkName: "Finished",
+      icon: MdOutlineDoneOutline,
+      execute: () => navigate("finished"),
     },
     {
       linkName: "Labels",

@@ -40,12 +40,12 @@ const EditTodoBackdrop = ({ handleCloseEditTodoBackdrop, todoInfo }: Props) => {
     }
   };
   return (
-    <div className="edit-todo absolute top-0 left-0 h-full w-full flex items-center justify-center bg-zinc-700 bg-opacity-70 z-50">
+    <div className="edit-todo absolute top-0 left-0 h-full w-full flex items-center justify-center bg-zinc-700 bg-opacity-90 backdrop-blur-sm z-50">
       <div className="flex flex-col items-center justify-center basis-1/3">
         <div className="w-full py-3 flex items-center justify-between">
           <p className="text-2xl font-semibold text-stone-200 ">Edit</p>
           <button
-            className="p-2 rounded-full hover:bg-slate-800 active:bg-slate-500"
+            className="p-2 rounded-full hover:bg-stone-500 active:bg-stone-400"
             onClick={handleCloseEditTodoBackdrop}
           >
             <VscChromeClose size="1.5rem" />

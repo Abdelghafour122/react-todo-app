@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useTodoContext } from "../../Contexts/TodoContext";
 
-import Todo from "./Todos/Todo";
 import Message from "./Todos/Message";
 import TodoForm from "./Todos/TodoForm";
 import TodosContainer from "./Todos/TodosContainer";
@@ -21,7 +20,7 @@ const Todos = (props: Props) => {
   };
 
   return (
-    <div className="todos my-3">
+    <div className="todos mt-3">
       <div className="container">
         {openTodoForm ? (
           <TodoForm
