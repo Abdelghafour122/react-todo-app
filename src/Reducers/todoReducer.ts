@@ -14,6 +14,8 @@ export const todoReducer = (
           title: payload.title as string,
           content: payload.content as string,
           completed: false,
+          deleted: false,
+          archived: false,
         },
       ];
 
@@ -31,12 +33,32 @@ export const todoReducer = (
       ];
 
     case actions.REMOVE_TODO_ITEM:
+      return [
+        ...state.map((todo) =>
+          todo.id === payload.id ? { ...todo, deleted: true } : todo
+        ),
+      ];
+
+    case actions.PERMANENTLY_REMOVE_TODO_ITEM:
       return [...state.filter((todo) => todo.id !== payload.id)];
 
     case actions.TOGGLE_COMPLETED:
       return [
         ...state.map((todo) =>
-          todo.id === payload.id ? { ...todo, completed: true } : todo
+          todo.id === payload.id
+            ? todo.completed === true
+              ? { ...todo, completed: false }
+              : { ...todo, completed: true }
+            : todo
+        ),
+      ];
+
+    case actions.ARCHIVE_TODO_ITEM:
+      return [
+        ...state.map((todo) =>
+          todo.id === payload.id && todo.deleted === false
+            ? { ...todo, archived: true }
+            : todo
         ),
       ];
 

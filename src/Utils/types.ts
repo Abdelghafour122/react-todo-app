@@ -16,13 +16,21 @@ export type TodoContextValueType = {
   addTodoItem: ({ content }: EditTodoPayloadType) => void;
   editTodoItem: ({ id, title, content }: EditTodoPayloadType) => void;
   removeTodoItem: ({ id }: EditTodoPayloadType) => void;
+  permanentlyRemoveTodoItem: ({ id }: EditTodoPayloadType) => void;
   markAsCompleted: ({ id }: EditTodoPayloadType) => void;
+  archiveTodoItem: ({ id, deleted }: ArchiveTodoType) => void;
+};
+
+type ArchiveTodoType = {
+  id: number;
+  deleted: boolean;
 };
 
 export type EditTodoPayloadType = {
   id?: number;
   title?: string | undefined;
   content?: string | undefined;
+  deleted?: boolean;
 };
 
 export type Actions = {
@@ -39,6 +47,8 @@ interface Todo {
   title: string;
   content: string;
   completed: boolean;
+  deleted: boolean;
+  archived: boolean;
 }
 
 export type Todos = Todo[];

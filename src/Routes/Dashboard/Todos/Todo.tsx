@@ -13,7 +13,7 @@ type Props = {
 };
 
 const Todo = ({ todoContent, todoTitle, todoId, todoDone }: Props) => {
-  const { removeTodoItem, todoList } = useTodoContext();
+  const { removeTodoItem, markAsCompleted, todoList } = useTodoContext();
   const [openEditTodoBackdrop, setOpenEditTodoBackdrop] = useState(false);
   const [todoIsDone, setTodoIsDone] = useState(todoDone);
 
@@ -25,6 +25,12 @@ const Todo = ({ todoContent, todoTitle, todoId, todoDone }: Props) => {
     return setOpenEditTodoBackdrop(false);
   };
 
+  const markTodoAsCompleted = () => {
+    setTodoIsDone(!todoIsDone);
+    return setTimeout(() => {
+      markAsCompleted({ id: todoId });
+    }, 1500);
+  };
   console.log(todoList);
   return (
     <div className="todo bg-slate-800 text-stone-300 rounded-md flex flex-col items-start justify-between p-3 basis-1/5">
@@ -37,7 +43,7 @@ const Todo = ({ todoContent, todoTitle, todoId, todoDone }: Props) => {
           type="checkbox"
           id={`${todoId}`}
           checked={todoIsDone}
-          onChange={() => setTodoIsDone(!todoIsDone)}
+          onChange={markTodoAsCompleted}
         />
         <label htmlFor={`${todoId}`}>Completed</label>
       </div>
