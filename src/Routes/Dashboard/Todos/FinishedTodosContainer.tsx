@@ -4,13 +4,13 @@ import Todo from "./Todo";
 
 type Props = {};
 
-const TodosContainer = (props: Props) => {
+const FinishedTodosContainer = (props: Props) => {
   const { todoList } = useTodoContext();
   return (
-    <div className="todos-container flex flex-wrap items-start justify-start gap-2">
+    <div className="finished-todos-container flex flex-wrap items-start justify-start gap-2">
       {todoList.map(
         (todo) =>
-          todo.completed === false &&
+          todo.completed === true &&
           todo.deleted === false &&
           todo.archived === false && (
             <Todo
@@ -26,4 +26,4 @@ const TodosContainer = (props: Props) => {
   );
 };
 
-export default TodosContainer;
+export default FinishedTodosContainer;

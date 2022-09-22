@@ -76,6 +76,7 @@ const DUMMY_DATA: Todos = [
 
 const TodoContext = ({ children }: TodoContextProps) => {
   const [state, dispatch] = useReducer(todoReducer, DUMMY_DATA); //initialState.todoList
+
   const contextValue: TodoContextValueType = {
     todoList: state,
     addTodoItem: ({ title: todoItemTitle, content: todoItemContent }) => {

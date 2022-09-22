@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTodoContext } from "../../Contexts/TodoContext";
 
 import Message from "./Todos/Message";
@@ -9,8 +9,10 @@ type Props = {};
 
 const Todos = (props: Props) => {
   const { todoList } = useTodoContext();
+
   const [openTodoForm, setOpenTodoForm] = useState(false);
-  const noTodosRef = useRef<boolean>();
+  const [loading, setLoading] = useState(true);
+  const [noOngoingTodos, setNoOngoingTodos] = useState<boolean>();
 
   const handleCloseTodoForm = () => {
     return setOpenTodoForm(false);
@@ -21,12 +23,21 @@ const Todos = (props: Props) => {
   };
 
   useEffect(() => {
-    todoList.every((todo) =>
-      todo.archived === true || todo.completed === true || todo.deleted === true
-        ? (noTodosRef.current = true)
-        : (noTodosRef.current = false)
-    );
+    const checkForOngoingTodos = () => {
+      return todoList.every(
+        (todo) =>
+          todo.archived === true ||
+          todo.completed === true ||
+          todo.deleted === true
+      );
+    };
+    setNoOngoingTodos(() => checkForOngoingTodos());
+    console.log(checkForOngoingTodos());
   }, [todoList]);
+
+  useEffect(() => {
+    noOngoingTodos === undefined ? setLoading(true) : setLoading(false);
+  }, [noOngoingTodos]);
 
   return (
     <div className="todos mt-3">
@@ -45,7 +56,9 @@ const Todos = (props: Props) => {
           </div>
         )}
         <div className="w-full flex flex-wrap gap-2 justify-center mt-8">
-          {noTodosRef.current === true ? (
+          {loading === true ? (
+            <p>Loading...</p>
+          ) : noOngoingTodos === true ? (
             <Message message={"Your undone todos will show up here!"} />
           ) : (
             <TodosContainer />
