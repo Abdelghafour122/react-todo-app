@@ -100,4 +100,8 @@
     outline: none;
     @apply focus:border-blue-500 placeholder:text-stone-400 text-stone-100 bg-stone-900 caret-stone-100;
   }
+
+  .todo {
+    @apply bg-slate-800 text-stone-300 rounded-md flex flex-col items-start justify-between p-3 basis-1/5;
+  }
 }

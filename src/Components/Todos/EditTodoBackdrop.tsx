@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { VscChromeClose } from "react-icons/vsc";
 import { EditTodoPayloadType } from "../../Utils/types";
 import { useTodoContext } from "../../Contexts/TodoContext";
@@ -16,6 +16,15 @@ const EditTodoBackdrop = ({ handleCloseEditTodoBackdrop, todoInfo }: Props) => {
   const [editedTodoContent, setEditedTodoContent] = useState<
     string | undefined
   >(todoInfo.content);
+
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+
+  useEffect(() => {
+    (editedTodoContent !== "" && editedTodoContent !== todoInfo.content) ||
+    (editedTodoTitle !== "" && editedTodoTitle !== todoInfo.title)
+      ? setButtonDisabled(false)
+      : setButtonDisabled(true);
+  }, [editedTodoContent, editedTodoTitle, todoInfo.title, todoInfo.content]);
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -72,7 +81,9 @@ const EditTodoBackdrop = ({ handleCloseEditTodoBackdrop, todoInfo }: Props) => {
               setEditedTodoContent(e.target.value)
             }
           />
-          <button className="button">Update</button>
+          <button className="button" disabled={buttonDisabled}>
+            Update
+          </button>
         </form>
       </div>
     </div>

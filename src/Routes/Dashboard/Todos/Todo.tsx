@@ -48,7 +48,7 @@ const Todo = ({
   };
   console.log(todoList);
   return (
-    <div className="todo bg-slate-800 text-stone-300 rounded-md flex flex-col items-start justify-between p-3 basis-1/5">
+    <div className="todo">
       <h1 className="text-xl font-bold text-stone-100 mb-3">
         {todoTitle?.length === 0 ? "No title" : todoTitle}
       </h1>
