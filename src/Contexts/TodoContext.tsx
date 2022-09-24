@@ -127,7 +127,7 @@ const TodoContext = ({ children }: TodoContextProps) => {
     archiveTodoItem: ({ id: todoItemId, deleted: todoItemDeleted }) => {
       dispatch({
         type: actions.ARCHIVE_TODO_ITEM,
-        payload: { id: todoItemId, deleted: todoItemDeleted },
+        payload: { id: todoItemId as number, deleted: todoItemDeleted },
       });
     },
   };

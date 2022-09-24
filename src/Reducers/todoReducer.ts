@@ -64,7 +64,9 @@ export const todoReducer = (
       return [
         ...state.map((todo) =>
           todo.id === payload.id && todo.deleted === false
-            ? { ...todo, archived: true }
+            ? todo.archived === true
+              ? { ...todo, archived: false }
+              : { ...todo, archived: true }
             : todo
         ),
       ];

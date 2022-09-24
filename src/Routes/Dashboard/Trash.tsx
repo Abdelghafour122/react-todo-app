@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useTodoContext } from "../../Contexts/TodoContext";
-import DeletedTodosContainer from "./Todos/DeletedTodosContainer";
+import DeletedTodosContainer from "./Todos/Containers/DeletedTodosContainer";
 import Message from "./Todos/Message";
 
 type Props = {};
 
 const Trash = (props: Props) => {
-  const { todoList, permanentlyRemoveTodoItem } = useTodoContext();
+  const { todoList } = useTodoContext();
   const [undeletedTodos, setUndeletedTodos] = useState<boolean>();
   const [loading, setLoading] = useState(true);
 

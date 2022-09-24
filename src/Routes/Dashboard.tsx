@@ -8,7 +8,7 @@ function Dashboard(props: Props) {
   return (
     <div className="dashboard h-full w-full flex items-start justify-start">
       <Navbar />
-      <div className="dashboard-body">
+      <div className="dashboard-body flex-1 h-full">
         <Outlet />
       </div>
     </div>

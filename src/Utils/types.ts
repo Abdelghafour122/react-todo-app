@@ -23,8 +23,8 @@ export type TodoContextValueType = {
 };
 
 type ArchiveTodoType = {
-  id: number;
-  deleted: boolean;
+  id: number | undefined;
+  deleted: boolean | undefined;
 };
 
 export type EditTodoPayloadType = {

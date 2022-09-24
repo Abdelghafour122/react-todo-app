@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTodoContext } from "../../Contexts/TodoContext";
-import FinishedTodosContainer from "./Todos/FinishedTodosContainer";
+import FinishedTodosContainer from "./Todos/Containers/FinishedTodosContainer";
 import Message from "./Todos/Message";
 
 type Props = {};

@@ -3,6 +3,7 @@ import { BsArchive, BsTrash } from "react-icons/bs";
 import { FiEdit3 } from "react-icons/fi";
 import { CgRemove } from "react-icons/cg";
 import { FaTrashRestore } from "react-icons/fa";
+import { RiInboxUnarchiveLine } from "react-icons/ri";
 import EditTodoBackdrop from "../../../Components/Todos/EditTodoBackdrop";
 import { useTodoContext } from "../../../Contexts/TodoContext";
 import { EditTodoPayloadType } from "../../../Utils/types";
@@ -13,6 +14,7 @@ type Props = {
   todoId?: number;
   todoDone: boolean;
   todoDeleted?: boolean;
+  todoArchived?: boolean;
 };
 
 const Todo = ({
@@ -21,12 +23,14 @@ const Todo = ({
   todoId,
   todoDone,
   todoDeleted,
+  todoArchived,
 }: Props) => {
   const {
     removeTodoItem,
     permanentlyRemoveTodoItem,
     restoreTodoItem,
     markAsCompleted,
+    archiveTodoItem,
     todoList,
   } = useTodoContext();
   const [openEditTodoBackdrop, setOpenEditTodoBackdrop] = useState(false);
@@ -71,9 +75,27 @@ const Todo = ({
             >
               <FiEdit3 size={"1.3rem"} />
             </button>
-            <button className="todo-action-button">
-              <BsArchive size={"1.3rem"} />
-            </button>
+            <>
+              {todoArchived === undefined || todoArchived === false ? (
+                <button
+                  className="todo-action-button"
+                  onClick={() =>
+                    archiveTodoItem({ id: todoId, deleted: todoDeleted })
+                  }
+                >
+                  <BsArchive size={"1.3rem"} />
+                </button>
+              ) : (
+                <button
+                  className="todo-action-button"
+                  onClick={() =>
+                    archiveTodoItem({ id: todoId, deleted: todoDeleted })
+                  }
+                >
+                  <RiInboxUnarchiveLine size={"1.3rem"} />
+                </button>
+              )}
+            </>
             <button
               className="todo-action-button"
               onClick={() => removeTodoItem({ id: todoId })}
