@@ -14,11 +14,11 @@ const Todos = (props: Props) => {
   const [loading, setLoading] = useState(true);
   const [noOngoingTodos, setNoOngoingTodos] = useState<boolean>();
 
-  const handleCloseTodoForm = () => {
+  const handleCloseTodoFormBackdrop = () => {
     return setOpenTodoForm(false);
   };
 
-  const handleOpenTodoForm = () => {
+  const handleOpenTodoFormBackdrop = () => {
     return setOpenTodoForm(true);
   };
 
@@ -40,17 +40,14 @@ const Todos = (props: Props) => {
   }, [noOngoingTodos]);
 
   return (
-    <div className="todos mt-3">
+    <div className="todos">
       <div className="container">
         {openTodoForm ? (
-          <TodoForm
-            handleOpen={handleOpenTodoForm}
-            handleClose={handleCloseTodoForm}
-          />
+          <TodoForm handleCloseTodoFormBackdrop={handleCloseTodoFormBackdrop} />
         ) : (
           <div className="form-note flex items-center justify-center gap-2">
             <Message message={"Click to add a todo"} />
-            <button className="button" onClick={handleOpenTodoForm}>
+            <button className="button" onClick={handleOpenTodoFormBackdrop}>
               Open
             </button>
           </div>

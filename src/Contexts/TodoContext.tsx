@@ -82,7 +82,6 @@ const TodoContext = ({ children }: TodoContextProps) => {
     addTodoItem: ({ title: todoItemTitle, content: todoItemContent }) => {
       dispatch({
         type: actions.ADD_TODO_ITEM,
-        // DONT FORGET TO ADD OTHER PROPERTIES
         payload: { title: todoItemTitle, content: todoItemContent },
       });
     },

@@ -55,7 +55,7 @@ const EditTodoBackdrop = ({ handleCloseEditTodoBackdrop, todoInfo }: Props) => {
             className="p-2 rounded-full hover:bg-stone-500 active:bg-stone-400"
             onClick={handleCloseEditTodoBackdrop}
           >
-            <VscChromeClose size="1.5rem" />
+            <VscChromeClose color="rgb(231 229 228)" size="1.5rem" />
           </button>
         </div>
         <form
