@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useTodoContext } from "../../Contexts/TodoContext";
+import EmptySection from "./Placeholders/EmptySection";
 import FinishedTodosContainer from "./Todos/Containers/FinishedTodosContainer";
-import Message from "./Todos/Message";
+import { MdOutlineDone } from "react-icons/md";
 
 type Props = {};
 
@@ -29,7 +30,10 @@ const Finished = (props: Props) => {
         {loading ? (
           <p>Loading...</p>
         ) : noFinishedTodos === true || todoList.length === 0 ? (
-          <Message message={"Your finished todos will be moved in here!"} />
+          <EmptySection
+            Icon={MdOutlineDone}
+            message={"Your finished todos will be moved in here!"}
+          />
         ) : (
           <FinishedTodosContainer />
         )}

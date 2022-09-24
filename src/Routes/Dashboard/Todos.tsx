@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useTodoContext } from "../../Contexts/TodoContext";
 
-import Message from "./Todos/Message";
+import { HiLightBulb } from "react-icons/hi";
 import TodoForm from "./Todos/TodoForm";
 import TodosContainer from "./Todos/Containers/TodosContainer";
+import EmptySection from "./Placeholders/EmptySection";
+import Message from "./Todos/Message";
 
 type Props = {};
 
@@ -56,7 +58,10 @@ const Todos = (props: Props) => {
           {loading === true ? (
             <p>Loading...</p>
           ) : noOngoingTodos === true ? (
-            <Message message={"Your undone todos will show up here!"} />
+            <EmptySection
+              Icon={HiLightBulb}
+              message={"Your ongoing todos will show up here!"}
+            />
           ) : (
             <TodosContainer />
           )}

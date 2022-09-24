@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Message from "./Todos/Message";
 import { useTodoContext } from "../../Contexts/TodoContext";
 import ArchivedTodosContainer from "./Todos/Containers/ArchivedTodosContainer";
+import EmptySection from "./Placeholders/EmptySection";
+import { BsArchiveFill } from "react-icons/bs";
 
 type Props = {};
 
@@ -27,7 +28,10 @@ const Archived = (props: Props) => {
         {loading ? (
           <p>Loading...</p>
         ) : unArchivedTodos === true ? (
-          <Message message={"The archived todos will appear here!"} />
+          <EmptySection
+            Icon={BsArchiveFill}
+            message={"The archived todos will appear here!"}
+          />
         ) : (
           <ArchivedTodosContainer />
         )}

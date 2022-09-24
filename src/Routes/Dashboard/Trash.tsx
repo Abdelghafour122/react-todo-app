@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { BsTrashFill } from "react-icons/bs";
 import { useTodoContext } from "../../Contexts/TodoContext";
+import EmptySection from "./Placeholders/EmptySection";
 import DeletedTodosContainer from "./Todos/Containers/DeletedTodosContainer";
-import Message from "./Todos/Message";
 
 type Props = {};
 
@@ -22,12 +23,15 @@ const Trash = (props: Props) => {
   }, [todoList]);
 
   return (
-    <div className="trashed-todos mt-3">
-      <div className="container">
+    <div className="trashed-todos h-full">
+      <div className="container h-full">
         {loading ? (
           <p>Loading...</p>
         ) : undeletedTodos === true ? (
-          <Message message={"The deleted todos will appear here!"} />
+          <EmptySection
+            message={"The deleted todos will appear here!"}
+            Icon={BsTrashFill}
+          />
         ) : (
           <DeletedTodosContainer />
         )}
