@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BsTrashFill } from "react-icons/bs";
 import { useTodoContext } from "../../Contexts/TodoContext";
 import EmptySection from "./Placeholders/EmptySection";
-import DeletedTodosContainer from "./Todos/Containers/DeletedTodosContainer";
+import DeletedTodosContainer from "./Containers/DeletedTodosContainer";
 
 type Props = {};
 

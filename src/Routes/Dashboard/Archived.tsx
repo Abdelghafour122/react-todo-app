@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTodoContext } from "../../Contexts/TodoContext";
-import ArchivedTodosContainer from "./Todos/Containers/ArchivedTodosContainer";
+import ArchivedTodosContainer from "./Containers/ArchivedTodosContainer";
 import EmptySection from "./Placeholders/EmptySection";
 import { BsArchiveFill } from "react-icons/bs";
 
@@ -13,7 +13,11 @@ const Archived = (props: Props) => {
 
   useEffect(() => {
     const checkForUnArchivedTodos = () => {
-      return todoList.every((todo) => todo.archived === false);
+      return todoList.every(
+        (todo) =>
+          todo.archived === false ||
+          (todo.archived === true && todo.deleted === true)
+      );
     };
     setUnArchivedTodos(() => checkForUnArchivedTodos());
   }, [todoList]);

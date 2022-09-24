@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTodoContext } from "../../Contexts/TodoContext";
 import EmptySection from "./Placeholders/EmptySection";
-import FinishedTodosContainer from "./Todos/Containers/FinishedTodosContainer";
+import FinishedTodosContainer from "./Containers/FinishedTodosContainer";
 import { MdOutlineDone } from "react-icons/md";
 
 type Props = {};

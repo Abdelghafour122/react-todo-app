@@ -1,6 +1,6 @@
 import React from "react";
-import { useTodoContext } from "../../../../Contexts/TodoContext";
-import Todo from "../Todo";
+import { useTodoContext } from "../../../Contexts/TodoContext";
+import Todo from "../Todos/Todo";
 
 type Props = {};
 

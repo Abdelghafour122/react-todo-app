@@ -1,16 +1,16 @@
 import React from "react";
-import { useTodoContext } from "../../../../Contexts/TodoContext";
-import Todo from "../Todo";
+import { useTodoContext } from "../../../Contexts/TodoContext";
+import Todo from "../Todos/Todo";
 
 type Props = {};
 
-const FinishedTodosContainer = (props: Props) => {
+const TodosContainer = (props: Props) => {
   const { todoList } = useTodoContext();
   return (
-    <div className="finished-todos-container flex flex-wrap items-start justify-start gap-2">
+    <div className="todos-container flex flex-wrap items-start justify-start gap-2">
       {todoList.map(
         (todo) =>
-          todo.completed === true &&
+          todo.completed === false &&
           todo.deleted === false &&
           todo.archived === false && (
             <Todo
@@ -26,4 +26,4 @@ const FinishedTodosContainer = (props: Props) => {
   );
 };
 
-export default FinishedTodosContainer;
+export default TodosContainer;

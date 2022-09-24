@@ -3,7 +3,7 @@ import { useTodoContext } from "../../Contexts/TodoContext";
 
 import { HiLightBulb } from "react-icons/hi";
 import TodoForm from "./Todos/TodoForm";
-import TodosContainer from "./Todos/Containers/TodosContainer";
+import TodosContainer from "./Containers/TodosContainer";
 import EmptySection from "./Placeholders/EmptySection";
 import Message from "./Todos/Message";
 
