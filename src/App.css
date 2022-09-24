@@ -1,4 +1,8 @@
 /*JUST TEMPORARILY*/
+* {
+  box-sizing: border-box;
+}
+
 .App {
   height: 100vh;
   width: 100vw;

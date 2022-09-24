@@ -19,12 +19,11 @@ const EditTodoBackdrop = ({ handleCloseEditTodoBackdrop, todoInfo }: Props) => {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    // use try/catch when firebase backend get involved
+    // use try/catch when firebase backend gets involved
+
     if (
-      editedTodoContent !== "" &&
-      editedTodoContent !== todoInfo.content &&
-      editedTodoTitle !== "" &&
-      editedTodoTitle !== todoInfo.title
+      (editedTodoContent !== "" && editedTodoContent !== todoInfo.content) ||
+      (editedTodoTitle !== "" && editedTodoTitle !== todoInfo.title)
     ) {
       editTodoItem({
         id: todoInfo.id,
@@ -33,10 +32,9 @@ const EditTodoBackdrop = ({ handleCloseEditTodoBackdrop, todoInfo }: Props) => {
       });
       // set a success message
       handleCloseEditTodoBackdrop();
-    } else {
+    } else if (editedTodoContent === "" || editedTodoTitle === "") {
       // set an error message
-      if (editedTodoContent === "" || editedTodoTitle === "")
-        console.log("can't leave the fields blank!");
+      console.log("can't leave the fields blank!");
     }
   };
   return (
@@ -58,7 +56,7 @@ const EditTodoBackdrop = ({ handleCloseEditTodoBackdrop, todoInfo }: Props) => {
         >
           <input
             type="text"
-            className="todo-form-input text-xl font-semibold placeholder:text-stone-300"
+            className="todo-form-input text-xl font-semibold"
             placeholder="Don't leave the title blank"
             value={editedTodoTitle}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -67,7 +65,7 @@ const EditTodoBackdrop = ({ handleCloseEditTodoBackdrop, todoInfo }: Props) => {
           />
           <textarea
             rows={5}
-            className="todo-form-input placeholder:text-stone-300 resize-none"
+            className="todo-form-input resize-none"
             placeholder="Don't leave the content blank"
             value={editedTodoContent}
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>

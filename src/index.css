@@ -22,6 +22,7 @@
     font-weight: theme("fontWeight.medium");
     color: theme("colors.stone.100");
     align-self: flex-start;
+    @apply after:content-['*'] after:ml-0.5 after:text-red-500;
   }
 
   .form-input {
@@ -33,6 +34,7 @@
     caret-color: theme("colors.stone.100");
     color: theme("colors.stone.200");
     width: 100%;
+    @apply focus:border-blue-500;
   }
 
   .link {
@@ -40,6 +42,7 @@
     color: theme("colors.stone.200");
     text-decoration: underline;
     font-weight: bold;
+    @apply hover:hover:text-stone-400;
   }
 
   .button {
@@ -49,6 +52,12 @@
     border: 2px solid theme("colors.slate.900");
     color: theme("colors.slate.900");
     padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    @apply disabled:cursor-not-allowed disabled:bg-stone-600  hover:bg-stone-400 active:bg-stone-500;
+  }
+
+  .todo-action-button {
+    @apply p-2 rounded-full hover:bg-slate-700 active:bg-slate-500;
   }
 
   .form-info-message {
@@ -87,10 +96,8 @@
   .todo-form-input {
     padding: 5px 15px;
     border-radius: 7px;
-    border: none;
+    border: 2px solid theme("colors.stone.900");
     outline: none;
-    background-color: theme("colors.stone.900");
-    color: theme("colors.stone.100");
-    caret-color: theme("colors.stone.100");
+    @apply focus:border-blue-500 placeholder:text-stone-400 text-stone-100 bg-stone-900 caret-stone-100;
   }
 }

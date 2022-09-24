@@ -66,10 +66,7 @@ const SignIn = () => {
         action=""
       >
         <div className="email flex flex-col justify-center items-center w-full">
-          <label
-            htmlFor="email"
-            className="form-label after:content-['*'] after:ml-0.5 after:text-red-500"
-          >
+          <label htmlFor="email" className="form-label">
             Email:
           </label>
           <input
@@ -85,10 +82,7 @@ const SignIn = () => {
         </div>
 
         <div className="password flex flex-col justify-center items-center w-full">
-          <label
-            htmlFor="password"
-            className="form-label after:content-['*'] after:ml-0.5 after:text-red-500"
-          >
+          <label htmlFor="password" className="form-label">
             Password:
           </label>
           <input
@@ -100,12 +94,12 @@ const SignIn = () => {
           />
         </div>
         <div className="forgot-password">
-          <Link className="link hover:text-stone-400" to={"/forgottenpassword"}>
+          <Link className="link" to={"/forgottenpassword"}>
             Forgot your password?
           </Link>
         </div>
         <button
-          className="button disabled:opacity-20 disabled:cursor-not-allowed"
+          className="button"
           type="submit"
           value="Sign In"
           onClick={handleSubmit}
@@ -123,7 +117,7 @@ const SignIn = () => {
       <button
         onClick={handleGoogleSignIn}
         disabled={loading}
-        className="button flex justify-center items-center mt-3 mb-0 mx-auto disabled:opacity-20 cursor-pointer disabled:cursor-not-allowed"
+        className="button flex justify-center items-center mt-3 mb-0 mx-auto"
       >
         <FcGoogle size="2rem" />
         Continue with Google

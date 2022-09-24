@@ -66,16 +66,16 @@ const Todo = ({
         {todoDeleted === undefined || todoDeleted === false ? (
           <>
             <button
-              className="p-2 rounded-full hover:bg-slate-700 active:bg-slate-500"
+              className="todo-action-button"
               onClick={handleOpenEditTodoBackdrop}
             >
               <FiEdit3 size={"1.3rem"} />
             </button>
-            <button className="p-2 rounded-full hover:bg-slate-700 active:bg-slate-500">
+            <button className="todo-action-button">
               <BsArchive size={"1.3rem"} />
             </button>
             <button
-              className="p-2 rounded-full hover:bg-slate-700 active:bg-slate-500"
+              className="todo-action-button"
               onClick={() => removeTodoItem({ id: todoId })}
             >
               <BsTrash size={"1.3rem"} />
@@ -84,13 +84,13 @@ const Todo = ({
         ) : (
           <>
             <button
-              className="p-2 rounded-full hover:bg-slate-700 active:bg-slate-500"
+              className="todo-action-button"
               onClick={() => permanentlyRemoveTodoItem({ id: todoId })}
             >
               <CgRemove size={"1.5rem"} color={"rgb(220 38 38)"} />
             </button>
             <button
-              className="p-2 text-red-600 rounded-full hover:bg-slate-700 active:bg-slate-500"
+              className="todo-action-button"
               onClick={() => restoreTodoItem({ id: todoId })}
             >
               <FaTrashRestore size={"1.5rem"} color={"rgb(22 163 74)"} />

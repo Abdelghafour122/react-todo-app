@@ -31,7 +31,7 @@ const TodoForm = ({ handleOpen, handleClose }: Props) => {
     >
       <input
         type="text"
-        className="todo-form-input font-semibold text-2xl placeholder:text-stone-300"
+        className="todo-form-input font-semibold text-2xl"
         value={todoTitle}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setTodoTitle(e.target.value)
@@ -39,7 +39,7 @@ const TodoForm = ({ handleOpen, handleClose }: Props) => {
         placeholder="Add a title..."
       />
       <textarea
-        className="todo-form-input resize-none placeholder:text-stone-300"
+        className="todo-form-input resize-none"
         rows={7}
         maxLength={2000}
         value={todoContent}
