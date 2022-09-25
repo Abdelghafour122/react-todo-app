@@ -25,7 +25,7 @@ const Finished = (props: Props) => {
   }, [todoList]);
 
   return (
-    <div className="finished-todos mt-3">
+    <div className="finished-todos">
       <div className="container">
         {loading ? (
           <p>Loading...</p>

@@ -26,7 +26,7 @@ function Homepage(props: Props) {
             </button>
           </>
         ) : (
-          <button onClick={() => navigate("/dashboard")}>
+          <button className="button" onClick={() => navigate("/dashboard")}>
             Go to dashboard
           </button>
         )}

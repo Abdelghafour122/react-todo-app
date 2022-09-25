@@ -27,7 +27,7 @@ const Archived = (props: Props) => {
   }, [unArchivedTodos]);
 
   return (
-    <div className="archived-todos mt-3">
+    <div className="archived-todos">
       <div className="container">
         {loading ? (
           <p>Loading...</p>
