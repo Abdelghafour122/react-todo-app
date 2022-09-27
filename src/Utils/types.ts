@@ -1,4 +1,5 @@
 import { User, UserCredential } from "firebase/auth";
+import { DocumentData, DocumentReference } from "firebase/firestore";
 
 export type AuthContextType = {
   currentUser: User | null | undefined;
@@ -13,6 +14,7 @@ export type AuthContextType = {
 
 export type TodoContextValueType = {
   todoList: Todos;
+  fetchTodoItems: () => Promise<void>;
   addTodoItem: ({ content }: EditTodoPayloadType) => void;
   editTodoItem: ({ id, title, content }: EditTodoPayloadType) => void;
   removeTodoItem: ({ id }: EditTodoPayloadType) => void;
@@ -23,15 +25,16 @@ export type TodoContextValueType = {
 };
 
 type ArchiveTodoType = {
-  id: number | undefined;
+  id: string;
   deleted: boolean | undefined;
 };
 
 export type EditTodoPayloadType = {
-  id?: number;
+  id?: string;
   title?: string | undefined;
   content?: string | undefined;
   deleted?: boolean;
+  fetchedData?: Todos;
 };
 
 export type Actions = {
@@ -44,7 +47,7 @@ export type InitialReducerStateType = {
 };
 
 interface Todo {
-  id: number;
+  id: string;
   title: string;
   content: string;
   completed: boolean;

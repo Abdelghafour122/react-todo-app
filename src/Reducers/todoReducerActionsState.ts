@@ -5,6 +5,7 @@ export const initialState: InitialReducerStateType = {
 };
 
 export const actions = {
+  FETCH_TODO_ITEM: "FETCH_TODO_ITEM",
   ADD_TODO_ITEM: "ADD_TODO_ITEM",
   EDIT_TODO_ITEM: "EDIT_TODO_ITEM",
   REMOVE_TODO_ITEM: "REMOVE_TODO_ITEM",
@@ -12,5 +13,4 @@ export const actions = {
   RESTORE_TODO_ITEM: "RESTORE_TODO_ITEM",
   TOGGLE_COMPLETED: "TOGGLE_COMPLETED",
   ARCHIVE_TODO_ITEM: "ARCHIVE_TODO_ITEM",
-  // UNARCHIVE_TODO_ITEM: "UNARCHIVE_TODO_ITEM",
 };

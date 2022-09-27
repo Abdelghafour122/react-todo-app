@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthentication } from "../Contexts/AuthContext";
+import { useTodoContext } from "../Contexts/TodoContext";
 type Props = {};
 
 function Homepage(props: Props) {
   const { currentUser } = useAuthentication();
+  const { fetchTodoItems } = useTodoContext();
+
+  useEffect(() => {
+    fetchTodoItems();
+  }, [fetchTodoItems]);
+
   const navigate = useNavigate();
   return (
     <div className="homepage">

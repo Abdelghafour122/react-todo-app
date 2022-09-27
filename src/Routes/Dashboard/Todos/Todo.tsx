@@ -11,7 +11,7 @@ import { EditTodoPayloadType } from "../../../Utils/types";
 type Props = {
   todoContent: string;
   todoTitle?: string;
-  todoId?: number;
+  todoId: string;
   todoDone: boolean;
   todoDeleted?: boolean;
   todoArchived?: boolean;
@@ -31,7 +31,6 @@ const Todo = ({
     restoreTodoItem,
     markAsCompleted,
     archiveTodoItem,
-    todoList,
   } = useTodoContext();
   const [openEditTodoBackdrop, setOpenEditTodoBackdrop] = useState(false);
   const [todoIsDone, setTodoIsDone] = useState(todoDone);
@@ -50,7 +49,7 @@ const Todo = ({
       markAsCompleted({ id: todoId });
     }, 1500);
   };
-  console.log(todoList);
+
   return (
     <div className="todo">
       <h1 className="text-xl font-bold text-stone-100 mb-3">

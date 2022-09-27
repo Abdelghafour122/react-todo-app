@@ -6,11 +6,14 @@ export const todoReducer = (
   { type, payload }: Actions
 ): Todos => {
   switch (type) {
+    case actions.FETCH_TODO_ITEM:
+      return [...(payload.fetchedData as Todos)];
+
     case actions.ADD_TODO_ITEM:
       return [
         ...state,
         {
-          id: Math.floor(Math.random() * 1000000),
+          id: Math.floor(Math.random() * 1000000).toString(),
           title: payload.title as string,
           content: payload.content as string,
           completed: false,

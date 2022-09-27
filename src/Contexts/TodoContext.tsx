@@ -1,7 +1,19 @@
-import React, { ReactNode, createContext, useContext, useReducer } from "react";
+import React, {
+  ReactNode,
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
+import { addDoc, collection, getDocs } from "firebase/firestore";
+import { todoDatabase } from "../firebase";
 import { todoReducer } from "../Reducers/todoReducer";
 import { initialState, actions } from "../Reducers/todoReducerActionsState";
-import { TodoContextValueType, Todos } from "../Utils/types";
+import { TodoContextValueType } from "../Utils/types";
+
+import { getTodosList } from "../Utils/firestore";
 
 type TodoContextProps = {
   children: ReactNode;
@@ -15,70 +27,21 @@ export function useTodoContext() {
   return useContext(TodosContext);
 }
 
-const DUMMY_DATA: Todos = [
-  {
-    id: 3423235235,
-    title: "bullshit",
-    content: "amfjejfmoajefojaef",
-    completed: false,
-    deleted: false,
-    archived: false,
-  },
-  {
-    id: 3423,
-    title: "bullshizazat",
-    content: "amfjejdazazdazazfmoajefojaef",
-    completed: false,
-    deleted: false,
-    archived: false,
-  },
-  {
-    id: 34232,
-    title: "bullsh azdazd ait",
-    content: "amfjejzaz a za fmoajefojaef",
-    completed: false,
-    deleted: false,
-    archived: false,
-  },
-  {
-    id: 342323,
-    title: "bullshfazfafe e afit",
-    content: "amfjejfm adae a afaef oajefojaef",
-    completed: false,
-    deleted: false,
-    archived: false,
-  },
-  {
-    id: 3423235,
-    title: "bullshit crap",
-    content: "amfjejfmoajefojaef ckuefkuzefuzgef gdgazgiu",
-    completed: false,
-    deleted: false,
-    archived: false,
-  },
-  {
-    id: 34232352,
-    title: "bullshitfzefze ezfzfe",
-    content: "amfjejfmoajefojae fefafa eafef",
-    completed: false,
-    deleted: false,
-    archived: false,
-  },
-  {
-    id: 342323523,
-    title: "bullshi aefeaft",
-    content: "amfjejfmoajefoj eeeee  a aeaeeaef",
-    completed: false,
-    deleted: false,
-    archived: false,
-  },
-];
+// const todosCollection = collection(todoDatabase, "todos");
 
 const TodoContext = ({ children }: TodoContextProps) => {
-  const [state, dispatch] = useReducer(todoReducer, DUMMY_DATA); //initialState.todoList
+  const [state, dispatch] = useReducer(todoReducer, initialState.todoList);
 
   const contextValue: TodoContextValueType = {
     todoList: state,
+    fetchTodoItems: useCallback(async () => {
+      await getTodosList().then((res) => {
+        dispatch({
+          type: actions.FETCH_TODO_ITEM,
+          payload: { fetchedData: res },
+        });
+      });
+    }, []),
     addTodoItem: ({ title: todoItemTitle, content: todoItemContent }) => {
       dispatch({
         type: actions.ADD_TODO_ITEM,
@@ -102,34 +65,35 @@ const TodoContext = ({ children }: TodoContextProps) => {
     removeTodoItem: ({ id: todoItemId }) => {
       dispatch({
         type: actions.REMOVE_TODO_ITEM,
-        payload: { id: todoItemId as number },
+        payload: { id: todoItemId },
       });
     },
     permanentlyRemoveTodoItem: ({ id: todoItemId }) => {
       dispatch({
         type: actions.PERMANENTLY_REMOVE_TODO_ITEM,
-        payload: { id: todoItemId as number },
+        payload: { id: todoItemId },
       });
     },
     restoreTodoItem: ({ id: todoItemId }) => {
       dispatch({
         type: actions.RESTORE_TODO_ITEM,
-        payload: { id: todoItemId as number },
+        payload: { id: todoItemId },
       });
     },
     markAsCompleted: ({ id: todoItemId }) => {
       dispatch({
         type: actions.TOGGLE_COMPLETED,
-        payload: { id: todoItemId as number },
+        payload: { id: todoItemId },
       });
     },
     archiveTodoItem: ({ id: todoItemId, deleted: todoItemDeleted }) => {
       dispatch({
         type: actions.ARCHIVE_TODO_ITEM,
-        payload: { id: todoItemId as number, deleted: todoItemDeleted },
+        payload: { id: todoItemId, deleted: todoItemDeleted },
       });
     },
   };
+
   return (
     <TodosContext.Provider value={contextValue}>
       {children}

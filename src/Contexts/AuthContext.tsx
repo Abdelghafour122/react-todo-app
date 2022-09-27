@@ -84,8 +84,6 @@ export default function AuthContext({ children }: AuthProviderProps) {
     EMAIL_REGEX,
   };
 
-  console.log(globalAuth.currentUser?.email);
-
   return (
     <AuthenticationContext.Provider value={contextValue}>
       {loading === false && children}

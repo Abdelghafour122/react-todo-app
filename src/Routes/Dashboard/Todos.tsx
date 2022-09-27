@@ -11,6 +11,7 @@ type Props = {};
 
 const Todos = (props: Props) => {
   const { todoList } = useTodoContext();
+  // console.log("todolist in todos prop", todoList);
 
   const [openTodoForm, setOpenTodoForm] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -25,21 +26,26 @@ const Todos = (props: Props) => {
   };
 
   useEffect(() => {
-    const checkForOngoingTodos = () => {
-      return todoList.every(
-        (todo) =>
-          todo.archived === true ||
-          todo.completed === true ||
-          todo.deleted === true
-      );
-    };
-    setNoOngoingTodos(() => checkForOngoingTodos());
-    console.log(checkForOngoingTodos());
+    todoList === undefined ? setLoading(true) : setLoading(false);
   }, [todoList]);
 
   useEffect(() => {
-    noOngoingTodos === undefined ? setLoading(true) : setLoading(false);
-  }, [noOngoingTodos]);
+    const checkForOngoingTodos = () => {
+      if (!loading)
+        return todoList.every(
+          (todo) =>
+            todo.archived === true ||
+            todo.completed === true ||
+            todo.deleted === true
+        );
+    };
+    setNoOngoingTodos(() => checkForOngoingTodos());
+    // console.log(checkForOngoingTodos());
+  }, [todoList, loading]);
+
+  // useEffect(() => {
+  //   noOngoingTodos === undefined ? setLoading(true) : setLoading(false);
+  // }, [noOngoingTodos]);
 
   return (
     <div className="todos">
@@ -55,7 +61,7 @@ const Todos = (props: Props) => {
           </div>
         )}
         <div className="w-full flex flex-wrap gap-2 justify-center mt-8">
-          {loading === true ? (
+          {/* {loading === true ? (
             <p>Loading...</p>
           ) : noOngoingTodos === true ? (
             <EmptySection
@@ -64,6 +70,16 @@ const Todos = (props: Props) => {
             />
           ) : (
             <TodosContainer />
+          )} */}
+          {loading === true ? (
+            <p>Loading...</p>
+          ) : loading === false && noOngoingTodos === true ? (
+            <EmptySection
+              Icon={HiLightBulb}
+              message={"Your ongoing todos will show up here!"}
+            />
+          ) : (
+            loading === false && noOngoingTodos === false && <TodosContainer />
           )}
         </div>
       </div>
