@@ -13,7 +13,7 @@ export const todoReducer = (
       return [
         ...state,
         {
-          id: Math.floor(Math.random() * 1000000).toString(),
+          id: payload.id as string,
           title: payload.title as string,
           content: payload.content as string,
           completed: false,

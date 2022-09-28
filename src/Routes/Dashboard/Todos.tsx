@@ -11,7 +11,6 @@ type Props = {};
 
 const Todos = (props: Props) => {
   const { todoList } = useTodoContext();
-  // console.log("todolist in todos prop", todoList);
 
   const [openTodoForm, setOpenTodoForm] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -40,12 +39,7 @@ const Todos = (props: Props) => {
         );
     };
     setNoOngoingTodos(() => checkForOngoingTodos());
-    // console.log(checkForOngoingTodos());
   }, [todoList, loading]);
-
-  // useEffect(() => {
-  //   noOngoingTodos === undefined ? setLoading(true) : setLoading(false);
-  // }, [noOngoingTodos]);
 
   return (
     <div className="todos">

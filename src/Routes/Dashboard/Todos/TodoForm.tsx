@@ -13,9 +13,6 @@ const TodoForm = ({ handleCloseTodoFormBackdrop }: Props) => {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
 
-    console.log(todoTitle);
-    console.log(todoContent);
-
     todoContent !== "" &&
       addTodoItem({ title: todoTitle, content: todoContent });
 

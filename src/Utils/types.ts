@@ -37,6 +37,19 @@ export type EditTodoPayloadType = {
   fetchedData?: Todos;
 };
 
+export type DeleteTodoParamsType = {
+  id: string;
+  deleted: boolean;
+};
+
+export type AddTodoParamsType = {
+  title?: string;
+  content: string;
+  completed: boolean;
+  deleted: boolean;
+  archived: boolean;
+};
+
 export type Actions = {
   type: string;
   payload: EditTodoPayloadType;

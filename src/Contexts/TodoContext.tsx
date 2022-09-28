@@ -6,14 +6,15 @@ import React, {
   useEffect,
   useState,
   useCallback,
+  useRef,
 } from "react";
-import { addDoc, collection, getDocs } from "firebase/firestore";
-import { todoDatabase } from "../firebase";
+import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
 import { todoReducer } from "../Reducers/todoReducer";
 import { initialState, actions } from "../Reducers/todoReducerActionsState";
-import { TodoContextValueType } from "../Utils/types";
+import { AddTodoParamsType, TodoContextValueType } from "../Utils/types";
 
 import { getTodosList } from "../Utils/firestore";
+import { app } from "../firebase";
 
 type TodoContextProps = {
   children: ReactNode;
@@ -27,10 +28,18 @@ export function useTodoContext() {
   return useContext(TodosContext);
 }
 
-// const todosCollection = collection(todoDatabase, "todos");
+export const todoDatabase = getFirestore(app);
+const todosCollection = collection(todoDatabase, "todos");
 
 const TodoContext = ({ children }: TodoContextProps) => {
+  const todoItemIdRef = useRef<string>("");
   const [state, dispatch] = useReducer(todoReducer, initialState.todoList);
+
+  const addTodoItemToDB = async (params: AddTodoParamsType) => {
+    let documentId = "";
+    await addDoc(todosCollection, params).then((doc) => (documentId = doc.id));
+    return documentId;
+  };
 
   const contextValue: TodoContextValueType = {
     todoList: state,
@@ -42,10 +51,21 @@ const TodoContext = ({ children }: TodoContextProps) => {
         });
       });
     }, []),
-    addTodoItem: ({ title: todoItemTitle, content: todoItemContent }) => {
+    addTodoItem: async ({ title: todoItemTitle, content: todoItemContent }) => {
+      await addTodoItemToDB({
+        title: todoItemTitle,
+        content: todoItemContent as string,
+        completed: false,
+        archived: false,
+        deleted: false,
+      }).then((res) => (todoItemIdRef.current = res));
       dispatch({
         type: actions.ADD_TODO_ITEM,
-        payload: { title: todoItemTitle, content: todoItemContent },
+        payload: {
+          id: todoItemIdRef.current,
+          title: todoItemTitle,
+          content: todoItemContent,
+        },
       });
     },
     editTodoItem: ({

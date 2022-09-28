@@ -1,10 +1,19 @@
-import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { todoDatabase } from "../firebase";
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  addDoc,
+  doc,
+} from "firebase/firestore";
+import { app } from "../firebase";
 import { Todos } from "./types";
+import { DeleteTodoParamsType, AddTodoParamsType } from "../Utils/types";
 
+export const todoDatabase = getFirestore(app);
 const todosCollection = collection(todoDatabase, "todos");
 
+// TODOS FETCHING FUNCTION:
 export const getTodosList = async () => {
   const result = await getDocs(todosCollection)
     .then(
@@ -17,7 +26,6 @@ export const getTodosList = async () => {
         ] as Todos
     )
     .then((finalRes) => {
-      console.log("from the promise", finalRes);
       return finalRes;
     });
   return result;
