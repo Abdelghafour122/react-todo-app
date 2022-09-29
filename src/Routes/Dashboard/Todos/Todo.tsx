@@ -6,31 +6,9 @@ import { FaTrashRestore } from "react-icons/fa";
 import { RiInboxUnarchiveLine } from "react-icons/ri";
 import EditTodoBackdrop from "../../../Components/Todos/EditTodoBackdrop";
 import { useTodoContext } from "../../../Contexts/TodoContext";
-import {
-  EditTodoParamsType,
-  EditTodoPayloadType,
-  Todo as TodoType,
-} from "../../../Utils/types";
-
-type Props = {
-  todoContent: string;
-  todoTitle?: string;
-  todoId: string;
-  todoDone: boolean;
-  todoDeleted: boolean;
-  todoArchived: boolean;
-};
+import { EditTodoParamsType, Todo as TodoType } from "../../../Utils/types";
 
 const Todo = (todoInfo: TodoType) => {
-  // const Todo = (props: TodoType) => {
-  // const Todo = ({
-  //   todoId,
-  //   todoTitle,
-  //   todoContent,
-  //   todoDone,
-  //   todoArchived,
-  //   todoDeleted,
-  // }: Props) => {
   const {
     removeTodoItem,
     permanentlyRemoveTodoItem,
@@ -58,10 +36,12 @@ const Todo = (todoInfo: TodoType) => {
 
   return (
     <div className="todo">
-      <h1 className="text-xl font-bold text-stone-100 mb-3">
+      {/* ADD THE THREE DOTS THING HERE */}
+      <h1 className="text-xl font-bold text-stone-100 mb-3 break-all">
         {todoInfo.title?.length === 0 ? "No title" : todoInfo.title}
       </h1>
-      <p className="text-lg ">{todoInfo.content}</p>
+      {/* ADD THE THREE DOTS THING HERE */}
+      <p className="text-lg break-all">{todoInfo.content}</p>
       <div className="todo-checked">
         <input
           type="checkbox"

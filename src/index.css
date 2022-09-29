@@ -102,6 +102,10 @@
   }
 
   .todo {
-    @apply bg-slate-800 text-stone-300 rounded-md flex flex-col items-start justify-between p-3 basis-1/5;
+    @apply bg-zinc-800 text-stone-300 border-2 border-stone-300 rounded-md flex flex-col items-start justify-between p-3 basis-1/5;
+  }
+
+  .todo-container {
+    @apply w-full gap-3 grid grid-cols-[repeat(4,_minmax(200px,_1fr))] auto-rows-auto;
   }
 }

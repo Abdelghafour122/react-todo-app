@@ -54,7 +54,7 @@ const Todos = (props: Props) => {
             </button>
           </div>
         )}
-        <div className="w-full flex flex-wrap gap-2 justify-center mt-8">
+        <div className="w-full flex flex-wrap gap-2 justify-start mt-8">
           {/* {loading === true ? (
             <p>Loading...</p>
           ) : noOngoingTodos === true ? (
