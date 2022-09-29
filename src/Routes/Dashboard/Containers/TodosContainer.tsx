@@ -15,10 +15,13 @@ const TodosContainer = (props: Props) => {
           todo.archived === false && (
             <Todo
               key={todo.id}
-              todoId={todo.id}
-              todoContent={todo.content}
-              todoTitle={todo.title}
-              todoDone={todo.completed}
+              // todoId={todo.id}
+              // todoContent={todo.content}
+              // todoTitle={todo.title}
+              // todoDone={todo.completed}
+              // todoDeleted={todo.deleted}
+              // todoArchived={todo.archived}
+              {...todo}
             />
           )
       )}

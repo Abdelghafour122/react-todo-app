@@ -8,7 +8,6 @@ import {
 } from "firebase/firestore";
 import { app } from "../firebase";
 import { Todos } from "./types";
-import { DeleteTodoParamsType, AddTodoParamsType } from "../Utils/types";
 
 export const todoDatabase = getFirestore(app);
 const todosCollection = collection(todoDatabase, "todos");

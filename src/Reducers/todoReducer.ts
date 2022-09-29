@@ -66,7 +66,7 @@ export const todoReducer = (
     case actions.ARCHIVE_TODO_ITEM:
       return [
         ...state.map((todo) =>
-          todo.id === payload.id && todo.deleted === false
+          todo.id === payload.id
             ? todo.archived === true
               ? { ...todo, archived: false }
               : { ...todo, archived: true }

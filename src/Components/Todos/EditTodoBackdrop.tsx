@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { VscChromeClose } from "react-icons/vsc";
-import { EditTodoPayloadType } from "../../Utils/types";
+import { EditTodoPayloadType, EditTodoParamsType } from "../../Utils/types";
 import { useTodoContext } from "../../Contexts/TodoContext";
 
 type Props = {
   handleCloseEditTodoBackdrop: () => void;
-  todoInfo: EditTodoPayloadType;
+  // todoInfo: EditTodoPayloadType;
+  todoInfo: EditTodoParamsType;
 };
 
 const EditTodoBackdrop = ({ handleCloseEditTodoBackdrop, todoInfo }: Props) => {
   const { editTodoItem } = useTodoContext();
-  const [editedTodoTitle, setEditedTodoTitle] = useState<string | undefined>(
+  const [editedTodoTitle, setEditedTodoTitle] = useState<string>(
     todoInfo.title
   );
-  const [editedTodoContent, setEditedTodoContent] = useState<
-    string | undefined
-  >(todoInfo.content);
+  const [editedTodoContent, setEditedTodoContent] = useState<string>(
+    todoInfo.content
+  );
 
   const [buttonDisabled, setButtonDisabled] = useState(true);
 

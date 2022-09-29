@@ -1,5 +1,4 @@
 import { User, UserCredential } from "firebase/auth";
-import { DocumentData, DocumentReference } from "firebase/firestore";
 
 export type AuthContextType = {
   currentUser: User | null | undefined;
@@ -15,18 +14,18 @@ export type AuthContextType = {
 export type TodoContextValueType = {
   todoList: Todos;
   fetchTodoItems: () => Promise<void>;
-  addTodoItem: ({ content }: EditTodoPayloadType) => void;
-  editTodoItem: ({ id, title, content }: EditTodoPayloadType) => void;
-  removeTodoItem: ({ id }: EditTodoPayloadType) => void;
-  permanentlyRemoveTodoItem: ({ id }: EditTodoPayloadType) => void;
-  restoreTodoItem: ({ id }: EditTodoPayloadType) => void;
-  markAsCompleted: ({ id }: EditTodoPayloadType) => void;
-  archiveTodoItem: ({ id, deleted }: ArchiveTodoType) => void;
+  addTodoItem: ({ title, content }: EditTodoPayloadType) => void;
+  editTodoItem: ({ id, title, content }: EditTodoParamsType) => void;
+  removeTodoItem: ({ id, deleted }: DeletedTodoParamsType) => void;
+  permanentlyRemoveTodoItem: ({ id }: PermanentlyDeleteTodoParamsType) => void;
+  restoreTodoItem: ({ id, deleted }: DeletedTodoParamsType) => void;
+  markAsCompleted: ({ id, completed }: CompletedTodoParamsType) => void; //CompletedTodoParamsType
+  archiveTodoItem: ({ id, archived }: ArchivedTodoParamsType) => void;
 };
 
 type ArchiveTodoType = {
   id: string;
-  deleted: boolean | undefined;
+  deleted: boolean;
 };
 
 export type EditTodoPayloadType = {
@@ -34,12 +33,12 @@ export type EditTodoPayloadType = {
   title?: string | undefined;
   content?: string | undefined;
   deleted?: boolean;
+  archived?: boolean;
   fetchedData?: Todos;
 };
 
-export type DeleteTodoParamsType = {
+export type PermanentlyDeleteTodoParamsType = {
   id: string;
-  deleted: boolean;
 };
 
 export type AddTodoParamsType = {
@@ -50,6 +49,36 @@ export type AddTodoParamsType = {
   archived: boolean;
 };
 
+export type CompletedTodoParamsType = {
+  id: string;
+  completed: boolean;
+};
+
+export type UpdateTodoContentParamsType = {
+  id: string;
+  title: string;
+  content: string;
+};
+
+export type DeletedTodoParamsType = ArchiveTodoType;
+
+export type ArchivedTodoParamsType = {
+  id: string;
+  archived: boolean;
+};
+
+export type EditTodoParamsType = {
+  id: string;
+  title: string;
+  content: string;
+};
+
+// export type StandardEditTodoType = AddTodoParamsType &
+//   DeleteTodoParamsType &
+//   ArchiveTodoType &
+//   CompletedTodoParamsType &
+//   EditTodoParamsType;
+
 export type Actions = {
   type: string;
   payload: EditTodoPayloadType;
@@ -59,13 +88,13 @@ export type InitialReducerStateType = {
   todoList: Todos;
 };
 
-interface Todo {
+export type Todo = {
   id: string;
   title: string;
   content: string;
   completed: boolean;
   deleted: boolean;
   archived: boolean;
-}
+};
 
 export type Todos = Todo[];
