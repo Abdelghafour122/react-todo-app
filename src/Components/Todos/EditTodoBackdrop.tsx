@@ -51,7 +51,9 @@ const EditTodoBackdrop = ({ handleCloseEditTodoBackdrop, todoInfo }: Props) => {
     <div className="edit-todo absolute top-0 left-0 h-full w-full flex items-center justify-center bg-zinc-700 bg-opacity-90 backdrop-blur-sm z-50">
       <div className="flex flex-col items-center justify-center basis-1/3">
         <div className="w-full py-3 flex items-center justify-between">
-          <p className="text-2xl font-semibold text-stone-200 ">Edit</p>
+          <p className="text-2xl font-semibold text-stone-200 ">
+            Edit the todo
+          </p>
           <button
             className="p-2 rounded-full hover:bg-stone-500 active:bg-stone-400"
             onClick={handleCloseEditTodoBackdrop}

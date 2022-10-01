@@ -108,4 +108,12 @@
   .todo-container {
     @apply w-full gap-3 grid grid-cols-[repeat(4,_minmax(200px,_1fr))] auto-rows-auto;
   }
+
+  .section-small-header {
+    @apply text-sm font-medium text-zinc-400 ml-2 mb-2;
+  }
+
+  .section-global-container {
+    @apply flex flex-col w-full h-full items-start justify-start;
+  }
 }
