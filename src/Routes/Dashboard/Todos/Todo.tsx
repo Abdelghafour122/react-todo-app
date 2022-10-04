@@ -4,9 +4,11 @@ import { FiEdit3 } from "react-icons/fi";
 import { CgRemove } from "react-icons/cg";
 import { FaTrashRestore } from "react-icons/fa";
 import { RiInboxUnarchiveLine } from "react-icons/ri";
+import { ImEnlarge2 } from "react-icons/im";
 import EditTodoBackdrop from "../../../Components/Todos/EditTodoBackdrop";
 import { useTodoContext } from "../../../Contexts/TodoContext";
 import { EditTodoParamsType, Todo as TodoType } from "../../../Utils/types";
+import DetailedTodoBackdrop from "./DetailedTodoBackdrop";
 
 const Todo = (todoInfo: TodoType) => {
   const {
@@ -17,6 +19,8 @@ const Todo = (todoInfo: TodoType) => {
     archiveTodoItem,
   } = useTodoContext();
   const [openEditTodoBackdrop, setOpenEditTodoBackdrop] = useState(false);
+  const [openDetailedTodoBackdrop, setOpenDetailedTodoBackdrop] =
+    useState(false);
   const [todoIsDone, setTodoIsDone] = useState(todoInfo.completed);
 
   const handleOpenEditTodoBackdrop = () => {
@@ -25,6 +29,14 @@ const Todo = (todoInfo: TodoType) => {
 
   const handleCloseEditTodoBackdrop = () => {
     return setOpenEditTodoBackdrop(false);
+  };
+
+  const handleOpenDetailedTodoBackdrop = () => {
+    return setOpenDetailedTodoBackdrop(true);
+  };
+
+  const handleCloseDetailedTodoBackdrop = () => {
+    return setOpenDetailedTodoBackdrop(false);
   };
 
   const markTodoAsCompleted = () => {
@@ -36,12 +48,10 @@ const Todo = (todoInfo: TodoType) => {
 
   return (
     <div className="todo">
-      {/* ADD THE THREE DOTS THING HERE */}
-      <h1 className="text-xl font-bold text-stone-100 mb-3 break-all">
+      <h1 className="todo-title">
         {todoInfo.title?.length === 0 ? "No title" : todoInfo.title}
       </h1>
-      {/* ADD THE THREE DOTS THING HERE */}
-      <p className="text-lg break-all">{todoInfo.content}</p>
+      <p className="todo-p">{todoInfo.content}</p>
       <div className="todo-checked">
         <input
           type="checkbox"
@@ -51,7 +61,7 @@ const Todo = (todoInfo: TodoType) => {
         />
         <label htmlFor={`${todoInfo.id}`}>Completed</label>
       </div>
-      <div className="flex items-center justify-around w-full mt-3">
+      <div className="button-cont flex items-center justify-around w-full">
         {todoInfo.deleted === undefined || todoInfo.deleted === false ? (
           <>
             <button
@@ -96,6 +106,12 @@ const Todo = (todoInfo: TodoType) => {
             >
               <BsTrash size={"1.3rem"} />
             </button>
+            <button
+              className="todo-action-button"
+              onClick={handleOpenDetailedTodoBackdrop}
+            >
+              <ImEnlarge2 size={"1.3rem"} />
+            </button>
           </>
         ) : (
           <>
@@ -120,6 +136,18 @@ const Todo = (todoInfo: TodoType) => {
         <EditTodoBackdrop
           handleCloseEditTodoBackdrop={handleCloseEditTodoBackdrop}
           todoInfo={
+            {
+              id: todoInfo.id,
+              title: todoInfo.title,
+              content: todoInfo.content,
+            } as EditTodoParamsType
+          }
+        />
+      )}
+      {openDetailedTodoBackdrop && (
+        <DetailedTodoBackdrop
+          handleCloseDetailedTodoBackdrop={handleCloseDetailedTodoBackdrop}
+          detailedTodoInfo={
             {
               id: todoInfo.id,
               title: todoInfo.title,

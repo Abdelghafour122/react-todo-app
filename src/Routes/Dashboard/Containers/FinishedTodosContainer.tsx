@@ -10,7 +10,7 @@ const FinishedTodosContainer = (props: Props) => {
   return (
     <div className="section-global-container">
       <LittleSectionHeader header={"Finished Todos"} />
-      <div className="finished-todos-container flex flex-wrap items-start justify-start gap-2">
+      <div className="finished-todos-container todo-container">
         {todoList.map(
           (todo) =>
             todo.completed === true &&

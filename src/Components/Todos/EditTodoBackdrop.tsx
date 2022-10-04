@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { VscChromeClose } from "react-icons/vsc";
-import { EditTodoPayloadType, EditTodoParamsType } from "../../Utils/types";
+import { EditTodoParamsType } from "../../Utils/types";
 import { useTodoContext } from "../../Contexts/TodoContext";
 
 type Props = {
   handleCloseEditTodoBackdrop: () => void;
-  // todoInfo: EditTodoPayloadType;
   todoInfo: EditTodoParamsType;
 };
 
@@ -49,7 +48,7 @@ const EditTodoBackdrop = ({ handleCloseEditTodoBackdrop, todoInfo }: Props) => {
   };
   return (
     <div className="edit-todo absolute top-0 left-0 h-full w-full flex items-center justify-center bg-zinc-700 bg-opacity-90 backdrop-blur-sm z-50">
-      <div className="flex flex-col items-center justify-center basis-1/3">
+      <div className="flex flex-col items-center justify-center basis-2/4">
         <div className="w-full py-3 flex items-center justify-between">
           <p className="text-2xl font-semibold text-stone-200 ">
             Edit the todo

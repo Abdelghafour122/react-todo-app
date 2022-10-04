@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { HiOutlineLightBulb } from "react-icons/hi";
 import { FiEdit3 } from "react-icons/fi";
+import { BiPowerOff } from "react-icons/bi";
 import { MdLabelOutline } from "react-icons/md";
 import { BsArchive, BsTrash } from "react-icons/bs";
 import { MdOutlineDoneOutline } from "react-icons/md";
@@ -14,7 +15,7 @@ import Tooltip from "./Navbar/Tooltip";
 type Props = {};
 
 const Navbar = (props: Props) => {
-  const { currentUser } = useAuthentication();
+  const { currentUser, userSignOut } = useAuthentication();
   const [profilePic, setProfilePic] = useState<string | undefined>();
   const [openProfilePopup, setOpenProfilePopup] = useState(false);
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ const Navbar = (props: Props) => {
 
   return (
     <nav className="py-2 px-2 h-full bg-stone-900">
-      <div className="flex flex-col items-center justify-between gap-2">
+      <div className="flex flex-col items-center justify-start gap-2">
         <p className="text-2xl text-orange-300 font-sans font-extrabold border-b-2 border-b-stone-500">
           Dooit
         </p>
@@ -86,6 +87,13 @@ const Navbar = (props: Props) => {
           </button>
           {openProfilePopup === true && <ProfileSettingsPopup />}
         </div>
+        <button
+          className="p-3 bg-stone-700 transition-all rounded-[50%] duration-150 ease-linear hover:rounded-[10px] hover:bg-stone-600 active:bg-stone-500 absolute bottom-2 group"
+          onClick={userSignOut}
+        >
+          <BiPowerOff size={"1.7rem"} color={"red"} />
+          <Tooltip tooltipContent={"Sign out"} />
+        </button>
       </div>
     </nav>
   );

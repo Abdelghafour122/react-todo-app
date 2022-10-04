@@ -57,7 +57,7 @@
   }
 
   .todo-action-button {
-    @apply p-2 rounded-full hover:bg-slate-700 active:bg-slate-500;
+    @apply p-2 rounded-full hover:bg-zinc-700 active:bg-zinc-500;
   }
 
   .form-info-message {
@@ -102,11 +102,24 @@
   }
 
   .todo {
-    @apply bg-zinc-800 text-stone-300 border-2 border-stone-300 rounded-md flex flex-col items-start justify-between p-3 basis-1/5;
+    @apply bg-zinc-800 text-stone-300 border-2 border-stone-300 rounded-md flex flex-col items-start justify-between p-3 basis-1/5 gap-4;
+  }
+
+  .todo-title {
+    @apply text-xl font-bold text-stone-100 break-all text-ellipsis overflow-hidden w-[150px] whitespace-nowrap;
+  }
+
+  .todo-p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    max-width: 160px;
+
+    @apply overflow-hidden text-lg break-words mb-1;
   }
 
   .todo-container {
-    @apply w-full gap-3 grid grid-cols-[repeat(4,_minmax(200px,_1fr))] auto-rows-auto;
+    @apply w-full flex flex-wrap items-start justify-start gap-2;
   }
 
   .section-small-header {

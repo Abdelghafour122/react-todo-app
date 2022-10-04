@@ -7,7 +7,7 @@ const DeletedTodosContainer = () => {
   const { todoList } = useTodoContext();
   return (
     <div className="section-global-container">
-      <LittleSectionHeader header={"Finished Todos"} />
+      <LittleSectionHeader header={"Deleted Todos"} />
       <div className="finished-todos-container flex flex-wrap items-start justify-start gap-2">
         {todoList.map(
           (todo) => todo.deleted === true && <Todo key={todo.id} {...todo} />

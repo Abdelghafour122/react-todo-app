@@ -1,0 +1,10 @@
+p width is relative to the flex-basis of the todo
+alternative icon for labels: MdLocalOffer
+
+
+.make standard classes in index.css for: 
+    backdrops
+
+
+Later retouches:
+    try make the nav buttons like toggle buttons from mui

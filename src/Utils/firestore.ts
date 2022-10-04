@@ -1,11 +1,4 @@
-import { useEffect, useState } from "react";
-import {
-  collection,
-  getDocs,
-  getFirestore,
-  addDoc,
-  doc,
-} from "firebase/firestore";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { app } from "../firebase";
 import { Todos } from "./types";
 

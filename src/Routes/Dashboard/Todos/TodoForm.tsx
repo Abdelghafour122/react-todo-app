@@ -18,6 +18,8 @@ const TodoForm = ({ handleCloseTodoFormBackdrop }: Props) => {
 
     setTodoContent("");
     setTodoTitle("");
+
+    handleCloseTodoFormBackdrop();
   };
 
   return (
@@ -57,11 +59,12 @@ const TodoForm = ({ handleCloseTodoFormBackdrop }: Props) => {
             placeholder="Write a task..."
           />
           <div className="form-buttons flex items-center justify-around">
-            <button className="button" onClick={handleCloseTodoFormBackdrop}>
-              Close the form
-            </button>
-            <button type="submit" className="button w-max self-center">
-              Finish
+            <button
+              type="submit"
+              className="button w-full self-center"
+              disabled={todoContent === ""}
+            >
+              Make todo
             </button>
           </div>
         </form>
