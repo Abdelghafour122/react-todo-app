@@ -9,6 +9,7 @@ import EditTodoBackdrop from "../../../Components/Todos/EditTodoBackdrop";
 import { useTodoContext } from "../../../Contexts/TodoContext";
 import { EditTodoParamsType, Todo as TodoType } from "../../../Utils/types";
 import DetailedTodoBackdrop from "./DetailedTodoBackdrop";
+import Snackbar from "../../../Components/Todos/Snackbar";
 
 const Todo = (todoInfo: TodoType) => {
   const {
@@ -22,6 +23,7 @@ const Todo = (todoInfo: TodoType) => {
   const [openDetailedTodoBackdrop, setOpenDetailedTodoBackdrop] =
     useState(false);
   const [todoIsDone, setTodoIsDone] = useState(todoInfo.completed);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handleOpenEditTodoBackdrop = () => {
     return setOpenEditTodoBackdrop(true);
@@ -39,6 +41,14 @@ const Todo = (todoInfo: TodoType) => {
     return setOpenDetailedTodoBackdrop(false);
   };
 
+  const handleOpenSnackbar = () => {
+    return setOpenSnackbar(true);
+  };
+
+  const handleCloseSnackbar = () => {
+    return setOpenSnackbar(false);
+  };
+
   const markTodoAsCompleted = () => {
     setTodoIsDone(!todoIsDone);
     return setTimeout(() => {
@@ -48,6 +58,9 @@ const Todo = (todoInfo: TodoType) => {
 
   return (
     <div className="todo">
+      <button className="button" onClick={handleOpenSnackbar}>
+        C
+      </button>
       <h1 className="todo-title">
         {todoInfo.title?.length === 0 ? "No title" : todoInfo.title}
       </h1>
@@ -156,6 +169,10 @@ const Todo = (todoInfo: TodoType) => {
           }
         />
       )}
+      <Snackbar
+        text="Success message"
+        handleCloseSnackbar={handleCloseSnackbar}
+      />
     </div>
   );
 };
