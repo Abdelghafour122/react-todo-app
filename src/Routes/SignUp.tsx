@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useAuthentication } from "../Contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { VscError } from "react-icons/vsc";
+import Attribution from "../Components/Dashboard/Attribution";
 
 const SignUp = () => {
   const { userSignUp } = useAuthentication();
@@ -103,6 +104,7 @@ const SignUp = () => {
           </Link>
         </div>
       </div>
+      <Attribution />
     </div>
   );
 };

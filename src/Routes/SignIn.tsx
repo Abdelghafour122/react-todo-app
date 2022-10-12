@@ -4,6 +4,7 @@ import { useAuthentication } from "../Contexts/AuthContext";
 import { VscError } from "react-icons/vsc";
 
 import { FcGoogle } from "react-icons/fc";
+import Attribution from "../Components/Dashboard/Attribution";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -122,6 +123,7 @@ const SignIn = () => {
         <FcGoogle size="2rem" />
         Continue with Google
       </button>
+      <Attribution />
     </div>
   );
 };
