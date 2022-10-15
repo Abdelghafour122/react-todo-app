@@ -4,6 +4,7 @@ import { useAuthentication } from "../Contexts/AuthContext";
 import { useTodoContext } from "../Contexts/TodoContext";
 
 import { BsArrowRight } from "react-icons/bs";
+import { AiFillHome } from "react-icons/ai";
 import Attribution from "../Components/Dashboard/Attribution";
 
 function Homepage() {
@@ -26,29 +27,15 @@ function Homepage() {
       <div className="btn-cont w-full mx-auto my-0 flex flex-col gap-2 items-center justify-center">
         {currentUser === null ? (
           <>
-            {/* <button
-              onClick={() => navigate("/signin")}
-              className="bg-stone-200 font-semibold py-1 px-3 rounded-md border-2 border-slate-900 "
-            >
-              Sign In
-            </button>
-            <button
-              onClick={() => navigate("/signup")}
-              className="bg-stone-200 font-semibold py-1 px-3 rounded-md border-2 border-slate-900"
-            >
-              Sign Up
-            </button> */}
-            <button
-              className="flex items-center gap-1 p-2 rounded-sm text-lg font-medium text-stone-100 bg-orange-400"
-              onClick={() => navigate("/signin")}
-            >
+            <button className="big-button" onClick={() => navigate("/signin")}>
               Get Started
               <BsArrowRight size={"1.3rem"} />
             </button>
           </>
         ) : (
-          <button className="button" onClick={() => navigate("/dashboard")}>
+          <button className="big-button" onClick={() => navigate("/dashboard")}>
             Go to dashboard
+            <AiFillHome size={"1.3rem"} />
           </button>
         )}
       </div>

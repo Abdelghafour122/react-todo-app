@@ -7,7 +7,11 @@ import { RiInboxUnarchiveLine } from "react-icons/ri";
 import { ImEnlarge2 } from "react-icons/im";
 import EditTodoBackdrop from "../../../Components/Todos/EditTodoBackdrop";
 import { useTodoContext } from "../../../Contexts/TodoContext";
-import { EditTodoParamsType, Todo as TodoType } from "../../../Utils/types";
+import {
+  EditTodoParamsType,
+  DetailedTodoType,
+  Todo as TodoType,
+} from "../../../Utils/types";
 import DetailedTodoBackdrop from "./DetailedTodoBackdrop";
 import Snackbar from "../../../Components/Todos/Snackbar";
 
@@ -58,9 +62,9 @@ const Todo = (todoInfo: TodoType) => {
 
   return (
     <div className="todo">
-      <button className="button" onClick={handleOpenSnackbar}>
+      {/* <button className="button" onClick={handleOpenSnackbar}>
         C
-      </button>
+      </button> */}
       <h1 className="todo-title">
         {todoInfo.title?.length === 0 ? "No title" : todoInfo.title}
       </h1>
@@ -165,14 +169,17 @@ const Todo = (todoInfo: TodoType) => {
               id: todoInfo.id,
               title: todoInfo.title,
               content: todoInfo.content,
-            } as EditTodoParamsType
+              archived: todoInfo.archived,
+              completed: todoInfo.completed,
+              deleted: todoInfo.deleted,
+            } as DetailedTodoType
           }
         />
       )}
-      <Snackbar
+      {/* <Snackbar
         text="Success message"
         handleCloseSnackbar={handleCloseSnackbar}
-      />
+      /> */}
     </div>
   );
 };

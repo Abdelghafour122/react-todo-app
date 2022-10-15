@@ -73,6 +73,10 @@ export type EditTodoParamsType = {
   content: string;
 };
 
+export type DetailedTodoType = AddTodoParamsType & {
+  id: string;
+};
+
 // export type StandardEditTodoType = AddTodoParamsType &
 //   DeleteTodoParamsType &
 //   ArchiveTodoType &
