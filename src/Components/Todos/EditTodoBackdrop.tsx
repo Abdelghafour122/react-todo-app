@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { VscChromeClose } from "react-icons/vsc";
 import { EditTodoParamsType } from "../../Utils/types";
 import { useTodoContext } from "../../Contexts/TodoContext";
+import { Timestamp } from "firebase/firestore";
 
 type Props = {
   handleCloseEditTodoBackdrop: () => void;
@@ -38,6 +39,7 @@ const EditTodoBackdrop = ({ handleCloseEditTodoBackdrop, todoInfo }: Props) => {
         id: todoInfo.id,
         title: editedTodoTitle,
         content: editedTodoContent,
+        date: Timestamp.now(),
       });
       // set a success message
       handleCloseEditTodoBackdrop();

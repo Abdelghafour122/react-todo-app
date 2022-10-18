@@ -20,6 +20,7 @@ export const todoReducer = (
           completed: false,
           deleted: false,
           archived: false,
+          edited: false,
           date: Timestamp.now(),
         },
       ];
@@ -32,6 +33,8 @@ export const todoReducer = (
                 ...todo,
                 title: payload.title as string,
                 content: payload.content as string,
+                date: payload.date as Timestamp,
+                edited: true,
               }
             : todo
         ),

@@ -3,7 +3,6 @@ import { BsArchive, BsTrash } from "react-icons/bs";
 import { DetailedTodoType } from "../../../Utils/types";
 import { useTodoContext } from "../../../Contexts/TodoContext";
 import { RiInboxUnarchiveLine } from "react-icons/ri";
-import { Timestamp } from "firebase/firestore";
 
 type Props = {
   handleCloseDetailedTodoBackdrop: () => void;
@@ -14,13 +13,7 @@ const DetailedTodoBackdrop = ({
   handleCloseDetailedTodoBackdrop,
   detailedTodoInfo,
 }: Props) => {
-  const { removeTodoItem, archiveTodoItem } = useTodoContext();
-  const formatDate = (fetchedDate: Timestamp) => {
-    return fetchedDate.toDate().toLocaleString("en-GB", {
-      dateStyle: "short",
-      timeStyle: "short",
-    });
-  };
+  const { removeTodoItem, archiveTodoItem, formatDate } = useTodoContext();
   return (
     <div className="detailed-todo absolute top-0 left-0 h-full w-full flex items-center justify-center bg-zinc-700 bg-opacity-90 backdrop-blur-sm z-50">
       <div className="flex flex-col items-center justify-center basis-3/5 shadow-2xl">
@@ -31,7 +24,12 @@ const DetailedTodoBackdrop = ({
             </h1>
             <p className="w-full min-h-[150px]">{detailedTodoInfo.content}</p>
           </div>
-          <p> {`Created on: ${formatDate(detailedTodoInfo.date)}`} </p>
+          <p>
+            {" "}
+            {`${
+              detailedTodoInfo.edited === false ? "Created on: " : "Edited on: "
+            } ${formatDate(detailedTodoInfo.date)}`}{" "}
+          </p>
           <div className="todo-funcs w-full flex items-center justify-between">
             <ul className="flex items-center justify-between gap-1">
               <li>

@@ -141,6 +141,13 @@ const TodoContext = ({ children }: TodoContextProps) => {
       });
     }, []),
 
+    formatDate: (fetchedDate: Timestamp) => {
+      return fetchedDate.toDate().toLocaleString("en-GB", {
+        dateStyle: "short",
+        timeStyle: "short",
+      });
+    },
+
     addTodoItem: async ({ title: todoItemTitle, content: todoItemContent }) => {
       await addTodoItemToDB({
         title: todoItemTitle,
@@ -148,6 +155,7 @@ const TodoContext = ({ children }: TodoContextProps) => {
         completed: false,
         archived: false,
         deleted: false,
+        edited: false,
         date: Timestamp.now(),
       }).then((res) => (todoItemIdRef.current = res));
       dispatch({
@@ -163,11 +171,15 @@ const TodoContext = ({ children }: TodoContextProps) => {
       id: todoItemId,
       title: todoItemTitle,
       content: todoItemContent,
+      date: todoItemDate,
     }) => {
       updateTodoContentInDB({
         id: todoItemId,
         title: todoItemTitle,
         content: todoItemContent,
+        edited: true,
+        // date: Timestamp.now(),
+        date: todoItemDate,
       } as UpdateTodoContentParamsType);
       dispatch({
         type: actions.EDIT_TODO_ITEM,
@@ -175,6 +187,7 @@ const TodoContext = ({ children }: TodoContextProps) => {
           id: todoItemId,
           title: todoItemTitle,
           content: todoItemContent,
+          date: todoItemDate,
         },
       });
     },

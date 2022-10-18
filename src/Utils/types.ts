@@ -14,6 +14,7 @@ export type AuthContextType = {
 
 export type TodoContextValueType = {
   todoList: Todos;
+  formatDate: (fetchedDate: Timestamp) => string;
   fetchTodoItems: () => Promise<void>;
   addTodoItem: ({ title, content }: EditTodoPayloadType) => void;
   editTodoItem: ({ id, title, content }: EditTodoParamsType) => void;
@@ -36,6 +37,7 @@ export type EditTodoPayloadType = {
   deleted?: boolean;
   archived?: boolean;
   fetchedData?: Todos;
+  date?: Timestamp;
 };
 
 export type PermanentlyDeleteTodoParamsType = {
@@ -48,6 +50,7 @@ export type AddTodoParamsType = {
   completed: boolean;
   deleted: boolean;
   archived: boolean;
+  edited: boolean;
   date: Timestamp;
 };
 
@@ -60,6 +63,7 @@ export type UpdateTodoContentParamsType = {
   id: string;
   title: string;
   content: string;
+  edited: boolean;
 };
 
 export type DeletedTodoParamsType = ArchiveTodoType;
@@ -73,6 +77,7 @@ export type EditTodoParamsType = {
   id: string;
   title: string;
   content: string;
+  date: Timestamp;
 };
 
 export type DetailedTodoType = AddTodoParamsType & {
@@ -95,6 +100,7 @@ export type Todo = {
   completed: boolean;
   deleted: boolean;
   archived: boolean;
+  edited: boolean;
   date: Timestamp;
 };
 

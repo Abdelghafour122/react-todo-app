@@ -170,6 +170,7 @@ const Todo = (todoInfo: TodoType) => {
               archived: todoInfo.archived,
               completed: todoInfo.completed,
               deleted: todoInfo.deleted,
+              edited: todoInfo.edited,
               date: todoInfo.date,
             } as DetailedTodoType
           }
