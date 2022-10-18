@@ -8,3 +8,4 @@ alternative icon for labels: MdLocalOffer
 
 Later retouches:
     try make the nav buttons like toggle buttons from mui
+    improve the loading states when fetching (replace the "loading" with a more suitable message)

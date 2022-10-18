@@ -3,8 +3,6 @@ import React, {
   createContext,
   useContext,
   useReducer,
-  useEffect,
-  useState,
   useCallback,
   useRef,
 } from "react";
@@ -15,12 +13,12 @@ import {
   deleteDoc,
   updateDoc,
   doc,
+  Timestamp,
 } from "firebase/firestore";
 import { todoReducer } from "../Reducers/todoReducer";
 import { initialState, actions } from "../Reducers/todoReducerActionsState";
 import {
   AddTodoParamsType,
-  EditTodoPayloadType,
   TodoContextValueType,
   UpdateTodoContentParamsType,
   CompletedTodoParamsType,
@@ -68,7 +66,6 @@ const TodoContext = ({ children }: TodoContextProps) => {
       .catch((err) => console.log("error while deleting todo.", err));
   };
 
-  // CLEAN THIS UP CAUSE I WAS HALF ASLEEP WHEN I WROTE IT :')
   const updateTodoContentInDB = async (
     updateTodoContentInput: UpdateTodoContentParamsType
   ) => {
@@ -151,6 +148,7 @@ const TodoContext = ({ children }: TodoContextProps) => {
         completed: false,
         archived: false,
         deleted: false,
+        date: Timestamp.now(),
       }).then((res) => (todoItemIdRef.current = res));
       dispatch({
         type: actions.ADD_TODO_ITEM,

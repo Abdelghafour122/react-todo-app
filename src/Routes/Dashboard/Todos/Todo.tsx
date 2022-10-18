@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsArchive, BsTrash } from "react-icons/bs";
 import { FiEdit3 } from "react-icons/fi";
 import { CgRemove } from "react-icons/cg";
@@ -62,9 +62,7 @@ const Todo = (todoInfo: TodoType) => {
 
   return (
     <div className="todo">
-      {/* <button className="button" onClick={handleOpenSnackbar}>
-        C
-      </button> */}
+      {/* <button className="button" onClick={handleOpenSnackbar}> */}
       <h1 className="todo-title">
         {todoInfo.title?.length === 0 ? "No title" : todoInfo.title}
       </h1>
@@ -172,6 +170,7 @@ const Todo = (todoInfo: TodoType) => {
               archived: todoInfo.archived,
               completed: todoInfo.completed,
               deleted: todoInfo.deleted,
+              date: todoInfo.date,
             } as DetailedTodoType
           }
         />

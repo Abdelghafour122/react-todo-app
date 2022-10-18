@@ -1,3 +1,4 @@
+import { Timestamp } from "firebase/firestore";
 import { Actions, Todos } from "../Utils/types";
 import { actions } from "./todoReducerActionsState";
 
@@ -19,6 +20,7 @@ export const todoReducer = (
           completed: false,
           deleted: false,
           archived: false,
+          date: Timestamp.now(),
         },
       ];
 

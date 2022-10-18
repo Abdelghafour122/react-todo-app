@@ -1,4 +1,5 @@
 import { User, UserCredential } from "firebase/auth";
+import { Timestamp } from "firebase/firestore";
 
 export type AuthContextType = {
   currentUser: User | null | undefined;
@@ -47,6 +48,7 @@ export type AddTodoParamsType = {
   completed: boolean;
   deleted: boolean;
   archived: boolean;
+  date: Timestamp;
 };
 
 export type CompletedTodoParamsType = {
@@ -77,12 +79,6 @@ export type DetailedTodoType = AddTodoParamsType & {
   id: string;
 };
 
-// export type StandardEditTodoType = AddTodoParamsType &
-//   DeleteTodoParamsType &
-//   ArchiveTodoType &
-//   CompletedTodoParamsType &
-//   EditTodoParamsType;
-
 export type Actions = {
   type: string;
   payload: EditTodoPayloadType;
@@ -99,6 +95,7 @@ export type Todo = {
   completed: boolean;
   deleted: boolean;
   archived: boolean;
+  date: Timestamp;
 };
 
 export type Todos = Todo[];
