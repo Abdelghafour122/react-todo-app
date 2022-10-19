@@ -139,6 +139,6 @@
   }
 
   .section-global-container {
-    @apply flex flex-col w-full h-full items-start justify-start;
+    @apply flex flex-col w-full h-full items-start justify-start ml-5;
   }
 }

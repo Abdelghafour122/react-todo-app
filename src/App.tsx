@@ -22,32 +22,34 @@ function App() {
   return (
     <AuthContext>
       <TodoContext>
-        <div className="App">
-          <Routes>
-            <Route element={<PrivateLoggedRoute />}>
-              <Route element={<Dashboard />} path="dashboard/*">
-                <Route index element={<Todos />} />
-                <Route element={<Finished />} path="finished" />
-                <Route element={<Trash />} path="trash" />
-                <Route element={<Archived />} path="archived" />
+        <main>
+          <div className="App">
+            <Routes>
+              <Route element={<PrivateLoggedRoute />}>
+                <Route element={<Dashboard />} path="dashboard/*">
+                  <Route index element={<Todos />} />
+                  <Route element={<Finished />} path="finished" />
+                  <Route element={<Trash />} path="trash" />
+                  <Route element={<Archived />} path="archived" />
+                </Route>
               </Route>
-            </Route>
-            <Route element={<PrivateUnloggedRoute />}>
-              <Route element={<SignIn />} path="/signin" />
-            </Route>
-            <Route element={<PrivateUnloggedRoute />}>
-              <Route element={<SignUp />} path="/signup" />
-            </Route>
-            <Route element={<PrivateUnloggedRoute />}>
-              <Route
-                element={<ForgottenPassword />}
-                path="/forgottenpassword"
-              />
-            </Route>
-            <Route element={<Homepage />} path="/" />
-            <Route element={<ErrorPage />} path="*" />
-          </Routes>
-        </div>
+              <Route element={<PrivateUnloggedRoute />}>
+                <Route element={<SignIn />} path="/signin" />
+              </Route>
+              <Route element={<PrivateUnloggedRoute />}>
+                <Route element={<SignUp />} path="/signup" />
+              </Route>
+              <Route element={<PrivateUnloggedRoute />}>
+                <Route
+                  element={<ForgottenPassword />}
+                  path="/forgottenpassword"
+                />
+              </Route>
+              <Route element={<Homepage />} path="/" />
+              <Route element={<ErrorPage />} path="*" />
+            </Routes>
+          </div>
+        </main>
       </TodoContext>
     </AuthContext>
   );

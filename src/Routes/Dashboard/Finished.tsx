@@ -26,18 +26,16 @@ const Finished = (props: Props) => {
 
   return (
     <div className="finished-todos">
-      <div className="container">
-        {loading ? (
-          <p>Loading...</p>
-        ) : noFinishedTodos === true || todoList.length === 0 ? (
-          <EmptySection
-            Icon={MdOutlineDone}
-            message={"Your finished todos will be moved in here!"}
-          />
-        ) : (
-          <FinishedTodosContainer />
-        )}
-      </div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : noFinishedTodos === true || todoList.length === 0 ? (
+        <EmptySection
+          Icon={MdOutlineDone}
+          message={"Your finished todos will be moved in here!"}
+        />
+      ) : (
+        <FinishedTodosContainer />
+      )}
     </div>
   );
 };

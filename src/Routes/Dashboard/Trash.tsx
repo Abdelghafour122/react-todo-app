@@ -24,18 +24,16 @@ const Trash = (props: Props) => {
 
   return (
     <div className="trashed-todos h-full">
-      <div className="container h-full">
-        {loading ? (
-          <p>Loading...</p>
-        ) : undeletedTodos === true ? (
-          <EmptySection
-            message={"The deleted todos will appear here!"}
-            Icon={BsTrashFill}
-          />
-        ) : (
-          <DeletedTodosContainer />
-        )}
-      </div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : undeletedTodos === true ? (
+        <EmptySection
+          message={"The deleted todos will appear here!"}
+          Icon={BsTrashFill}
+        />
+      ) : (
+        <DeletedTodosContainer />
+      )}
     </div>
   );
 };

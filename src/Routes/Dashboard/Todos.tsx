@@ -43,19 +43,18 @@ const Todos = (props: Props) => {
 
   return (
     <div className="todos">
-      <div className="container">
-        {openTodoForm ? (
-          <TodoForm handleCloseTodoFormBackdrop={handleCloseTodoFormBackdrop} />
-        ) : (
-          <div className="form-note flex items-center justify-center gap-2">
-            <Message message={"Click to add a todo"} />
-            <button className="button" onClick={handleOpenTodoFormBackdrop}>
-              Open
-            </button>
-          </div>
-        )}
-        <div className="w-full flex flex-wrap gap-2 justify-start mt-8">
-          {/* {loading === true ? (
+      {openTodoForm ? (
+        <TodoForm handleCloseTodoFormBackdrop={handleCloseTodoFormBackdrop} />
+      ) : (
+        <div className="form-note flex items-center justify-center gap-2">
+          <Message message={"Click to add a todo"} />
+          <button className="button" onClick={handleOpenTodoFormBackdrop}>
+            Open
+          </button>
+        </div>
+      )}
+      <div className="w-full flex flex-wrap gap-2 justify-start mt-8">
+        {/* {loading === true ? (
             <p>Loading...</p>
           ) : noOngoingTodos === true ? (
             <EmptySection
@@ -65,17 +64,16 @@ const Todos = (props: Props) => {
           ) : (
             <TodosContainer />
           )} */}
-          {loading === true ? (
-            <p>Loading...</p>
-          ) : loading === false && noOngoingTodos === true ? (
-            <EmptySection
-              Icon={HiLightBulb}
-              message={"Your ongoing todos will show up here!"}
-            />
-          ) : (
-            loading === false && noOngoingTodos === false && <TodosContainer />
-          )}
-        </div>
+        {loading === true ? (
+          <p>Loading...</p>
+        ) : loading === false && noOngoingTodos === true ? (
+          <EmptySection
+            Icon={HiLightBulb}
+            message={"Your ongoing todos will show up here!"}
+          />
+        ) : (
+          loading === false && noOngoingTodos === false && <TodosContainer />
+        )}
       </div>
     </div>
   );
