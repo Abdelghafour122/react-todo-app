@@ -178,7 +178,6 @@ const TodoContext = ({ children }: TodoContextProps) => {
         title: todoItemTitle,
         content: todoItemContent,
         edited: true,
-        // date: Timestamp.now(),
         date: todoItemDate,
       } as UpdateTodoContentParamsType);
       dispatch({

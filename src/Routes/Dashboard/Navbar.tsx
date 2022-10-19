@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { HiOutlineLightBulb } from "react-icons/hi";
 import { FiEdit3 } from "react-icons/fi";
-import { BiPowerOff } from "react-icons/bi";
+import { BiPowerOff, BiLogOut } from "react-icons/bi";
 import { MdLabelOutline } from "react-icons/md";
 import { BsArchive, BsTrash } from "react-icons/bs";
 import { MdOutlineDoneOutline } from "react-icons/md";
@@ -91,7 +91,7 @@ const Navbar = (props: Props) => {
           className="p-3 bg-stone-700 transition-all rounded-[50%] duration-150 ease-linear hover:rounded-[10px] hover:bg-stone-600 active:bg-stone-500 absolute bottom-2 group"
           onClick={userSignOut}
         >
-          <BiPowerOff size={"1.7rem"} color={"red"} />
+          <BiLogOut size={"1.7rem"} color={"#ff3535"} />
           <Tooltip tooltipContent={"Sign out"} />
         </button>
       </div>

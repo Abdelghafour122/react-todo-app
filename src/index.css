@@ -13,6 +13,14 @@
     @apply flex items-center gap-1 p-2 rounded-sm text-lg font-medium text-stone-100 bg-orange-400;
   }
 
+  .navbar-tooltip {
+    @apply absolute left-[154%] top-2/4 -translate-y-1/2 p-2 w-max rounded-md bg-zinc-900 text-stone-200 font-semibold scale-0 group-hover:scale-100 shadow-md shadow-zinc-900;
+  }
+
+  .todo-actions-tooltip {
+    @apply absolute left-1/2 top-[110%] -translate-x-1/2 p-2 w-max rounded-md bg-zinc-900  text-stone-200 font-medium scale-0 group-hover:scale-100;
+  }
+
   .form-title {
     padding: 1rem 1.5rem;
     color: theme("colors.stone.100");

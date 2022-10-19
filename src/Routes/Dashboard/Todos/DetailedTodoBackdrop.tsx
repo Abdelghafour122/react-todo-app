@@ -3,6 +3,8 @@ import { BsArchive, BsTrash } from "react-icons/bs";
 import { DetailedTodoType } from "../../../Utils/types";
 import { useTodoContext } from "../../../Contexts/TodoContext";
 import { RiInboxUnarchiveLine } from "react-icons/ri";
+import { MdOutlineNewLabel } from "react-icons/md";
+import TodoActionsTooltip from "./TodoActionsTooltip";
 
 type Props = {
   handleCloseDetailedTodoBackdrop: () => void;
@@ -34,7 +36,7 @@ const DetailedTodoBackdrop = ({
             <ul className="flex items-center justify-between gap-1">
               <li>
                 <button
-                  className="todo-action-button"
+                  className="todo-action-button group relative"
                   onClick={() =>
                     removeTodoItem({
                       id: detailedTodoInfo.id,
@@ -43,13 +45,14 @@ const DetailedTodoBackdrop = ({
                   }
                 >
                   <BsTrash size={"1.3rem"} />
+                  <TodoActionsTooltip text={"Delete"} />
                 </button>
               </li>
               <li>
                 {detailedTodoInfo.archived === undefined ||
                 detailedTodoInfo.archived === false ? (
                   <button
-                    className="todo-action-button"
+                    className="todo-action-button group relative"
                     onClick={() =>
                       archiveTodoItem({
                         id: detailedTodoInfo.id,
@@ -58,10 +61,11 @@ const DetailedTodoBackdrop = ({
                     }
                   >
                     <BsArchive size={"1.3rem"} />
+                    <TodoActionsTooltip text={"Archive"} />
                   </button>
                 ) : (
                   <button
-                    className="todo-action-button"
+                    className="todo-action-button group relative"
                     onClick={() =>
                       archiveTodoItem({
                         id: detailedTodoInfo.id,
@@ -70,8 +74,15 @@ const DetailedTodoBackdrop = ({
                     }
                   >
                     <RiInboxUnarchiveLine size={"1.3rem"} />
+                    <TodoActionsTooltip text={"Unarchive"} />
                   </button>
                 )}
+              </li>
+              <li>
+                <button className="todo-action-button group relative">
+                  <MdOutlineNewLabel size={"1.3rem"} />
+                  <TodoActionsTooltip text={"Add Label"} />
+                </button>
               </li>
             </ul>
             <div className="close-button">
