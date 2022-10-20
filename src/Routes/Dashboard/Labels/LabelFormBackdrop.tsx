@@ -4,9 +4,11 @@ import { VscChromeClose } from "react-icons/vsc";
 import LabelItem from "./LabelItem";
 import NoLabelsMessage from "./NoLabelsMessage";
 
-type Props = {};
+type Props = {
+  handleCloseLabelsBackdrop: () => void;
+};
 
-const LabelFormBackdrop = (props: Props) => {
+const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
   const [label, setLabel] = useState("");
   const labelValid = useRef(true);
   useEffect(() => {
@@ -25,7 +27,7 @@ const LabelFormBackdrop = (props: Props) => {
           <p className="text-2xl font-semibold text-stone-200 ">Labels</p>
           <button
             className="p-2 rounded-full hover:bg-stone-500 active:bg-stone-400"
-            // onClick={handleCloseEditTodoBackdrop}
+            onClick={handleCloseLabelsBackdrop}
           >
             <VscChromeClose color="rgb(231 229 228)" size="1.5rem" />
           </button>
@@ -52,7 +54,7 @@ const LabelFormBackdrop = (props: Props) => {
           </form>
           {labelValid.current === false && (
             <p className="-mt-2 text-red-600 font-semibold">
-              Label length should be below 25 letters!
+              Label length should be below 20 letters!
             </p>
           )}
           {/* PUT THE CONDITION HERE */}

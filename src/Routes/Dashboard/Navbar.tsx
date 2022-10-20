@@ -17,9 +17,19 @@ type Props = {};
 
 const Navbar = (props: Props) => {
   const { currentUser, userSignOut } = useAuthentication();
+  const navigate = useNavigate();
   const [profilePic, setProfilePic] = useState<string | undefined>();
   const [openProfilePopup, setOpenProfilePopup] = useState(false);
-  const navigate = useNavigate();
+
+  const [openLabelsBackdrop, setOpenLabelsBackdrop] = useState(false);
+
+  const handleOpenLabelsBackdrop = () => {
+    return setOpenLabelsBackdrop(true);
+  };
+
+  const handleCloseLabelsBackdrop = () => {
+    return setOpenLabelsBackdrop(false);
+  };
 
   useEffect(() => {
     if (currentUser?.photoURL !== null) setProfilePic(currentUser?.photoURL);
@@ -37,16 +47,6 @@ const Navbar = (props: Props) => {
       linkName: "Finished",
       icon: MdOutlineDoneOutline,
       execute: () => navigate("finished"),
-    },
-    {
-      linkName: "Labels",
-      icon: MdLabelOutline,
-      execute: () => console.log("labels"),
-    },
-    {
-      linkName: "Edit Labels",
-      icon: FiEdit3,
-      execute: () => console.log("Edit Labels"),
     },
     {
       linkName: "Archived",
@@ -77,6 +77,15 @@ const Navbar = (props: Props) => {
                 </li>
               );
             })}
+            <li className="relative group">
+              <button
+                className="p-3 bg-stone-700 transition-all rounded-[50%] duration-150 ease-linear hover:rounded-[10px] hover:bg-stone-600 active:bg-stone-500 focus:bg-stone-400 focus:rounded-[10px]"
+                onClick={handleOpenLabelsBackdrop}
+              >
+                <MdLabelOutline color="rgb(253 186 116)" size={"1.7rem"} />
+              </button>
+              <Tooltip tooltipContent={"Labels"} />
+            </li>
           </ul>
         </div>
         <div className="profile relative mt-2">
@@ -96,7 +105,11 @@ const Navbar = (props: Props) => {
           <Tooltip tooltipContent={"Sign out"} />
         </button>
       </div>
-      <LabelFormBackdrop />
+      {openLabelsBackdrop === true ? (
+        <LabelFormBackdrop
+          handleCloseLabelsBackdrop={handleCloseLabelsBackdrop}
+        />
+      ) : null}
     </nav>
   );
 };
