@@ -1,10 +1,12 @@
 p width is relative to the flex-basis of the todo
 alternative icon for labels: MdLocalOffer
 
-20/10
+21/10
 finish the labelBackdorp's functionalities
-find a way to implement the label feature
-check if the label already exists before adding
+check if the label already exists/valid before adding
+remove the dummy data from labelslist in context
+make a labelFetch function
+finish label edit function
 
 .make standard classes in index.css for: 
     backdrops

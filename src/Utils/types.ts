@@ -23,6 +23,10 @@ export type TodoContextValueType = {
   restoreTodoItem: ({ id, deleted }: DeletedTodoParamsType) => void;
   markAsCompleted: ({ id, completed }: CompletedTodoParamsType) => void; //CompletedTodoParamsType
   archiveTodoItem: ({ id, archived }: ArchivedTodoParamsType) => void;
+  labelsArray: Labels;
+  addLabel: ({ name }: AddLabelParamsType) => void;
+  deleteLabel: (id: string) => void;
+  // editLabel: ({id, name, count}:UpdateLabelContentParamsType) => void;
 };
 
 type ArchiveTodoType = {
@@ -102,6 +106,25 @@ export type Todo = {
   archived: boolean;
   edited: boolean;
   date: Timestamp;
+  labels: Labels;
 };
 
 export type Todos = Todo[];
+
+export type Label = {
+  id: string;
+  name: string;
+  count: number;
+};
+
+export type Labels = Label[];
+
+export type AddLabelParamsType = {
+  name: string;
+};
+
+export type UpdateLabelContentParamsType = {
+  id: string;
+  name?: string;
+  count?: number;
+};

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { MdOutlineDone } from "react-icons/md";
 import { VscChromeClose } from "react-icons/vsc";
+import { useTodoContext } from "../../../Contexts/TodoContext";
+import LabelContentHolder from "./LabelContentHolder";
 import LabelItem from "./LabelItem";
 import NoLabelsMessage from "./NoLabelsMessage";
 
@@ -9,8 +11,15 @@ type Props = {
 };
 
 const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
+  const { addLabel, labelsArray } = useTodoContext();
   const [label, setLabel] = useState("");
   const labelValid = useRef(true);
+
+  const [labelsAsState, setLabelsAsState] = useState(labelsArray);
+  useEffect(() => {
+    setLabelsAsState(labelsArray);
+  }, [labelsArray]);
+
   useEffect(() => {
     label.trim().length > 20
       ? (labelValid.current = false)
@@ -19,7 +28,13 @@ const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    label !== "" &&
+      addLabel({
+        name: label,
+      });
+    setLabel("");
   };
+
   return (
     <div className="absolute top-0 left-0 h-full w-full flex items-center justify-center bg-zinc-700 bg-opacity-90 backdrop-blur-sm z-50">
       <div className="flex flex-col items-center justify-center basis-2/4">
@@ -47,7 +62,10 @@ const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
                   setLabel(e.target.value)
                 }
               />
-              <button className="rounded-sm hover:bg-stone-700 active:bg-stone-400 p-2">
+              <button
+                className="rounded-sm hover:bg-stone-700 active:bg-stone-400 p-2"
+                onClick={handleSubmit}
+              >
                 <MdOutlineDone size={"1.2rem"} />
               </button>
             </div>
@@ -57,17 +75,7 @@ const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
               Label length should be below 20 letters!
             </p>
           )}
-          {/* PUT THE CONDITION HERE */}
-          {/* <ul className="w-full flex flex-col gap-1 items-start justify-center p-2 bg-stone-900 rounded-md h-[290px] overflow-y-scroll">
-            <LabelItem labelText={"labelText"} />
-            <LabelItem labelText={"gotta float man innit"} />
-            <LabelItem labelText={"gotta cut the price"} />
-            <LabelItem labelText={"get out"} />
-            <LabelItem labelText={"get out"} />
-            <LabelItem labelText={"get out"} />
-            <LabelItem labelText={"get out"} />
-          </ul> */}
-          <NoLabelsMessage />
+          <LabelContentHolder labelsAsState={labelsAsState} />
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { Timestamp } from "firebase/firestore";
-import { Actions, Todos } from "../Utils/types";
+import { Actions, Labels, Todos } from "../Utils/types";
 import { actions } from "./todoReducerActionsState";
 
 export const todoReducer = (
@@ -22,6 +22,7 @@ export const todoReducer = (
           archived: false,
           edited: false,
           date: Timestamp.now(),
+          labels: [] as Labels,
         },
       ];
 
@@ -78,6 +79,13 @@ export const todoReducer = (
             : todo
         ),
       ];
+
+    // case actions.ADD_LABEL_TO_TODO_ITEM:
+    //   return [
+    //     ...state.map((todo) => {
+
+    //     })
+    //   ]
 
     default:
       return state;

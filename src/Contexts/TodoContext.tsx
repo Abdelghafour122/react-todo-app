@@ -5,6 +5,7 @@ import React, {
   useReducer,
   useCallback,
   useRef,
+  useState,
 } from "react";
 import {
   addDoc,
@@ -24,6 +25,9 @@ import {
   CompletedTodoParamsType,
   DeletedTodoParamsType,
   ArchivedTodoParamsType,
+  AddLabelParamsType,
+  UpdateLabelContentParamsType,
+  Labels,
 } from "../Utils/types";
 
 import { getTodosList } from "../Utils/firestore";
@@ -43,10 +47,17 @@ export function useTodoContext() {
 
 export const todoDatabase = getFirestore(app);
 const todosCollection = collection(todoDatabase, "todos");
+const labelsCollection = collection(todoDatabase, "labels");
 
 const TodoContext = ({ children }: TodoContextProps) => {
   const todoItemIdRef = useRef<string>("");
+  const labelIdRef = useRef<string>("");
   const [state, dispatch] = useReducer(todoReducer, initialState.todoList);
+
+  const [LabelsList, setLabelsList] = useState<Labels>([
+    { id: "ladihflihfe", name: "twat", count: 10 },
+    { id: "ladihflihfeaaadaz", name: "broski", count: 0 },
+  ] as Labels);
 
   const addTodoItemToDB = async (params: AddTodoParamsType) => {
     let documentId = "";
@@ -129,6 +140,43 @@ const TodoContext = ({ children }: TodoContextProps) => {
         console.log("error while updating todos archived state", err)
       );
   };
+
+  // LABEL RELATED FUNCS
+  const addLabelToDB = async (params: AddLabelParamsType) => {
+    let documentId = "";
+    await addDoc(labelsCollection, params)
+      .then((doc) => (documentId = doc.id))
+      .catch((err) => {
+        console.log("error while adding a label.");
+        return err;
+      });
+    return documentId;
+  };
+  const deleteLabelFromDB = async (removeLabelId: string) => {
+    const deleteLabelDocRef = doc(todoDatabase, "labels", removeLabelId);
+    await deleteDoc(deleteLabelDocRef)
+      .then(() => console.log("deleted successfuly"))
+      .catch((err) => console.log("error while deleting label.", err));
+  };
+  const editLabel = async (
+    updateLabelContentInput: UpdateLabelContentParamsType
+  ) => {
+    const editLabelDocRef = doc(
+      todoDatabase,
+      "labels",
+      updateLabelContentInput.id
+    );
+    await updateDoc(editLabelDocRef, {
+      name: updateLabelContentInput.name,
+      count: updateLabelContentInput.count,
+    })
+      .then(() => console.log("label content updated successfuly"))
+      .catch((err) => console.log("error while updating label content.", err));
+  };
+
+  // MANAGE LABELS IN A TODO
+  const addLabelToTodo = async () => {};
+  const removeLabelFromTodo = async () => {};
 
   const contextValue: TodoContextValueType = {
     todoList: state,
@@ -236,6 +284,25 @@ const TodoContext = ({ children }: TodoContextProps) => {
         type: actions.ARCHIVE_TODO_ITEM,
         payload: { id: todoItemId, archived: todoItemArchived },
       });
+    },
+
+    labelsArray: LabelsList,
+    addLabel: async ({ name: labelName }: AddLabelParamsType) => {
+      await addLabelToDB({ name: labelName }).then(
+        (res) => (labelIdRef.current = res)
+      );
+      setLabelsList([
+        ...LabelsList,
+        {
+          id: labelIdRef.current,
+          name: labelName,
+          count: 0,
+        },
+      ]);
+    },
+    deleteLabel: (id: string) => {
+      deleteLabelFromDB(id);
+      setLabelsList([...LabelsList.filter((label) => label.id !== id)]);
     },
   };
 

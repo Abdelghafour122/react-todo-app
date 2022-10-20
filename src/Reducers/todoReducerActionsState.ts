@@ -1,4 +1,4 @@
-import { InitialReducerStateType, Todos } from "../Utils/types";
+import { InitialReducerStateType, Todos, Labels } from "../Utils/types";
 
 export const initialState: InitialReducerStateType = {
   todoList: [] as Todos,
@@ -13,4 +13,6 @@ export const actions = {
   RESTORE_TODO_ITEM: "RESTORE_TODO_ITEM",
   TOGGLE_COMPLETED: "TOGGLE_COMPLETED",
   ARCHIVE_TODO_ITEM: "ARCHIVE_TODO_ITEM",
+  ADD_LABEL_TO_TODO_ITEM: "ADD_LABEL_TO_TODO_ITEM",
+  REMOVE_LABEL_FROM_TODO_ITEM: "REMOVE_LABEL_FROM_TODO_ITEM",
 };
