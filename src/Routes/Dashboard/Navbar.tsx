@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useAuthentication } from "../../Contexts/AuthContext";
 import Tooltip from "./Navbar/Tooltip";
+import LabelFormBackdrop from "./Labels/LabelFormBackdrop";
 
 type Props = {};
 
@@ -95,6 +96,7 @@ const Navbar = (props: Props) => {
           <Tooltip tooltipContent={"Sign out"} />
         </button>
       </div>
+      <LabelFormBackdrop />
     </nav>
   );
 };

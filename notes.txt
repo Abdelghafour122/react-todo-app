@@ -1,6 +1,8 @@
 p width is relative to the flex-basis of the todo
 alternative icon for labels: MdLocalOffer
 
+make the label ul scroll, incase of many labels
+check if the label already exists before adding
 
 .make standard classes in index.css for: 
     backdrops
