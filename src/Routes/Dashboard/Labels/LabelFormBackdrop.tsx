@@ -36,7 +36,7 @@ const LabelFormBackdrop = (props: Props) => {
               <input
                 type="text"
                 placeholder="Add label"
-                className={`todo-form-input flex-1 ${
+                className={`todo-form-input flex-1 font-semibold ${
                   labelValid.current === false &&
                   "text-red-600 caret-red-600 border-red-600 focus:border-red-600"
                 }`}
