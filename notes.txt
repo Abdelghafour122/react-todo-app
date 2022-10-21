@@ -1,12 +1,9 @@
 p width is relative to the flex-basis of the todo
 alternative icon for labels: MdLocalOffer
 
-21/10
-finish the labelBackdorp's functionalities
+22/10
 check if the label already exists/valid before adding
-remove the dummy data from labelslist in context
-make a labelFetch function
-finish label edit function
+finish editLabel tasks "below"
 
 .make standard classes in index.css for: 
     backdrops
@@ -20,5 +17,8 @@ Later retouches:
     remake the lable's validation test
 
     editLabel:
-        decide if to use placeholder or value(with state instead of ref) in editLabel
+        decide if to use placeholder or value(with state instead of ref) in editLabel (find the difference in space)
         check if a label with the same name already exists before editing
+        start implementing the label feature in the todo:
+            make a dropdown for the addLabel button in detailedTodo with all the labels
+            add them as chips (check for design ideas)
