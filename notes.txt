@@ -15,6 +15,7 @@ Later retouches:
     add validation to the signin/out forms
     make a loading state when fetching (labels, todos) (use spinners)
     remake the lable's validation test
+    try adding the (deleting automatically after 2days feature) in deleted
 
     editLabel:
         decide if to use placeholder or value(with state instead of ref) in editLabel (find the difference in space)
