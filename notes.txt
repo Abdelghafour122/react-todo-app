@@ -18,3 +18,7 @@ Later retouches:
     add validation to the signin/out forms
     make a loading state when fetching (labels, todos) (use spinners)
     remake the lable's validation test
+
+    editLabel:
+        decide if to use placeholder or value(with state instead of ref) in editLabel
+        check if a label with the same name already exists before editing

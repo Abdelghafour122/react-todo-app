@@ -27,7 +27,7 @@ export type TodoContextValueType = {
   fetchLabels: () => Promise<void>;
   addLabel: ({ name }: AddLabelParamsType) => void;
   deleteLabel: (id: string) => void;
-  // editLabel: ({id, name, count}:UpdateLabelContentParamsType) => void;
+  editLabel: ({ id, name, count }: UpdateLabelContentParamsType) => void;
 };
 
 type ArchiveTodoType = {

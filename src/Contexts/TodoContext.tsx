@@ -155,7 +155,7 @@ const TodoContext = ({ children }: TodoContextProps) => {
       .then(() => console.log("deleted successfuly"))
       .catch((err) => console.log("error while deleting label.", err));
   };
-  const editLabel = async (
+  const editLabelInDB = async (
     updateLabelContentInput: UpdateLabelContentParamsType
   ) => {
     const editLabelDocRef = doc(
@@ -284,9 +284,6 @@ const TodoContext = ({ children }: TodoContextProps) => {
     },
 
     labelsArray: LabelsList,
-    // fetchLabels: async () => {
-    //   await getLabelsList().then((res) => setLabelsList(res));
-    // },
     fetchLabels: useCallback(async () => {
       await getLabelsList().then((res) => setLabelsList(res));
     }, []),
@@ -306,6 +303,20 @@ const TodoContext = ({ children }: TodoContextProps) => {
     deleteLabel: (id: string) => {
       deleteLabelFromDB(id);
       setLabelsList([...LabelsList.filter((label) => label.id !== id)]);
+    },
+    editLabel: ({ id: labelId, name: labelName, count: labelCount }) => {
+      editLabelInDB({ id: labelId, name: labelName, count: labelCount });
+      setLabelsList([
+        ...LabelsList.map((label) =>
+          label.id === labelId
+            ? {
+                ...label,
+                name: labelName as string,
+                count: labelCount as number,
+              }
+            : label
+        ),
+      ]);
     },
   };
 
