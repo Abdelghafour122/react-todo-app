@@ -16,3 +16,5 @@ Later retouches:
     try make the nav buttons like toggle buttons from mui
     improve the loading states when fetching (replace the "loading" with a more suitable message)
     add validation to the signin/out forms
+    make a loading state when fetching (labels, todos) (use spinners)
+    remake the lable's validation test

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useTodoContext } from "../../../Contexts/TodoContext";
 import { Labels } from "../../../Utils/types";
 import LabelItem from "./LabelItem";

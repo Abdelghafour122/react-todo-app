@@ -30,7 +30,7 @@ import {
   Labels,
 } from "../Utils/types";
 
-import { getTodosList } from "../Utils/firestore";
+import { getLabelsList, getTodosList } from "../Utils/firestore";
 import { app } from "../firebase";
 
 type TodoContextProps = {
@@ -54,10 +54,7 @@ const TodoContext = ({ children }: TodoContextProps) => {
   const labelIdRef = useRef<string>("");
   const [state, dispatch] = useReducer(todoReducer, initialState.todoList);
 
-  const [LabelsList, setLabelsList] = useState<Labels>([
-    { id: "ladihflihfe", name: "twat", count: 10 },
-    { id: "ladihflihfeaaadaz", name: "broski", count: 0 },
-  ] as Labels);
+  const [LabelsList, setLabelsList] = useState<Labels>([]);
 
   const addTodoItemToDB = async (params: AddTodoParamsType) => {
     let documentId = "";
@@ -287,8 +284,14 @@ const TodoContext = ({ children }: TodoContextProps) => {
     },
 
     labelsArray: LabelsList,
+    // fetchLabels: async () => {
+    //   await getLabelsList().then((res) => setLabelsList(res));
+    // },
+    fetchLabels: useCallback(async () => {
+      await getLabelsList().then((res) => setLabelsList(res));
+    }, []),
     addLabel: async ({ name: labelName }: AddLabelParamsType) => {
-      await addLabelToDB({ name: labelName }).then(
+      await addLabelToDB({ name: labelName, count: 0 }).then(
         (res) => (labelIdRef.current = res)
       );
       setLabelsList([

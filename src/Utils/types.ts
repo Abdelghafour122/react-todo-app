@@ -24,6 +24,7 @@ export type TodoContextValueType = {
   markAsCompleted: ({ id, completed }: CompletedTodoParamsType) => void; //CompletedTodoParamsType
   archiveTodoItem: ({ id, archived }: ArchivedTodoParamsType) => void;
   labelsArray: Labels;
+  fetchLabels: () => Promise<void>;
   addLabel: ({ name }: AddLabelParamsType) => void;
   deleteLabel: (id: string) => void;
   // editLabel: ({id, name, count}:UpdateLabelContentParamsType) => void;
@@ -121,6 +122,7 @@ export type Labels = Label[];
 
 export type AddLabelParamsType = {
   name: string;
+  count: number;
 };
 
 export type UpdateLabelContentParamsType = {

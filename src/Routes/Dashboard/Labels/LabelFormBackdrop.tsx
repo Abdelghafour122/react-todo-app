@@ -3,34 +3,39 @@ import { MdOutlineDone } from "react-icons/md";
 import { VscChromeClose } from "react-icons/vsc";
 import { useTodoContext } from "../../../Contexts/TodoContext";
 import LabelContentHolder from "./LabelContentHolder";
-import LabelItem from "./LabelItem";
-import NoLabelsMessage from "./NoLabelsMessage";
 
 type Props = {
   handleCloseLabelsBackdrop: () => void;
 };
 
 const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
-  const { addLabel, labelsArray } = useTodoContext();
+  const { addLabel, labelsArray, fetchLabels } = useTodoContext();
   const [label, setLabel] = useState("");
   const labelValid = useRef(true);
 
   const [labelsAsState, setLabelsAsState] = useState(labelsArray);
+
+  useEffect(() => {
+    fetchLabels();
+  }, [fetchLabels]);
+
   useEffect(() => {
     setLabelsAsState(labelsArray);
   }, [labelsArray]);
 
   useEffect(() => {
-    label.trim().length > 20
+    label.trim().length >= 20
       ? (labelValid.current = false)
       : (labelValid.current = true);
   }, [label]);
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    label !== "" &&
+    labelValid.current &&
+      label.trim().length > 0 &&
       addLabel({
         name: label,
+        count: 0,
       });
     setLabel("");
   };

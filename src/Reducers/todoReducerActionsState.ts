@@ -1,4 +1,4 @@
-import { InitialReducerStateType, Todos, Labels } from "../Utils/types";
+import { InitialReducerStateType, Todos } from "../Utils/types";
 
 export const initialState: InitialReducerStateType = {
   todoList: [] as Todos,

@@ -1,9 +1,10 @@
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { app } from "../firebase";
-import { Todos } from "./types";
+import { Labels, Todos } from "./types";
 
 export const todoDatabase = getFirestore(app);
 const todosCollection = collection(todoDatabase, "todos");
+const labelsCollection = collection(todoDatabase, "labels");
 
 // TODOS FETCHING FUNCTION:
 export const getTodosList = async () => {
@@ -20,5 +21,20 @@ export const getTodosList = async () => {
     .then((finalRes) => {
       return finalRes;
     });
+  return result;
+};
+
+export const getLabelsList = async () => {
+  const result = await getDocs(labelsCollection)
+    .then(
+      (res) =>
+        [
+          ...res.docs.map((data) => {
+            let labelsObjectProperties = data.data();
+            return { id: data.id.toString(), ...labelsObjectProperties };
+          }),
+        ] as Labels
+    )
+    .then((finalRes) => finalRes);
   return result;
 };
