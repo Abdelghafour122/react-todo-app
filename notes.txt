@@ -1,9 +1,15 @@
 p width is relative to the flex-basis of the todo
 alternative icon for labels: MdLocalOffer
 
-22/10
+24/10
+css:
+    make the hover effect on the button only
 check if the label already exists/valid before adding
 finish editLabel tasks "below"
+
+later:
+findout if a checkbox is better than an li
+finish the add / delete label in todo
 
 .make standard classes in index.css for: 
     backdrops
@@ -16,6 +22,7 @@ Later retouches:
     make a loading state when fetching (labels, todos) (use spinners)
     remake the lable's validation test
     try adding the (deleting automatically after 2days feature) in deleted
+    dive into tailwind's state handling, optimize your styles using tailwind
 
     editLabel:
         decide if to use placeholder or value(with state instead of ref) in editLabel (find the difference in space)

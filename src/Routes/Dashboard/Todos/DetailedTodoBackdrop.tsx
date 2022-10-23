@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsArchive, BsTrash } from "react-icons/bs";
 import { DetailedTodoType } from "../../../Utils/types";
 import { useTodoContext } from "../../../Contexts/TodoContext";
 import { RiInboxUnarchiveLine } from "react-icons/ri";
 import { MdOutlineNewLabel } from "react-icons/md";
 import TodoActionsTooltip from "./TodoActionsTooltip";
+import LabelListDropdown from "../Labels/LabelListDropdown";
 
 type Props = {
   handleCloseDetailedTodoBackdrop: () => void;
@@ -15,7 +16,9 @@ const DetailedTodoBackdrop = ({
   handleCloseDetailedTodoBackdrop,
   detailedTodoInfo,
 }: Props) => {
-  const { removeTodoItem, archiveTodoItem, formatDate } = useTodoContext();
+  const { removeTodoItem, archiveTodoItem, formatDate, labelsArray } =
+    useTodoContext();
+  const [openLabelsDrpdown, setOpenLabelsDropdown] = useState(false);
   return (
     <div className="detailed-todo absolute top-0 left-0 h-full w-full flex items-center justify-center bg-zinc-700 bg-opacity-90 backdrop-blur-sm z-50">
       <div className="flex flex-col items-center justify-center basis-3/5 shadow-2xl">
@@ -79,9 +82,15 @@ const DetailedTodoBackdrop = ({
                 )}
               </li>
               <li>
-                <button className="todo-action-button group relative">
+                <button
+                  className="todo-action-button group relative"
+                  onClick={() => setOpenLabelsDropdown((prev) => !prev)}
+                >
                   <MdOutlineNewLabel size={"1.3rem"} />
                   <TodoActionsTooltip text={"Add Label"} />
+                  {openLabelsDrpdown ? (
+                    <LabelListDropdown labelsList={labelsArray} />
+                  ) : null}
                 </button>
               </li>
             </ul>

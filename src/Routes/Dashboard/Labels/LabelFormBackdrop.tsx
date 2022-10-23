@@ -68,7 +68,7 @@ const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
                 }
               />
               <button
-                className="rounded-sm hover:bg-stone-500 active:bg-stone-400 p-2 disabled:opacity-0 transition-opacity duration-300"
+                className="rounded-sm hover:bg-stone-500 active:bg-stone-400 p-2 disabled:opacity-0 disabled:pointer-events-none transition-opacity duration-300"
                 onClick={handleSubmit}
                 disabled={!labelValid.current || label === ""}
               >
