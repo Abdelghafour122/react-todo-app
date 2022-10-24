@@ -57,6 +57,7 @@ export type AddTodoParamsType = {
   archived: boolean;
   edited: boolean;
   date: Timestamp;
+  labels: Labels;
 };
 
 export type CompletedTodoParamsType = {
@@ -129,4 +130,8 @@ export type UpdateLabelContentParamsType = {
   id: string;
   name?: string;
   count?: number;
+};
+
+export type AddLabelToTodoInput = Label & {
+  todoId: string;
 };

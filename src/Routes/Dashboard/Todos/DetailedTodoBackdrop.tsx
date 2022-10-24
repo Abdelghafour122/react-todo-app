@@ -81,17 +81,17 @@ const DetailedTodoBackdrop = ({
                   </button>
                 )}
               </li>
-              <li>
+              <li className="relative">
                 <button
                   className="todo-action-button group relative"
                   onClick={() => setOpenLabelsDropdown((prev) => !prev)}
                 >
                   <MdOutlineNewLabel size={"1.3rem"} />
                   <TodoActionsTooltip text={"Add Label"} />
-                  {openLabelsDrpdown ? (
-                    <LabelListDropdown labelsList={labelsArray} />
-                  ) : null}
                 </button>
+                {openLabelsDrpdown ? (
+                  <LabelListDropdown labelsList={labelsArray} />
+                ) : null}
               </li>
             </ul>
             <div className="close-button">

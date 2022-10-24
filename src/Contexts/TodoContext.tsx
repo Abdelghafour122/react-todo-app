@@ -28,6 +28,7 @@ import {
   AddLabelParamsType,
   UpdateLabelContentParamsType,
   Labels,
+  AddLabelToTodoInput,
 } from "../Utils/types";
 
 import { getLabelsList, getTodosList } from "../Utils/firestore";
@@ -171,10 +172,40 @@ const TodoContext = ({ children }: TodoContextProps) => {
       .catch((err) => console.log("error while updating label content.", err));
   };
 
+  // FIND TODO & RETURN THE TODOS LABELS ARRAY
+  const getLabelsListOfTodo = (todosId: string) => {
+    let curLabels = [] as Labels;
+    state.forEach((todo) => {
+      if (todo.id === todosId) curLabels = todo.labels;
+    });
+    return curLabels;
+  };
+
+  console.log("just checking:", getLabelsListOfTodo("CdjQI4ODCKlWy3hEhFJw"));
+
   // MANAGE LABELS IN A TODO
-  const addLabelToTodo = async () => {};
+  const addLabelToTodo = async (addLabelToTodoInput: AddLabelToTodoInput) => {
+    const addLabelToTodoDocRef = doc(
+      todoDatabase,
+      "todos",
+      addLabelToTodoInput.todoId
+    );
+    await updateDoc(addLabelToTodoDocRef, {
+      labels: [
+        ...getLabelsListOfTodo(addLabelToTodoInput.todoId),
+        {
+          id: addLabelToTodoInput.id,
+          name: addLabelToTodoInput.name,
+          count: addLabelToTodoInput.count,
+        },
+      ],
+    })
+      .then(() => console.log("label added to todo successfuly"))
+      .catch((err) => console.log("error while adding label to todo.", err));
+  };
   const removeLabelFromTodo = async () => {};
 
+  // CONTEXT VALUE OBJECT
   const contextValue: TodoContextValueType = {
     todoList: state,
     fetchTodoItems: useCallback(async () => {
@@ -202,6 +233,7 @@ const TodoContext = ({ children }: TodoContextProps) => {
         deleted: false,
         edited: false,
         date: Timestamp.now(),
+        labels: [],
       }).then((res) => (todoItemIdRef.current = res));
       dispatch({
         type: actions.ADD_TODO_ITEM,

@@ -3,13 +3,14 @@ alternative icon for labels: MdLocalOffer
 
 24/10
 css:
-    make the hover effect on the button only
 check if the label already exists/valid before adding
 finish editLabel tasks "below"
 
 later:
 findout if a checkbox is better than an li
 finish the add / delete label in todo
+    found a bug: add fetching labels when clicking "add label" button in detailedTodo, 
+    always check if the labelsList is empty before fetching, don't fetch if not necessary
 
 .make standard classes in index.css for: 
     backdrops
@@ -28,5 +29,4 @@ Later retouches:
         decide if to use placeholder or value(with state instead of ref) in editLabel (find the difference in space)
         check if a label with the same name already exists before editing
         start implementing the label feature in the todo:
-            make a dropdown for the addLabel button in detailedTodo with all the labels
             add them as chips (check for design ideas)
