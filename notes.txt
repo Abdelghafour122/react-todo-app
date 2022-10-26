@@ -5,7 +5,9 @@ alternative icon for labels: MdLocalOffer
 css:
     make the hover color of the chip button lighter
 check if the label already exists/valid before adding
-finish editLabel tasks "below"
+control the label count & make a limit to 5 or 6
+make deleteLabelFromTodo
+check the label feature in keep
 
 later:
 findout if a checkbox is better than an li
@@ -30,7 +32,6 @@ Later retouches:
     editLabel:
         decide if to use placeholder or value(with state instead of ref) in editLabel (find the difference in space)
         check if a label with the same name already exists before editing
-        control the label count
 
     deleteLabel:
         a label is removed from all todos if deleted
