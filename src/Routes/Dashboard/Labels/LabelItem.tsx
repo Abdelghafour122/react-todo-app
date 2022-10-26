@@ -33,11 +33,11 @@ const LabelItem = ({ id, name, count }: Label) => {
       )}
       <div className="label-buttons flex gap-2 items-center">
         {count === 0 ? (
-          <p className="font-semibold text-base text-yellow-600 p-1 bg-yellow-200 rounded-lg">
+          <p className="font-semibold text-base text-yellow-600 p-1 bg-yellow-200 rounded-lg w-max">
             Unused
           </p>
         ) : (
-          <p className="font-semibold text-base text-stone-300 p-1 bg-stone-600 rounded-lg">{`Count: ${count}`}</p>
+          <p className="font-semibold text-base text-stone-300 p-1 bg-stone-600 rounded-lg w-max">{`Count: ${count}`}</p>
         )}
         {editable ? (
           <button
