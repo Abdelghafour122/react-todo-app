@@ -28,6 +28,7 @@ export type TodoContextValueType = {
   addLabel: ({ name }: AddLabelParamsType) => void;
   deleteLabel: (id: string) => void;
   editLabel: ({ id, name, count }: UpdateLabelContentParamsType) => void;
+  addLabelToTodoItem: (addLabelParams: AddLabelToTodoInput) => void;
 };
 
 type ArchiveTodoType = {
@@ -43,6 +44,7 @@ export type EditTodoPayloadType = {
   archived?: boolean;
   fetchedData?: Todos;
   date?: Timestamp;
+  labels?: Labels;
 };
 
 export type PermanentlyDeleteTodoParamsType = {

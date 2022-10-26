@@ -1,11 +1,13 @@
 import React from "react";
 import { Labels } from "../../../Utils/types";
+import LabelDropdownItem from "./LabelDropdownItem";
 
 type Props = {
   labelsList: Labels;
+  currTodoId: string;
 };
 
-const LabelListDropdown = ({ labelsList }: Props) => {
+const LabelListDropdown = ({ labelsList, currTodoId }: Props) => {
   return (
     <div className="label-list-drop absolute bg-zinc-900 top-[110%] p-1 w-max min-h-[6rem] max-h-[8rem] rounded-sm flex flex-col items-start justify-start gap-2 overflow-y-scroll cursor-default">
       <p className="text-stone-400 text-lg font-bold">Labels:</p>
@@ -16,11 +18,11 @@ const LabelListDropdown = ({ labelsList }: Props) => {
       ) : (
         <ul className="small-labels flex flex-col items-start justify-start min-w-[10rem]">
           {labelsList.map((label) => (
-            <li key={label.id} className="w-full">
-              <button className="p-1 font-semibold rounded-sm w-full text-left text-stone-300 hover:bg-zinc-700 active:bg-zinc-800">
-                {label.name}
-              </button>
-            </li>
+            <LabelDropdownItem
+              key={label.id}
+              label={label}
+              currTodoId={currTodoId}
+            />
           ))}
         </ul>
       )}

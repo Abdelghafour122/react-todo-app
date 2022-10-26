@@ -350,6 +350,38 @@ const TodoContext = ({ children }: TodoContextProps) => {
         ),
       ]);
     },
+    addLabelToTodoItem: async ({
+      todoId: todoItemId,
+      id: labelId,
+      count: labelsCount,
+      name: labelsName,
+    }) => {
+      await addLabelToTodo({
+        id: labelId,
+        count: labelsCount,
+        name: labelsName,
+        todoId: todoItemId,
+      });
+      editLabelInDB({
+        id: labelId,
+        count: labelsCount + 1,
+        name: labelsName,
+      });
+      console.log("logging from context:", [
+        ...getLabelsListOfTodo(todoItemId),
+        { id: labelId, name: labelsName, count: labelsCount + 1 },
+      ]);
+      dispatch({
+        type: actions.ADD_LABEL_TO_TODO_ITEM,
+        payload: {
+          id: todoItemId,
+          labels: [
+            ...getLabelsListOfTodo(todoItemId),
+            { id: labelId, name: labelsName, count: labelsCount + 1 },
+          ],
+        },
+      });
+    },
   };
 
   return (

@@ -14,6 +14,7 @@ import {
 } from "../../../Utils/types";
 import DetailedTodoBackdrop from "./DetailedTodoBackdrop";
 import Snackbar from "../../../Components/Todos/Snackbar";
+import TodoLabelsList from "../../../Components/Todos/TodoLabelsList";
 
 const Todo = (todoInfo: TodoType) => {
   const {
@@ -76,6 +77,8 @@ const Todo = (todoInfo: TodoType) => {
         />
         <label htmlFor={`${todoInfo.id}`}>Completed</label>
       </div>
+      {/* DONT RENDER THIS IF THERE ARE NO LABELS */}
+      <TodoLabelsList labelsList={todoInfo.labels} />
       <div className="button-cont flex items-center justify-around w-full">
         {todoInfo.deleted === undefined || todoInfo.deleted === false ? (
           <>
@@ -172,6 +175,7 @@ const Todo = (todoInfo: TodoType) => {
               deleted: todoInfo.deleted,
               edited: todoInfo.edited,
               date: todoInfo.date,
+              labels: todoInfo.labels,
             } as DetailedTodoType
           }
         />

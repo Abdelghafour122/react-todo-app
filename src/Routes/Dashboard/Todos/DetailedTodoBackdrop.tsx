@@ -6,6 +6,7 @@ import { RiInboxUnarchiveLine } from "react-icons/ri";
 import { MdOutlineNewLabel } from "react-icons/md";
 import TodoActionsTooltip from "./TodoActionsTooltip";
 import LabelListDropdown from "../Labels/LabelListDropdown";
+import TodoLabelsList from "../../../Components/Todos/TodoLabelsList";
 
 type Props = {
   handleCloseDetailedTodoBackdrop: () => void;
@@ -35,6 +36,7 @@ const DetailedTodoBackdrop = ({
               detailedTodoInfo.edited === false ? "Created on: " : "Edited on: "
             } ${formatDate(detailedTodoInfo.date)}`}{" "}
           </p>
+          <TodoLabelsList labelsList={detailedTodoInfo.labels} />
           <div className="todo-funcs w-full flex items-center justify-between">
             <ul className="flex items-center justify-between gap-1">
               <li>
@@ -90,7 +92,10 @@ const DetailedTodoBackdrop = ({
                   <TodoActionsTooltip text={"Add Label"} />
                 </button>
                 {openLabelsDrpdown ? (
-                  <LabelListDropdown labelsList={labelsArray} />
+                  <LabelListDropdown
+                    labelsList={labelsArray}
+                    currTodoId={detailedTodoInfo.id}
+                  />
                 ) : null}
               </li>
             </ul>

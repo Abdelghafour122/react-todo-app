@@ -80,12 +80,14 @@ export const todoReducer = (
         ),
       ];
 
-    // case actions.ADD_LABEL_TO_TODO_ITEM:
-    //   return [
-    //     ...state.map((todo) => {
-
-    //     })
-    //   ]
+    case actions.ADD_LABEL_TO_TODO_ITEM:
+      return [
+        ...state.map((todo) =>
+          todo.id === payload.id
+            ? { ...todo, labels: payload.labels as Labels }
+            : todo
+        ),
+      ];
 
     default:
       return state;

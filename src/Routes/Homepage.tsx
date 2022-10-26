@@ -9,11 +9,12 @@ import Attribution from "../Components/Dashboard/Attribution";
 
 function Homepage() {
   const { currentUser } = useAuthentication();
-  const { fetchTodoItems } = useTodoContext();
+  const { fetchTodoItems, fetchLabels } = useTodoContext();
 
   useEffect(() => {
     fetchTodoItems();
-  }, [fetchTodoItems]);
+    fetchLabels();
+  }, [fetchTodoItems, fetchLabels]);
 
   const navigate = useNavigate();
   return (
