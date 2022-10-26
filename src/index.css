@@ -23,48 +23,29 @@
 
   .form-title {
     padding: 1rem 1.5rem;
-    color: theme("colors.stone.100");
-    font-size: theme("fontSize.5xl");
-    font-weight: theme("fontWeight.bold");
-    text-align: center;
+    @apply text-stone-100 text-5xl font-bold text-center;
   }
 
   .form-label {
-    font-size: theme("fontSize.lg");
-    font-weight: theme("fontWeight.medium");
-    color: theme("colors.stone.100");
-    align-self: flex-start;
+    @apply text-lg font-medium text-stone-100 self-start;
     @apply after:content-['*'] after:ml-0.5 after:text-red-500;
   }
 
   .form-input {
-    outline: none;
     border: 2px solid theme("colors.stone.900");
-    padding: 0.25rem 0.5rem;
-    background-color: theme("colors.stone.800");
-    border-radius: 0.25rem;
-    caret-color: theme("colors.stone.100");
-    color: theme("colors.stone.200");
-    width: 100%;
+    @apply outline-none bg-stone-800 caret-stone-100 text-stone-200 w-full rounded px-2 py-1;
     @apply focus:border-blue-500;
   }
 
   .link {
-    font-size: theme("fontSize.lg");
-    color: theme("colors.stone.200");
-    text-decoration: underline;
-    font-weight: bold;
+    @apply text-lg text-stone-200 underline font-bold;
     @apply hover:hover:text-stone-400;
   }
 
   .button {
-    background-color: theme("colors.stone.200");
-    font-weight: theme("fontWeight.semibold");
-    border-radius: theme("borderRadius.md");
     border: 2px solid theme("colors.slate.900");
-    color: theme("colors.slate.900");
     padding: 0.25rem 0.5rem;
-    cursor: pointer;
+    @apply bg-stone-200 font-semibold rounded-md border-slate-900 text-slate-900 cursor-pointer;
     @apply disabled:cursor-not-allowed disabled:bg-stone-600  hover:bg-stone-400 active:bg-stone-500;
   }
 
@@ -73,43 +54,20 @@
   }
 
   .form-info-message {
-    background-color: theme("colors.amber.200");
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: theme("space.2");
-    border-radius: theme("spacing[1.5]");
-    margin: 0 auto;
-    padding: theme("spacing.1");
+    @apply bg-amber-200 flex items-start justify-start gap-2 rounded-md my-0 mx-auto p-1;
   }
 
   .form-error-message {
-    background-color: theme("colors.red.500");
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: theme("space.2");
-    border-radius: theme("spacing[1.5]");
-    margin: 0 auto;
-    padding: theme("spacing.1");
+    @apply bg-red-500 flex items-start justify-start gap-2 rounded-md my-0 mx-auto p-1;
   }
 
   .form-success-message {
-    background-color: theme("colors.green.500");
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: theme("space.2");
-    border-radius: theme("spacing[1.5]");
-    margin: 0 auto;
-    padding: theme("spacing.1");
+    @apply bg-green-500 flex items-start justify-start gap-2 rounded-md my-0 mx-auto p-1;
   }
 
   .todo-form-input {
-    padding: 5px 15px;
-    border-radius: 7px;
     border: 2px solid theme("colors.stone.900");
-    outline: none;
+    @apply px-1 py-3 rounded-md outline-none;
     @apply focus:border-blue-500 placeholder:text-stone-400 text-stone-100 bg-stone-900 caret-stone-100;
   }
 
