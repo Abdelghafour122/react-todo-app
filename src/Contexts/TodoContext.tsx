@@ -29,6 +29,7 @@ import {
   UpdateLabelContentParamsType,
   Labels,
   AddLabelToTodoInput,
+  RemoveLabelFromTodoInput,
 } from "../Utils/types";
 
 import { getLabelsList, getTodosList } from "../Utils/firestore";
@@ -164,12 +165,20 @@ const TodoContext = ({ children }: TodoContextProps) => {
       "labels",
       updateLabelContentInput.id
     );
-    await updateDoc(editLabelDocRef, {
-      name: updateLabelContentInput.name,
-      count: updateLabelContentInput.count,
-    })
-      .then(() => console.log("label content updated successfuly"))
-      .catch((err) => console.log("error while updating label content.", err));
+
+    if (updateLabelContentInput.case === "count") {
+      await updateDoc(editLabelDocRef, {
+        count: updateLabelContentInput.count,
+      })
+        .then(() => console.log("label count updated successfuly"))
+        .catch((err) => console.log("error while updating label count.", err));
+    } else if (updateLabelContentInput.case === "name") {
+      await updateDoc(editLabelDocRef, {
+        name: updateLabelContentInput.name,
+      })
+        .then(() => console.log("label name updated successfuly"))
+        .catch((err) => console.log("error while updating label name.", err));
+    }
   };
 
   // FIND TODO & RETURN THE TODOS LABELS ARRAY
@@ -201,7 +210,26 @@ const TodoContext = ({ children }: TodoContextProps) => {
       .then(() => console.log("label added to todo successfuly"))
       .catch((err) => console.log("error while adding label to todo.", err));
   };
-  const removeLabelFromTodo = async () => {};
+  const removeLabelFromTodo = async (
+    removeLabelFromTodoInput: RemoveLabelFromTodoInput
+  ) => {
+    const removeLabelFromTodoDocRef = doc(
+      todoDatabase,
+      "todos",
+      removeLabelFromTodoInput.todoId
+    );
+    await updateDoc(removeLabelFromTodoDocRef, {
+      labels: [
+        ...getLabelsListOfTodo(removeLabelFromTodoInput.todoId).filter(
+          (todoLabels) => todoLabels.id !== removeLabelFromTodoInput.labelId
+        ),
+      ],
+    })
+      .then(() => console.log("label removed from todo successfuly"))
+      .catch((err) =>
+        console.log("error while removing label from todo.", err)
+      );
+  };
 
   // CONTEXT VALUE OBJECT
   const contextValue: TodoContextValueType = {
@@ -363,7 +391,6 @@ const TodoContext = ({ children }: TodoContextProps) => {
       editLabelInDB({
         id: labelId,
         count: labelsCount + 1,
-        name: labelsName,
       });
       // console.log("logging from context:", [
       //   ...getLabelsListOfTodo(todoItemId),
@@ -376,6 +403,29 @@ const TodoContext = ({ children }: TodoContextProps) => {
           labels: [
             ...getLabelsListOfTodo(todoItemId),
             { id: labelId, name: labelsName, count: labelsCount + 1 },
+          ],
+        },
+      });
+    },
+    removeLabelFromTodoItem: async (removeLabelParams) => {
+      await removeLabelFromTodo(removeLabelParams);
+      editLabelInDB({
+        id: removeLabelParams.labelId,
+        count: removeLabelParams.labelCount - 1,
+      });
+      // console.log([
+      //   ...(getLabelsListOfTodo(removeLabelParams.todoId).filter(
+      //     (todoLabels) => todoLabels.id !== removeLabelParams.labelId
+      //   ) as Labels),
+      // ]);
+      dispatch({
+        type: actions.REMOVE_LABEL_FROM_TODO_ITEM,
+        payload: {
+          id: removeLabelParams.todoId,
+          labels: [
+            ...getLabelsListOfTodo(removeLabelParams.todoId).filter(
+              (todoLabels) => todoLabels.id !== removeLabelParams.labelId
+            ),
           ],
         },
       });

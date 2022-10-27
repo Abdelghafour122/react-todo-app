@@ -27,8 +27,11 @@ export type TodoContextValueType = {
   fetchLabels: () => Promise<void>;
   addLabel: ({ name }: AddLabelParamsType) => void;
   deleteLabel: (id: string) => void;
-  editLabel: ({ id, name, count }: UpdateLabelContentParamsType) => void;
+  editLabel: (editLabelParams: UpdateLabelContentParamsType) => void;
   addLabelToTodoItem: (addLabelParams: AddLabelToTodoInput) => void;
+  removeLabelFromTodoItem: (
+    removeLabelParams: RemoveLabelFromTodoInput
+  ) => void;
 };
 
 type ArchiveTodoType = {
@@ -128,12 +131,27 @@ export type AddLabelParamsType = {
   count: number;
 };
 
-export type UpdateLabelContentParamsType = {
+export type UpdateLabelCountParamsType = {
+  case: "count";
   id: string;
-  name?: string;
-  count?: number;
+  count: number;
 };
+
+export type UpdateLabelNameParamsType = {
+  case: "name";
+  id: string;
+  name: string;
+};
+
+export type UpdateLabelContentParamsType =
+  | UpdateLabelNameParamsType
+  | UpdateLabelCountParamsType;
 
 export type AddLabelToTodoInput = Label & {
   todoId: string;
+};
+export type RemoveLabelFromTodoInput = {
+  todoId: string;
+  labelId: string;
+  labelCount: number;
 };

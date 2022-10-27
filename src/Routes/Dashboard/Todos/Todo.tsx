@@ -78,7 +78,7 @@ const Todo = (todoInfo: TodoType) => {
         <label htmlFor={`${todoInfo.id}`}>Completed</label>
       </div>
       {/* DONT RENDER THIS IF THERE ARE NO LABELS */}
-      <TodoLabelsList labelsList={todoInfo.labels} />
+      <TodoLabelsList labelsList={todoInfo.labels} todoId={todoInfo.id} />
       <div className="button-cont flex items-center justify-around w-full">
         {todoInfo.deleted === undefined || todoInfo.deleted === false ? (
           <>

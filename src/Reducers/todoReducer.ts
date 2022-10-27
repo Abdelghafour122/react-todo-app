@@ -89,6 +89,15 @@ export const todoReducer = (
         ),
       ];
 
+    case actions.REMOVE_LABEL_FROM_TODO_ITEM:
+      return [
+        ...state.map((todo) =>
+          todo.id === payload.id
+            ? { ...todo, labels: payload.labels as Labels }
+            : todo
+        ),
+      ];
+
     default:
       return state;
   }
