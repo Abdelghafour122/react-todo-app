@@ -3,11 +3,9 @@ alternative icon for labels: MdLocalOffer
 
 27/10
 css:
-    make the hover color of the chip button lighter
 check if the label already exists/valid before adding
 control the label count & make a limit to 5 or 6
 make deleteLabelFromTodo
-check the label feature in keep
 
 later:
 findout if a checkbox is better than an li

@@ -181,8 +181,6 @@ const TodoContext = ({ children }: TodoContextProps) => {
     return curLabels;
   };
 
-  console.log("just checking:", getLabelsListOfTodo("CdjQI4ODCKlWy3hEhFJw"));
-
   // MANAGE LABELS IN A TODO
   const addLabelToTodo = async (addLabelToTodoInput: AddLabelToTodoInput) => {
     const addLabelToTodoDocRef = doc(
@@ -367,10 +365,10 @@ const TodoContext = ({ children }: TodoContextProps) => {
         count: labelsCount + 1,
         name: labelsName,
       });
-      console.log("logging from context:", [
-        ...getLabelsListOfTodo(todoItemId),
-        { id: labelId, name: labelsName, count: labelsCount + 1 },
-      ]);
+      // console.log("logging from context:", [
+      //   ...getLabelsListOfTodo(todoItemId),
+      //   { id: labelId, name: labelsName, count: labelsCount + 1 },
+      // ]);
       dispatch({
         type: actions.ADD_LABEL_TO_TODO_ITEM,
         payload: {

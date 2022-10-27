@@ -12,6 +12,8 @@ const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
   const { addLabel, labelsArray, fetchLabels } = useTodoContext();
   const [label, setLabel] = useState("");
   const labelValid = useRef(true);
+  const labelExists = useRef(false);
+  const listLimitReached = useRef(false);
 
   const [labelsAsState, setLabelsAsState] = useState(labelsArray);
 
@@ -21,22 +23,29 @@ const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
 
   useEffect(() => {
     setLabelsAsState(labelsArray);
+    labelsArray.length >= 5
+      ? (listLimitReached.current = true)
+      : (listLimitReached.current = false);
   }, [labelsArray]);
 
   useEffect(() => {
     label.trim().length >= 20
       ? (labelValid.current = false)
       : (labelValid.current = true);
-  }, [label]);
+    labelExists.current = false;
+  }, [label, labelsArray]);
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    labelValid.current &&
-      label.trim().length > 0 &&
+    labelsArray.every((l) => l.name !== label) === false
+      ? (labelExists.current = true)
+      : (labelExists.current = false);
+    if (!labelExists.current && labelValid.current && label.trim().length > 0) {
       addLabel({
         name: label,
         count: 0,
       });
+    }
     setLabel("");
   };
 
@@ -59,10 +68,14 @@ const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
                 type="text"
                 placeholder="Add label"
                 className={`todo-form-input flex-1 font-semibold ${
-                  labelValid.current === false &&
+                  !labelValid.current &&
                   "text-red-600 caret-red-600 border-red-600 focus:border-red-600"
+                } ${
+                  listLimitReached.current &&
+                  "text-amber-600 placeholder-amber-600 border-amber-600 focus:border-amber-600 opacity-60 cursor-not-allowed"
                 }`}
                 value={label}
+                disabled={listLimitReached.current}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setLabel(e.target.value)
                 }
@@ -79,6 +92,16 @@ const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
           {labelValid.current === false && (
             <p className="-mt-2 text-red-600 font-semibold">
               Label length should be below 20 letters!
+            </p>
+          )}
+          {listLimitReached.current === true && (
+            <p className="-mt-2 text-amber-400 font-semibold">
+              Labels limit is reached.
+            </p>
+          )}
+          {labelExists.current && (
+            <p className="-mt-2 text-amber-400 font-semibold">
+              Label already exists.
             </p>
           )}
           <LabelContentHolder labelsAsState={labelsAsState} />
