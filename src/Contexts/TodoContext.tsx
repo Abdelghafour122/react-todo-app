@@ -362,19 +362,20 @@ const TodoContext = ({ children }: TodoContextProps) => {
       deleteLabelFromDB(id);
       setLabelsList([...LabelsList.filter((label) => label.id !== id)]);
     },
-    editLabel: ({ id: labelId, name: labelName, count: labelCount }) => {
-      editLabelInDB({ id: labelId, name: labelName, count: labelCount });
-      setLabelsList([
-        ...LabelsList.map((label) =>
-          label.id === labelId
-            ? {
-                ...label,
-                name: labelName as string,
-                count: labelCount as number,
-              }
-            : label
-        ),
-      ]);
+    editLabel: (editLabelParams: UpdateLabelContentParamsType) => {
+      if(editLabelParams.case === "name"){
+        editLabelInDB({ id: editLabelParams.id, name: editLabelParams.name, case: "name"});
+        setLabelsList([
+          ...LabelsList.map((label) =>
+            label.id === editLabelParams.id
+              ? {
+                  ...label,
+                  name: editLabelParams.name as string,
+                }
+              : label
+          ),
+        ]);
+      }
     },
     addLabelToTodoItem: async ({
       todoId: todoItemId,
@@ -388,10 +389,7 @@ const TodoContext = ({ children }: TodoContextProps) => {
         name: labelsName,
         todoId: todoItemId,
       });
-      editLabelInDB({
-        id: labelId,
-        count: labelsCount + 1,
-      });
+      editLabelInDB({id: labelId, count:labelsCount + 1, case: "count" } );
       // console.log("logging from context:", [
       //   ...getLabelsListOfTodo(todoItemId),
       //   { id: labelId, name: labelsName, count: labelsCount + 1 },
@@ -409,10 +407,12 @@ const TodoContext = ({ children }: TodoContextProps) => {
     },
     removeLabelFromTodoItem: async (removeLabelParams) => {
       await removeLabelFromTodo(removeLabelParams);
-      editLabelInDB({
-        id: removeLabelParams.labelId,
-        count: removeLabelParams.labelCount - 1,
-      });
+      editLabelInDB({id: removeLabelParams.labelId, count:removeLabelParams.labelCount - 1, case: "count" } );
+      // editLabelInDB({
+      //   id: removeLabelParams.labelId,
+      //   count: removeLabelParams.labelCount - 1,
+      // });
+
       // console.log([
       //   ...(getLabelsListOfTodo(removeLabelParams.todoId).filter(
       //     (todoLabels) => todoLabels.id !== removeLabelParams.labelId

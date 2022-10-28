@@ -14,7 +14,7 @@ const LabelItem = ({ id, name, count }: Label) => {
     console.log(labelNameRef.current?.value);
     labelNameRef.current?.value !== undefined &&
     labelNameRef.current?.value !== ""
-      ? editLabel({ id: id, name: labelNameRef.current?.value, count: count })
+      ? editLabel({ id: id, name: labelNameRef.current?.value, case: "name" })
       : // REPLACE WITH A PROPER ERROR MESSAGE
         console.log("cannot update label");
   };
