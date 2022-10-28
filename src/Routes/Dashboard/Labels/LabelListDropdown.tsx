@@ -3,11 +3,16 @@ import { Labels } from "../../../Utils/types";
 import LabelDropdownItem from "./LabelDropdownItem";
 
 type Props = {
-  labelsList: Labels;
   currTodoId: string;
+  labelsList: Labels;
+  currTodoLabelsList: Labels;
 };
 
-const LabelListDropdown = ({ labelsList, currTodoId }: Props) => {
+const LabelListDropdown = ({
+  currTodoLabelsList,
+  labelsList,
+  currTodoId,
+}: Props) => {
   return (
     <div className="label-list-drop absolute bg-zinc-900 top-[110%] p-1 w-max min-h-[6rem] max-h-[8rem] rounded-sm flex flex-col items-start justify-start gap-2 overflow-y-scroll cursor-default">
       <p className="text-stone-400 text-lg font-bold">Labels:</p>
@@ -16,14 +21,27 @@ const LabelListDropdown = ({ labelsList, currTodoId }: Props) => {
           No labels to add, try creating some.
         </p>
       ) : (
-        <ul className="small-labels flex flex-col items-start justify-start min-w-[10rem]">
-          {labelsList.map((label) => (
-            <LabelDropdownItem
-              key={label.id}
-              label={label}
-              currTodoId={currTodoId}
-            />
-          ))}
+        <ul className="small-labels flex flex-col items-start justify-start min-w-[10rem] gap-1">
+          {labelsList.map((label) =>
+            currTodoLabelsList.every(
+              (todoLabel) => todoLabel.id !== label.id
+            ) ? (
+              <LabelDropdownItem
+                key={label.id}
+                label={label}
+                currTodoId={currTodoId}
+                added={false}
+              />
+            ) : (
+              <LabelDropdownItem
+                key={label.id}
+                label={label}
+                currTodoId={currTodoId}
+                added={true}
+              />
+            )
+          )}
+          {}
         </ul>
       )}
     </div>

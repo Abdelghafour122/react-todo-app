@@ -36,10 +36,12 @@ const DetailedTodoBackdrop = ({
               detailedTodoInfo.edited === false ? "Created on: " : "Edited on: "
             } ${formatDate(detailedTodoInfo.date)}`}{" "}
           </p>
-          <TodoLabelsList
-            labelsList={detailedTodoInfo.labels}
-            todoId={detailedTodoInfo.id}
-          />
+          {detailedTodoInfo.labels.length === 0 ? null : (
+            <TodoLabelsList
+              labelsList={detailedTodoInfo.labels}
+              todoId={detailedTodoInfo.id}
+            />
+          )}
           <div className="todo-funcs w-full flex items-center justify-between">
             <ul className="flex items-center justify-between gap-1">
               <li>
@@ -98,6 +100,7 @@ const DetailedTodoBackdrop = ({
                   <LabelListDropdown
                     labelsList={labelsArray}
                     currTodoId={detailedTodoInfo.id}
+                    currTodoLabelsList={detailedTodoInfo.labels}
                   />
                 ) : null}
               </li>
