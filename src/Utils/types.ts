@@ -153,5 +153,5 @@ export type AddLabelToTodoInput = Label & {
 export type RemoveLabelFromTodoInput = {
   todoId: string;
   labelId: string;
-  labelCount: number;
+  labelCount?: number;
 };

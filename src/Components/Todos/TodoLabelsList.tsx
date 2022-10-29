@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { useTodoContext } from "../../Contexts/TodoContext";
 import { Labels } from "../../Utils/types";
 import LabelChip from "./LabelChip";
 
@@ -8,6 +9,15 @@ type Props = {
 };
 
 const TodoLabelsList = ({ labelsList, todoId }: Props) => {
+  // const { labelsArray } = useTodoContext();
+  // const labelsListRef = useRef(labelsList);
+  // useEffect(() => {
+  //   //  labelsList !== undefined
+  //   labelsListRef.current = labelsList.filter((localLabel) =>
+  //     labelsArray.some((globalLabel) => globalLabel.id === localLabel.id)
+  //   );
+  // }, [labelsArray, labelsList]);
+
   return (
     <>
       {labelsList !== undefined ? (

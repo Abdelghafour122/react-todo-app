@@ -2,8 +2,6 @@ p width is relative to the flex-basis of the todo
 alternative icon for labels: MdLocalOffer
 
 28/10
-fix the union type error
-make deleteLabelFromTodo
 
 later:
 findout if a checkbox is better than an li
@@ -20,14 +18,12 @@ Later retouches:
     improve the loading states when fetching (replace the "loading" with a more suitable message)
     add validation to the signin/out forms
     make a loading state when fetching (labels, todos) (use spinners)
-    remake the lable's validation test
     try adding the (deleting automatically after 2days feature) in deleted
     dive into tailwind's state handling, optimize your styles using tailwind
     remove the profile popup
 
     editLabel:
         decide if to use placeholder or value(with state instead of ref) in editLabel (find the difference in space)
-        check if a label with the same name already exists before editing
 
     deleteLabel:
         a label is removed from all todos if deleted

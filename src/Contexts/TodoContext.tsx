@@ -360,6 +360,27 @@ const TodoContext = ({ children }: TodoContextProps) => {
     },
     deleteLabel: (id: string) => {
       deleteLabelFromDB(id);
+      //   labelsList.filter((localLabel) =>
+      //   labelsArray.some((globalLabel) => globalLabel.id === localLabel.id)
+      // );
+
+      state.forEach(async (todo) => {
+        if (todo.labels.some((tLabel) => tLabel.id === id)) {
+          await removeLabelFromTodo({ labelId: id, todoId: todo.id });
+          dispatch({
+            type: actions.REMOVE_LABEL_FROM_TODO_ITEM,
+            payload: {
+              id: todo.id,
+              labels: [
+                ...getLabelsListOfTodo(todo.id).filter(
+                  (todoLabels) => todoLabels.id !== id
+                ),
+              ],
+            },
+          });
+        }
+      });
+
       setLabelsList([...LabelsList.filter((label) => label.id !== id)]);
     },
     editLabel: (editLabelParams: UpdateLabelContentParamsType) => {
@@ -415,7 +436,7 @@ const TodoContext = ({ children }: TodoContextProps) => {
       await removeLabelFromTodo(removeLabelParams);
       editLabelInDB({
         id: removeLabelParams.labelId,
-        count: removeLabelParams.labelCount - 1,
+        count: (removeLabelParams.labelCount as number) - 1,
         case: "count",
       });
       // editLabelInDB({
