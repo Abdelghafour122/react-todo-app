@@ -15,12 +15,14 @@ const LabelChip = ({ label, todoId }: Props) => {
       <p className="text-stone-300 font-semibold">{label.name}</p>
       <button
         className="p-1 rounded-full hover:bg-neutral-600 active:bg-neutral-500"
-        onClick={() =>
-          removeLabelFromTodoItem({
-            todoId: todoId,
-            labelCount: label.count,
-            labelId: label.id,
-          })
+        onClick={
+          () =>
+            removeLabelFromTodoItem({
+              todoId: todoId,
+              labelCount: label.count,
+              labelId: label.id,
+            })
+          // console.log(label.count)
         }
       >
         <VscChromeClose color="rgb(231 229 228)" size="1rem" />

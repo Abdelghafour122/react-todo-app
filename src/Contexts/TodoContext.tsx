@@ -16,6 +16,7 @@ import {
   doc,
   Timestamp,
 } from "firebase/firestore";
+import { labelsReducer } from "../Reducers/labelsReducer";
 import { todoReducer } from "../Reducers/todoReducer";
 import { initialState, actions } from "../Reducers/todoReducerActionsState";
 import {
@@ -30,10 +31,15 @@ import {
   Labels,
   AddLabelToTodoInput,
   RemoveLabelFromTodoInput,
+  DeleteLabelParamsType,
 } from "../Utils/types";
 
 import { getLabelsList, getTodosList } from "../Utils/firestore";
 import { app } from "../firebase";
+import {
+  labelsInitialState,
+  labelsReducerActions,
+} from "../Reducers/labelsReducerActionsState";
 
 type TodoContextProps = {
   children: ReactNode;
@@ -55,8 +61,12 @@ const TodoContext = ({ children }: TodoContextProps) => {
   const todoItemIdRef = useRef<string>("");
   const labelIdRef = useRef<string>("");
   const [state, dispatch] = useReducer(todoReducer, initialState.todoList);
+  const [labelsState, labelsDispatch] = useReducer(
+    labelsReducer,
+    labelsInitialState.labelsList
+  );
 
-  const [LabelsList, setLabelsList] = useState<Labels>([]);
+  // const [LabelsList, setLabelsList] = useState<Labels>([]);
 
   const addTodoItemToDB = async (params: AddTodoParamsType) => {
     let documentId = "";
@@ -151,8 +161,8 @@ const TodoContext = ({ children }: TodoContextProps) => {
       });
     return documentId;
   };
-  const deleteLabelFromDB = async (removeLabelId: string) => {
-    const deleteLabelDocRef = doc(todoDatabase, "labels", removeLabelId);
+  const deleteLabelFromDB = async (deleteLabelId: string) => {
+    const deleteLabelDocRef = doc(todoDatabase, "labels", deleteLabelId);
     await deleteDoc(deleteLabelDocRef)
       .then(() => console.log("deleted successfuly"))
       .catch((err) => console.log("error while deleting label.", err));
@@ -172,12 +182,32 @@ const TodoContext = ({ children }: TodoContextProps) => {
       })
         .then(() => console.log("label count updated successfuly"))
         .catch((err) => console.log("error while updating label count.", err));
+      // setLabelsList([
+      //   ...LabelsList.map((label) =>
+      //     label.id === updateLabelContentInput.id
+      //       ? {
+      //           ...label,
+      //           count: updateLabelContentInput.count as number,
+      //         }
+      //       : label
+      //   ),
+      // ]);
     } else if (updateLabelContentInput.case === "name") {
       await updateDoc(editLabelDocRef, {
         name: updateLabelContentInput.name,
       })
         .then(() => console.log("label name updated successfuly"))
         .catch((err) => console.log("error while updating label name.", err));
+      // setLabelsList([
+      //   ...LabelsList.map((label) =>
+      //     label.id === updateLabelContentInput.id
+      //       ? {
+      //           ...label,
+      //           name: updateLabelContentInput.name as string,
+      //         }
+      //       : label
+      //   ),
+      // ]);
     }
   };
 
@@ -341,66 +371,96 @@ const TodoContext = ({ children }: TodoContextProps) => {
       });
     },
 
-    labelsArray: LabelsList,
+    // LABELS FUNCS & STATE
+    labelsArray: labelsState,
     fetchLabels: useCallback(async () => {
-      await getLabelsList().then((res) => setLabelsList(res));
+      await getLabelsList().then((res) => {
+        labelsDispatch({
+          type: labelsReducerActions.FETCH_LABEL_ITEM,
+          payload: { fetchLabels: res },
+        });
+      });
     }, []),
     addLabel: async ({ name: labelName }: AddLabelParamsType) => {
       await addLabelToDB({ name: labelName, count: 0 }).then(
         (res) => (labelIdRef.current = res)
       );
-      setLabelsList([
-        ...LabelsList,
-        {
-          id: labelIdRef.current,
-          name: labelName,
-          count: 0,
-        },
-      ]);
+      labelsDispatch({
+        type: labelsReducerActions.ADD_LABEL_ITEM,
+        payload: { id: labelIdRef.current, name: labelName },
+      });
+      // setLabelsList([
+      //   ...LabelsList,
+      //   {
+      //     id: labelIdRef.current,
+      //     name: labelName,
+      //     count: 0,
+      //   },
+      // ]);
     },
-    deleteLabel: (id: string) => {
-      deleteLabelFromDB(id);
-      //   labelsList.filter((localLabel) =>
-      //   labelsArray.some((globalLabel) => globalLabel.id === localLabel.id)
-      // );
-
+    deleteLabel: (deleteLabelParams: DeleteLabelParamsType) => {
+      deleteLabelFromDB(deleteLabelParams.labelId);
       state.forEach(async (todo) => {
-        if (todo.labels.some((tLabel) => tLabel.id === id)) {
-          await removeLabelFromTodo({ labelId: id, todoId: todo.id });
+        if (
+          todo.labels.some((tLabel) => tLabel.id === deleteLabelParams.labelId)
+        ) {
+          await removeLabelFromTodo({
+            labelId: deleteLabelParams.labelId,
+            todoId: todo.id,
+            labelCount: deleteLabelParams.labelCount,
+          });
           dispatch({
             type: actions.REMOVE_LABEL_FROM_TODO_ITEM,
             payload: {
               id: todo.id,
               labels: [
                 ...getLabelsListOfTodo(todo.id).filter(
-                  (todoLabels) => todoLabels.id !== id
+                  (todoLabels) => todoLabels.id !== deleteLabelParams.labelId
                 ),
               ],
             },
           });
         }
       });
-
-      setLabelsList([...LabelsList.filter((label) => label.id !== id)]);
+      // setLabelsList([
+      //   ...LabelsList.filter((label) => label.id !== deleteLabelParams.labelId),
+      // ]);
+      labelsDispatch({
+        type: labelsReducerActions.DELETE_LABEL_ITEM,
+        payload: { id: deleteLabelParams.labelId as string },
+      });
     },
-    editLabel: (editLabelParams: UpdateLabelContentParamsType) => {
+    editLabel: async (editLabelParams: UpdateLabelContentParamsType) => {
       if (editLabelParams.case === "name") {
-        editLabelInDB({
+        await editLabelInDB({
           id: editLabelParams.id,
           name: editLabelParams.name,
           case: "name",
         });
-        setLabelsList([
-          ...LabelsList.map((label) =>
-            label.id === editLabelParams.id
-              ? {
-                  ...label,
-                  name: editLabelParams.name as string,
-                }
-              : label
-          ),
-        ]);
+        labelsDispatch({
+          type: labelsReducerActions.EDIT_LABEL_ITEM,
+          payload: {
+            id: editLabelParams.id,
+            case: "name",
+            name: editLabelParams.name,
+          },
+        });
+      } else if (editLabelParams.case === "count") {
+        await editLabelInDB({
+          id: editLabelParams.id,
+          count: editLabelParams.count,
+          case: "count",
+        });
+        labelsDispatch({
+          type: labelsReducerActions.EDIT_LABEL_ITEM,
+          payload: {
+            id: editLabelParams.id,
+            case: "count",
+            count: editLabelParams.count,
+          },
+        });
       }
+      console.log(editLabelParams);
     },
     addLabelToTodoItem: async ({
       todoId: todoItemId,
@@ -419,36 +479,49 @@ const TodoContext = ({ children }: TodoContextProps) => {
           name: labelsName,
           todoId: todoItemId,
         });
-        editLabelInDB({ id: labelId, count: labelsCount + 1, case: "count" });
+        await editLabelInDB({
+          id: labelId,
+          count: labelsCount,
+          case: "count",
+        });
         dispatch({
           type: actions.ADD_LABEL_TO_TODO_ITEM,
           payload: {
             id: todoItemId,
             labels: [
               ...getLabelsListOfTodo(todoItemId),
-              { id: labelId, name: labelsName, count: labelsCount + 1 },
+              { id: labelId, name: labelsName, count: labelsCount },
             ],
+          },
+        });
+        labelsDispatch({
+          type: labelsReducerActions.EDIT_LABEL_ITEM,
+          payload: {
+            case: "count",
+            count: labelsCount,
           },
         });
       }
     },
     removeLabelFromTodoItem: async (removeLabelParams) => {
       await removeLabelFromTodo(removeLabelParams);
-      editLabelInDB({
+      await editLabelInDB({
         id: removeLabelParams.labelId,
-        count: (removeLabelParams.labelCount as number) - 1,
         case: "count",
+        count: (removeLabelParams.labelCount as number) - 1,
       });
-      // editLabelInDB({
+      // console.log({
       //   id: removeLabelParams.labelId,
-      //   count: removeLabelParams.labelCount - 1,
+      //   case: "count",
+      //   count: removeLabelParams.labelCount as number,
       // });
-
-      // console.log([
-      //   ...(getLabelsListOfTodo(removeLabelParams.todoId).filter(
-      //     (todoLabels) => todoLabels.id !== removeLabelParams.labelId
-      //   ) as Labels),
-      // ]);
+      labelsDispatch({
+        type: labelsReducerActions.EDIT_LABEL_ITEM,
+        payload: {
+          case: "count",
+          count: removeLabelParams.labelCount,
+        },
+      });
       dispatch({
         type: actions.REMOVE_LABEL_FROM_TODO_ITEM,
         payload: {

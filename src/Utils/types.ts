@@ -1,5 +1,6 @@
 import { User, UserCredential } from "firebase/auth";
 import { Timestamp } from "firebase/firestore";
+import { type } from "os";
 
 export type AuthContextType = {
   currentUser: User | null | undefined;
@@ -26,7 +27,8 @@ export type TodoContextValueType = {
   labelsArray: Labels;
   fetchLabels: () => Promise<void>;
   addLabel: ({ name }: AddLabelParamsType) => void;
-  deleteLabel: (id: string) => void;
+  deleteLabel: (id: DeleteLabelParamsType) => void;
+  // deleteLabel: (id: RemoveLabelFromTodoInput) => void;
   editLabel: (editLabelParams: UpdateLabelContentParamsType) => void;
   addLabelToTodoItem: (addLabelParams: AddLabelToTodoInput) => void;
   removeLabelFromTodoItem: (
@@ -48,6 +50,14 @@ export type EditTodoPayloadType = {
   fetchedData?: Todos;
   date?: Timestamp;
   labels?: Labels;
+};
+
+export type LabelsReducerPayloadType = {
+  id?: string;
+  name?: string;
+  count?: number;
+  fetchLabels?: Labels;
+  case?: "name" | "count";
 };
 
 export type PermanentlyDeleteTodoParamsType = {
@@ -100,6 +110,11 @@ export type Actions = {
   payload: EditTodoPayloadType;
 };
 
+export type LabelsActions = {
+  type: string;
+  payload: LabelsReducerPayloadType;
+};
+
 export type InitialReducerStateType = {
   todoList: Todos;
 };
@@ -129,6 +144,11 @@ export type Labels = Label[];
 export type AddLabelParamsType = {
   name: string;
   count: number;
+};
+
+export type DeleteLabelParamsType = {
+  labelId: string;
+  labelCount: number;
 };
 
 export type UpdateLabelCountParamsType = {

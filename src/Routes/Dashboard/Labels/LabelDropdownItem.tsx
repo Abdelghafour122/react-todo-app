@@ -24,7 +24,7 @@ const LabelDropdownItem = ({ label, currTodoId, added }: Props) => {
             addLabelToTodoItem({
               id: label.id,
               name: label.name,
-              count: label.count,
+              count: label.count + 1,
               todoId: currTodoId,
             })
           }

@@ -1,7 +1,9 @@
 p width is relative to the flex-basis of the todo
 alternative icon for labels: MdLocalOffer
 
-28/10
+30/10
+THE LABEL COUNT PROBLEM IS ALL ABOUT THE LABELSLIST STATE
+CHECK OUT RENDERING/FETCHING/UPDATING THE STATE
 
 later:
 findout if a checkbox is better than an li
@@ -22,8 +24,16 @@ Later retouches:
     dive into tailwind's state handling, optimize your styles using tailwind
     remove the profile popup
 
+    IMPORTANT! Add the validation when editing the labels name
+
     editLabel:
         decide if to use placeholder or value(with state instead of ref) in editLabel (find the difference in space)
 
     deleteLabel:
         a label is removed from all todos if deleted
+
+NEW IDEAS:
+    ADD A SWITCH FOR GRID LAYOUT/LIST LAYOUT (like in keep)
+    ADD AN OFFLINE PAGE, SHOWING THE "connect to internet" MSG
+    TRY ADDING BG IMAGES FOR LOG PAGES, OFFLINE PAGE (check out paypal's mobile gb img in offline)
+    TODOS WITH BG COLORS

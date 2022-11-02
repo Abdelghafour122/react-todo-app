@@ -104,7 +104,7 @@ const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
               Label already exists.
             </p>
           )}
-          <LabelContentHolder labelsAsState={labelsAsState} />
+          <LabelContentHolder />
         </div>
       </div>
     </div>

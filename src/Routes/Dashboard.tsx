@@ -6,11 +6,12 @@ import Navbar from "./Dashboard/Navbar";
 type Props = {};
 
 function Dashboard(props: Props) {
-  const { fetchTodoItems } = useTodoContext();
+  const { fetchTodoItems, fetchLabels } = useTodoContext();
 
   useEffect(() => {
     fetchTodoItems();
-  }, [fetchTodoItems]);
+    fetchLabels();
+  }, [fetchTodoItems, fetchLabels]);
 
   return (
     <div className="dashboard h-full w-full flex items-start justify-start">
