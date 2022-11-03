@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { BsArchive, BsTrash } from "react-icons/bs";
 import { FiEdit3 } from "react-icons/fi";
 import { CgRemove } from "react-icons/cg";
@@ -11,6 +11,7 @@ import {
   EditTodoParamsType,
   DetailedTodoType,
   Todo as TodoType,
+  Labels,
 } from "../../../Utils/types";
 import DetailedTodoBackdrop from "./DetailedTodoBackdrop";
 import Snackbar from "../../../Components/Todos/Snackbar";
@@ -23,6 +24,7 @@ const Todo = (todoInfo: TodoType) => {
     restoreTodoItem,
     markAsCompleted,
     archiveTodoItem,
+    labelsArray,
   } = useTodoContext();
   const [openEditTodoBackdrop, setOpenEditTodoBackdrop] = useState(false);
   const [openDetailedTodoBackdrop, setOpenDetailedTodoBackdrop] =
@@ -61,6 +63,15 @@ const Todo = (todoInfo: TodoType) => {
     }, 1500);
   };
 
+  const syncTodoLabels = useMemo(() => {
+    const todoLabelsIdList = [...todoInfo.labels.map((label) => label.id)];
+    let result = [
+      ...labelsArray.filter((label) => todoLabelsIdList.includes(label.id)),
+    ];
+    console.log("synced the labels");
+    return result;
+  }, [labelsArray, todoInfo.labels]);
+
   return (
     <div className="todo">
       {/* <button className="button" onClick={handleOpenSnackbar}> */}
@@ -78,7 +89,7 @@ const Todo = (todoInfo: TodoType) => {
         <label htmlFor={`${todoInfo.id}`}>Completed</label>
       </div>
       {todoInfo.labels.length === 0 ? null : (
-        <TodoLabelsList labelsList={todoInfo.labels} todoId={todoInfo.id} />
+        <TodoLabelsList labelsList={syncTodoLabels} todoId={todoInfo.id} />
       )}
       <div className="button-cont flex items-center justify-around w-full">
         {todoInfo.deleted === undefined || todoInfo.deleted === false ? (

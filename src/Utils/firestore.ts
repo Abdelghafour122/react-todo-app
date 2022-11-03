@@ -1,4 +1,10 @@
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+} from "firebase/firestore";
 import { app } from "../firebase";
 import { Labels, Todos } from "./types";
 
@@ -24,6 +30,7 @@ export const getTodosList = async () => {
   return result;
 };
 
+// LABELS FETCHING FUNCTION
 export const getLabelsList = async () => {
   const result = await getDocs(labelsCollection)
     .then(
@@ -37,4 +44,15 @@ export const getLabelsList = async () => {
     )
     .then((finalRes) => finalRes);
   return result;
+};
+
+// FETCH A SECIFIC LABEL'S COUNT
+export const getSpecificLabelCount = async (labelId: string) => {
+  const labelRef = doc(todoDatabase, "labels", labelId);
+  const res = await getDoc(labelRef).then((result) => {
+    if (result.exists()) {
+      return result.data();
+    } else console.log("label not found in database");
+  });
+  return res;
 };

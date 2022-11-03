@@ -34,8 +34,13 @@ import {
   DeleteLabelParamsType,
 } from "../Utils/types";
 
-import { getLabelsList, getTodosList } from "../Utils/firestore";
-import { app } from "../firebase";
+import {
+  getLabelsList,
+  getSpecificLabelCount,
+  getTodosList,
+  todoDatabase,
+} from "../Utils/firestore";
+// import { app } from "../firebase";
 import {
   labelsInitialState,
   labelsReducerActions,
@@ -53,7 +58,7 @@ export function useTodoContext() {
   return useContext(TodosContext);
 }
 
-export const todoDatabase = getFirestore(app);
+// export const todoDatabase = getFirestore(app);
 const todosCollection = collection(todoDatabase, "todos");
 const labelsCollection = collection(todoDatabase, "labels");
 
@@ -227,13 +232,14 @@ const TodoContext = ({ children }: TodoContextProps) => {
       "todos",
       addLabelToTodoInput.todoId
     );
+    const labelCount = await getSpecificLabelCount(addLabelToTodoInput.id);
     await updateDoc(addLabelToTodoDocRef, {
       labels: [
         ...getLabelsListOfTodo(addLabelToTodoInput.todoId),
         {
           id: addLabelToTodoInput.id,
           name: addLabelToTodoInput.name,
-          count: addLabelToTodoInput.count,
+          count: labelCount?.count + 1,
         },
       ],
     })
@@ -407,7 +413,6 @@ const TodoContext = ({ children }: TodoContextProps) => {
           await removeLabelFromTodo({
             labelId: deleteLabelParams.labelId,
             todoId: todo.id,
-            labelCount: deleteLabelParams.labelCount,
           });
           dispatch({
             type: actions.REMOVE_LABEL_FROM_TODO_ITEM,
@@ -465,9 +470,9 @@ const TodoContext = ({ children }: TodoContextProps) => {
     addLabelToTodoItem: async ({
       todoId: todoItemId,
       id: labelId,
-      count: labelsCount,
       name: labelsName,
     }) => {
+      const labelCount = await getSpecificLabelCount(labelId);
       if (
         getLabelsListOfTodo(todoItemId).every(
           (label) => label.id !== labelId
@@ -475,13 +480,12 @@ const TodoContext = ({ children }: TodoContextProps) => {
       ) {
         await addLabelToTodo({
           id: labelId,
-          count: labelsCount,
           name: labelsName,
           todoId: todoItemId,
         });
         await editLabelInDB({
           id: labelId,
-          count: labelsCount,
+          count: labelCount?.count + 1,
           case: "count",
         });
         dispatch({
@@ -490,7 +494,7 @@ const TodoContext = ({ children }: TodoContextProps) => {
             id: todoItemId,
             labels: [
               ...getLabelsListOfTodo(todoItemId),
-              { id: labelId, name: labelsName, count: labelsCount },
+              { id: labelId, name: labelsName, count: labelCount?.count + 1 },
             ],
           },
         });
@@ -498,28 +502,25 @@ const TodoContext = ({ children }: TodoContextProps) => {
           type: labelsReducerActions.EDIT_LABEL_ITEM,
           payload: {
             case: "count",
-            count: labelsCount,
+            count: labelCount?.count + 1,
           },
         });
       }
     },
     removeLabelFromTodoItem: async (removeLabelParams) => {
+      const labelCount = await getSpecificLabelCount(removeLabelParams.labelId);
+
       await removeLabelFromTodo(removeLabelParams);
       await editLabelInDB({
         id: removeLabelParams.labelId,
         case: "count",
-        count: (removeLabelParams.labelCount as number) - 1,
+        count: labelCount?.count - 1,
       });
-      // console.log({
-      //   id: removeLabelParams.labelId,
-      //   case: "count",
-      //   count: removeLabelParams.labelCount as number,
-      // });
       labelsDispatch({
         type: labelsReducerActions.EDIT_LABEL_ITEM,
         payload: {
           case: "count",
-          count: removeLabelParams.labelCount,
+          count: labelCount?.count - 1,
         },
       });
       dispatch({

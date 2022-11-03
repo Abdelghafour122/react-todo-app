@@ -19,7 +19,6 @@ const LabelChip = ({ label, todoId }: Props) => {
           () =>
             removeLabelFromTodoItem({
               todoId: todoId,
-              labelCount: label.count,
               labelId: label.id,
             })
           // console.log(label.count)

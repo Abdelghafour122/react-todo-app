@@ -167,11 +167,12 @@ export type UpdateLabelContentParamsType =
   | UpdateLabelNameParamsType
   | UpdateLabelCountParamsType;
 
-export type AddLabelToTodoInput = Label & {
+export type AddLabelToTodoInput = {
+  id: string;
+  name: string;
   todoId: string;
 };
 export type RemoveLabelFromTodoInput = {
   todoId: string;
   labelId: string;
-  labelCount?: number;
 };
