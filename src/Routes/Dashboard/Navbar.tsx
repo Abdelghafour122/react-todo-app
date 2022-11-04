@@ -58,12 +58,13 @@ const Navbar = (props: Props) => {
 
   return (
     <nav className="py-2 px-2 h-full bg-stone-900">
-      <div className="flex flex-col items-center justify-start gap-2">
+      <div className="flex flex-col items-center justify-start gap-2 h-full w-max">
         <p className="text-2xl text-orange-300 font-sans font-extrabold border-b-2 border-b-stone-500">
           Dooit
         </p>
-        <div className="funcs">
-          <ul className="flex flex-col items-center justify-center gap-3">
+        <div className="funcs h-full overflow-y-scroll scrollbar-hide ">
+          <ul className="flex flex-col items-center justify-start gap-3 h-max left-2 absolute">
+            {/*absolute*/}
             {NAV_LINKS.map((link, ind) => {
               return (
                 <li key={ind} className="relative group">
@@ -86,9 +87,46 @@ const Navbar = (props: Props) => {
               </button>
               <Tooltip tooltipContent={"Labels"} />
             </li>
+            <li className="relative group">
+              <button
+                className="p-3 bg-stone-700 transition-all rounded-[50%] duration-150 ease-linear hover:rounded-[10px] hover:bg-stone-600 active:bg-stone-500 focus:bg-stone-400 focus:rounded-[10px]"
+                onClick={handleOpenLabelsBackdrop}
+              >
+                <MdLabelOutline color="rgb(253 186 116)" size={"1.7rem"} />
+              </button>
+              <Tooltip tooltipContent={"Labels"} />
+            </li>
+            <li className="relative group">
+              <button
+                className="p-3 bg-stone-700 transition-all rounded-[50%] duration-150 ease-linear hover:rounded-[10px] hover:bg-stone-600 active:bg-stone-500 focus:bg-stone-400 focus:rounded-[10px]"
+                onClick={handleOpenLabelsBackdrop}
+              >
+                <MdLabelOutline color="rgb(253 186 116)" size={"1.7rem"} />
+              </button>
+              <Tooltip tooltipContent={"Labels"} />
+            </li>
+            <li className="relative group">
+              <button
+                className="p-3 bg-stone-700 transition-all rounded-[50%] duration-150 ease-linear hover:rounded-[10px] hover:bg-stone-600 active:bg-stone-500 focus:bg-stone-400 focus:rounded-[10px]"
+                onClick={handleOpenLabelsBackdrop}
+              >
+                <MdLabelOutline color="rgb(253 186 116)" size={"1.7rem"} />
+              </button>
+              <Tooltip tooltipContent={"Labels"} />
+            </li>
+            <li className="relative group mt-6">
+              <button
+                className="p-3 bg-stone-700 transition-all rounded-[50%] duration-150 ease-linear hover:rounded-[10px] hover:bg-stone-600 active:bg-stone-500 bottom-2 group"
+                onClick={userSignOut}
+              >
+                <BiLogOut size={"1.7rem"} color={"#ff3535"} />
+                <Tooltip tooltipContent={"Sign out"} />
+              </button>
+            </li>
           </ul>
         </div>
-        <div className="profile relative mt-2">
+        {/* JUST REMOVED THE PROFILE POPUP, MAY RECONSIDER UNDOING */}
+        {/* <div className="profile relative mt-2">
           <button
             className="transition-all rounded-[50%] duration-200 ease-linear hover:rounded-[10px] overflow-hidden"
             onClick={() => setOpenProfilePopup(!openProfilePopup)}
@@ -96,14 +134,16 @@ const Navbar = (props: Props) => {
             <img className="h-12 " src={profilePic} alt="profile-img" />
           </button>
           {openProfilePopup === true && <ProfileSettingsPopup />}
-        </div>
-        <button
+        </div> */}
+
+        {/* MOVING THE LOGOUT BUTTON TO THE NAV LINKS UL */}
+        {/* <button
           className="p-3 bg-stone-700 transition-all rounded-[50%] duration-150 ease-linear hover:rounded-[10px] hover:bg-stone-600 active:bg-stone-500 absolute bottom-2 group"
           onClick={userSignOut}
         >
           <BiLogOut size={"1.7rem"} color={"#ff3535"} />
           <Tooltip tooltipContent={"Sign out"} />
-        </button>
+        </button> */}
       </div>
       {openLabelsBackdrop === true ? (
         <LabelFormBackdrop
