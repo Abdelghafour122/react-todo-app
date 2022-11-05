@@ -5,12 +5,10 @@ import React, {
   useReducer,
   useCallback,
   useRef,
-  useState,
 } from "react";
 import {
   addDoc,
   collection,
-  getFirestore,
   deleteDoc,
   updateDoc,
   doc,

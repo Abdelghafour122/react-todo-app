@@ -9,7 +9,7 @@ ADD LABELS IN THE NAVBAR & REPOSITION THE LOGOUT BUTTON
 later:
 findout if a checkbox is better than an li
 finish the add / delete label in todo
-    found a bug: add fetching labels when clicking "add label" button in detailedTodo, 
+    found a bug: add fetching labels when clicking "add label" button in detailedTodo, clicking too fast on two labels will add only the second but increase both's counts by 1 
     always check if the labelsList is empty before fetching, don't fetch if not necessary
 
 .make standard classes in index.css for: 

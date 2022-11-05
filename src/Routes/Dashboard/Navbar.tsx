@@ -62,8 +62,10 @@ const Navbar = (props: Props) => {
         <p className="text-2xl text-orange-300 font-sans font-extrabold border-b-2 border-b-stone-500">
           Dooit
         </p>
-        <div className="funcs h-full overflow-y-scroll scrollbar-hide ">
-          <ul className="flex flex-col items-center justify-start gap-3 h-max left-2 absolute">
+        <div className="funcs h-full ">
+          {" "}
+          {/* overflow-y-scroll scrollbar-hide*/}
+          <ul className="flex flex-col items-center justify-start gap-3 h-max left-2 ">
             {/*absolute*/}
             {NAV_LINKS.map((link, ind) => {
               return (

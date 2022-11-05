@@ -16,7 +16,7 @@ function Dashboard(props: Props) {
   return (
     <div className="dashboard h-full w-full flex items-start justify-start">
       <Navbar />
-      <div className="dashboard-body flex-1 h-full py-2 overflow-auto">
+      <div className="dashboard-body flex-1 min-h-full py-2 overflow-auto">
         <Outlet />
       </div>
     </div>

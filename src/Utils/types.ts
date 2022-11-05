@@ -1,6 +1,5 @@
 import { User, UserCredential } from "firebase/auth";
 import { Timestamp } from "firebase/firestore";
-import { type } from "os";
 
 export type AuthContextType = {
   currentUser: User | null | undefined;

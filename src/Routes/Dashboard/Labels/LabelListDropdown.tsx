@@ -1,6 +1,7 @@
 import React from "react";
 import { Labels } from "../../../Utils/types";
 import LabelDropdownItem from "./LabelDropdownItem";
+import NoLabelsDropdownMessage from "./NoLabelsDropdownMessage";
 
 type Props = {
   currTodoId: string;
@@ -14,13 +15,10 @@ const LabelListDropdown = ({
   currTodoId,
 }: Props) => {
   return (
-    <div className="label-list-drop absolute bg-zinc-900 left-[110%] top-0 p-1 w-max min-h-[6rem] max-h-[8rem] rounded-sm flex flex-col items-start justify-start gap-2 overflow-y-scroll cursor-default">
+    <div className="label-list-drop absolute bg-zinc-900 left-[110%] top-0 p-1 w-max min-h-[6rem] max-h-[8rem] rounded-sm flex flex-col items-start justify-start gap-2 overflow-y-scroll scrollbar-none cursor-default shadow-xl">
       <p className="text-stone-400 text-lg font-bold">Labels:</p>
       {labelsList.length === 0 ? (
-        // EXTRACT AS A SEPARATE COMPONENT
-        <p className="p-1 font-semibold rounded-sm w-full text-left text-stone-300">
-          No labels to add, try creating some.
-        </p>
+        <NoLabelsDropdownMessage />
       ) : (
         <ul className="small-labels flex flex-col items-start justify-start min-w-[10rem] gap-1">
           {labelsList.map((label) =>
