@@ -67,7 +67,7 @@ const Navbar = (props: Props) => {
 
   return (
     <nav className="py-2 px-2 h-full bg-stone-900">
-      <div className="flex flex-col items-center justify-start gap-2 h-full w-max">
+      <div className="flex flex-col items-center justify-start gap-2 h-full w-max overflow-y-scroll scrollbar-hide">
         <p className="text-2xl text-orange-300 font-sans font-extrabold border-b-2 border-b-stone-500">
           Dooit
         </p>
@@ -98,54 +98,7 @@ const Navbar = (props: Props) => {
               </button>
               <Tooltip tooltipContent={"Labels"} />
             </li>
-            {/* <li className="relative group">
-              <button
-                className="p-3 bg-stone-700 transition-all rounded-[50%] duration-150 ease-linear hover:rounded-[10px] hover:bg-stone-600 active:bg-stone-500 focus:bg-stone-400 focus:rounded-[10px]"
-                onClick={handleOpenLabelsBackdrop}
-              >
-                <MdLabelOutline color="rgb(253 186 116)" size={"1.7rem"} />
-              </button>
-              <Tooltip tooltipContent={"Labels"} />
-            </li>
-            <li className="relative group">
-              <button
-                className="p-3 bg-stone-700 transition-all rounded-[50%] duration-150 ease-linear hover:rounded-[10px] hover:bg-stone-600 active:bg-stone-500 focus:bg-stone-400 focus:rounded-[10px]"
-                onClick={handleOpenLabelsBackdrop}
-              >
-                <MdLabelOutline color="rgb(253 186 116)" size={"1.7rem"} />
-              </button>
-              <Tooltip tooltipContent={"Labels"} />
-            </li>
-            <li className="relative group">
-              <button
-                className="p-3 bg-stone-700 transition-all rounded-[50%] duration-150 ease-linear hover:rounded-[10px] hover:bg-stone-600 active:bg-stone-500 focus:bg-stone-400 focus:rounded-[10px]"
-                onClick={handleOpenLabelsBackdrop}
-              >
-                <MdLabelOutline color="rgb(253 186 116)" size={"1.7rem"} />
-              </button>
-              <Tooltip tooltipContent={"Labels"} />
-            </li> */}
-            {/* {labelsArray.map((label) => {
-              return (
-                <li className="relative group self-end" key={label.id}>
-                  <button
-                    className="p-2 bg-stone-700 transition-all rounded-[50%] duration-150 ease-linear hover:rounded-[10px] hover:bg-stone-600 active:bg-stone-500 focus:bg-stone-400 focus:rounded-[10px]"
-                    // onClick={handleOpenLabelsBackdrop}
-                  >
-                    <HiTag size={"1.3rem"} color="rgb(253 186 116)" />
-                    {label.count > 0 ? (
-                      <div className="inline-flex absolute -top-1.5 -right-1.5 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-600 rounded-full ">
-                        {label.count}
-                      </div>
-                    ) : null}
-                  </button>
-                  <LabelTooltip tooltipContent={`${label.name}`} />
-                </li>
-              );
-            })} */}
-
             <LabelsNavList />
-
             {/* LOGOUT BUTTON */}
             <li className="relative group mt-6">
               <button

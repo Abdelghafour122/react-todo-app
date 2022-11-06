@@ -13,19 +13,15 @@ const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
   const [label, setLabel] = useState("");
   const labelValid = useRef(true);
   const labelExists = useRef(false);
-  const listLimitReached = useRef(false);
-
-  // const [labelsAsState, setLabelsAsState] = useState(labelsArray);
+  const [listLimitReached, setListLimitReached] = useState(false);
 
   useEffect(() => {
     fetchLabels();
   }, [fetchLabels]);
 
   useEffect(() => {
-    // setLabelsAsState(labelsArray);
-    labelsArray.length >= 5
-      ? (listLimitReached.current = true)
-      : (listLimitReached.current = false);
+    if (labelsArray.length >= 5) setListLimitReached(true);
+    else if (labelsArray.length < 5) setListLimitReached(false);
   }, [labelsArray]);
 
   useEffect(() => {
@@ -71,11 +67,11 @@ const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
                   !labelValid.current &&
                   "text-red-600 caret-red-600 border-red-600 focus:border-red-600"
                 } ${
-                  listLimitReached.current &&
+                  listLimitReached &&
                   "text-amber-600 placeholder-amber-600 border-amber-600 focus:border-amber-600 opacity-60 cursor-not-allowed"
                 }`}
                 value={label}
-                disabled={listLimitReached.current}
+                disabled={listLimitReached}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setLabel(e.target.value)
                 }
@@ -89,21 +85,21 @@ const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
               </button>
             </div>
           </form>
-          {labelValid.current === false && (
+          {labelValid.current === false ? (
             <p className="-mt-2 text-red-600 font-semibold">
               Label length should be below 20 letters!
             </p>
-          )}
-          {listLimitReached.current === true && (
+          ) : null}
+          {listLimitReached === true ? (
             <p className="-mt-2 text-amber-400 font-semibold">
               Labels limit is reached.
             </p>
-          )}
-          {labelExists.current && (
+          ) : null}
+          {labelExists.current ? (
             <p className="-mt-2 text-amber-400 font-semibold">
               Label already exists.
             </p>
-          )}
+          ) : null}
           <LabelContentHolder />
         </div>
       </div>
