@@ -499,11 +499,13 @@ const TodoContext = ({ children }: TodoContextProps) => {
         labelsDispatch({
           type: labelsReducerActions.EDIT_LABEL_ITEM,
           payload: {
+            id: labelId,
             case: "count",
             count: labelCount?.count + 1,
           },
         });
       }
+      console.log(labelsState);
     },
     removeLabelFromTodoItem: async (removeLabelParams) => {
       const labelCount = await getSpecificLabelCount(removeLabelParams.labelId);
@@ -517,6 +519,7 @@ const TodoContext = ({ children }: TodoContextProps) => {
       labelsDispatch({
         type: labelsReducerActions.EDIT_LABEL_ITEM,
         payload: {
+          id: removeLabelParams.labelId,
           case: "count",
           count: labelCount?.count - 1,
         },

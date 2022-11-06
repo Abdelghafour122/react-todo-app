@@ -15,14 +15,14 @@ const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
   const labelExists = useRef(false);
   const listLimitReached = useRef(false);
 
-  const [labelsAsState, setLabelsAsState] = useState(labelsArray);
+  // const [labelsAsState, setLabelsAsState] = useState(labelsArray);
 
   useEffect(() => {
     fetchLabels();
   }, [fetchLabels]);
 
   useEffect(() => {
-    setLabelsAsState(labelsArray);
+    // setLabelsAsState(labelsArray);
     labelsArray.length >= 5
       ? (listLimitReached.current = true)
       : (listLimitReached.current = false);

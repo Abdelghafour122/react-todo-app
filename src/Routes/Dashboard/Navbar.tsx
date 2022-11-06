@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { HiOutlineLightBulb } from "react-icons/hi";
+import { HiOutlineLightBulb, HiTag } from "react-icons/hi";
 import { FiEdit3 } from "react-icons/fi";
 import { BiPowerOff, BiLogOut } from "react-icons/bi";
 import { MdLabelOutline } from "react-icons/md";
@@ -12,11 +12,15 @@ import { useNavigate } from "react-router-dom";
 import { useAuthentication } from "../../Contexts/AuthContext";
 import Tooltip from "./Navbar/Tooltip";
 import LabelFormBackdrop from "./Labels/LabelFormBackdrop";
+import { useTodoContext } from "../../Contexts/TodoContext";
+import LabelTooltip from "./Labels/LabelTooltip";
+import LabelsNavList from "./Labels/LabelsNavList";
 
 type Props = {};
 
 const Navbar = (props: Props) => {
   const { currentUser, userSignOut } = useAuthentication();
+  const { labelsArray, fetchLabels } = useTodoContext();
   const navigate = useNavigate();
   const [profilePic, setProfilePic] = useState<string | undefined>();
   const [openProfilePopup, setOpenProfilePopup] = useState(false);
@@ -30,6 +34,11 @@ const Navbar = (props: Props) => {
   const handleCloseLabelsBackdrop = () => {
     return setOpenLabelsBackdrop(false);
   };
+
+  useEffect(() => {
+    // console.log("labels list changed", labelsArray);
+    fetchLabels();
+  }, [fetchLabels]);
 
   useEffect(() => {
     if (currentUser?.photoURL !== null) setProfilePic(currentUser?.photoURL);
@@ -89,7 +98,7 @@ const Navbar = (props: Props) => {
               </button>
               <Tooltip tooltipContent={"Labels"} />
             </li>
-            <li className="relative group">
+            {/* <li className="relative group">
               <button
                 className="p-3 bg-stone-700 transition-all rounded-[50%] duration-150 ease-linear hover:rounded-[10px] hover:bg-stone-600 active:bg-stone-500 focus:bg-stone-400 focus:rounded-[10px]"
                 onClick={handleOpenLabelsBackdrop}
@@ -115,7 +124,29 @@ const Navbar = (props: Props) => {
                 <MdLabelOutline color="rgb(253 186 116)" size={"1.7rem"} />
               </button>
               <Tooltip tooltipContent={"Labels"} />
-            </li>
+            </li> */}
+            {/* {labelsArray.map((label) => {
+              return (
+                <li className="relative group self-end" key={label.id}>
+                  <button
+                    className="p-2 bg-stone-700 transition-all rounded-[50%] duration-150 ease-linear hover:rounded-[10px] hover:bg-stone-600 active:bg-stone-500 focus:bg-stone-400 focus:rounded-[10px]"
+                    // onClick={handleOpenLabelsBackdrop}
+                  >
+                    <HiTag size={"1.3rem"} color="rgb(253 186 116)" />
+                    {label.count > 0 ? (
+                      <div className="inline-flex absolute -top-1.5 -right-1.5 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-600 rounded-full ">
+                        {label.count}
+                      </div>
+                    ) : null}
+                  </button>
+                  <LabelTooltip tooltipContent={`${label.name}`} />
+                </li>
+              );
+            })} */}
+
+            <LabelsNavList />
+
+            {/* LOGOUT BUTTON */}
             <li className="relative group mt-6">
               <button
                 className="p-3 bg-stone-700 transition-all rounded-[50%] duration-150 ease-linear hover:rounded-[10px] hover:bg-stone-600 active:bg-stone-500 bottom-2 group"
