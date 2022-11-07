@@ -6,7 +6,7 @@ type Props = {
 
 const Message = ({ message }: Props) => {
   return (
-    <p className="self-center text-center text-lg text-stone-400">{message}</p>
+    <p className="self-center text-center text-xl text-stone-400">{message}</p>
   );
 };
 

@@ -23,12 +23,12 @@ const Trash = (props: Props) => {
   }, [todoList]);
 
   return (
-    <div className="trashed-todos h-full">
+    <div className="trashed-todos route-container">
       {loading ? (
         <p>Loading...</p>
       ) : undeletedTodos === true ? (
         <EmptySection
-          message={"The deleted todos will appear here!"}
+          message={"Your deleted todos will appear here!"}
           Icon={BsTrashFill}
         />
       ) : (

@@ -104,6 +104,10 @@
     @apply flex flex-col w-full h-full items-start justify-start ml-5;
   }
 
+  .route-container {
+    @apply w-full h-full flex flex-wrap gap-2 justify-start mt-8;
+  }
+
   .label-text {
     @apply font-bold text-xl text-stone-300 flex-1;
   }

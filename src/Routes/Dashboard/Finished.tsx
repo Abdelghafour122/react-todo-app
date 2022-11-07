@@ -25,7 +25,7 @@ const Finished = (props: Props) => {
   }, [todoList]);
 
   return (
-    <div className="finished-todos">
+    <div className="finished-todos route-container">
       {loading ? (
         <p>Loading...</p>
       ) : noFinishedTodos === true || todoList.length === 0 ? (

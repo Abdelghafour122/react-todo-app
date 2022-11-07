@@ -53,7 +53,7 @@ const Todos = (props: Props) => {
           </button>
         </div>
       )}
-      <div className="w-full flex flex-wrap gap-2 justify-start mt-8">
+      <div className="route-container">
         {/* {loading === true ? (
             <p>Loading...</p>
           ) : noOngoingTodos === true ? (

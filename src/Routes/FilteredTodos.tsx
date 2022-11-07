@@ -4,6 +4,7 @@ import { useTodoContext } from "../Contexts/TodoContext";
 import { Label } from "../Utils/types";
 import LabeledTodos from "./Dashboard/LabeledTodos";
 
+// USED AS A ROUTE
 const FilteredTodos = () => {
   const { labelsArray } = useTodoContext();
   const [selectedLabel, setSelectedLabel] = useState<Label>();

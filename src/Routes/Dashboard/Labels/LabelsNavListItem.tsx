@@ -19,7 +19,7 @@ const LabelsNavListItem = ({ count, name, id }: Props) => {
       >
         <HiTag size={"1.3rem"} color="rgb(253 186 116)" />
         {count > 0 ? (
-          <div className="inline-flex absolute -top-1.5 -right-1.5 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-600 rounded-full ">
+          <div className="inline-flex absolute -top-1.5 -right-1.5 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-amber-600 rounded-lg ">
             {count}
           </div>
         ) : null}

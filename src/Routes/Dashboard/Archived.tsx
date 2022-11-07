@@ -27,13 +27,13 @@ const Archived = (props: Props) => {
   }, [unArchivedTodos]);
 
   return (
-    <div className="archived-todos">
+    <div className="archived-todos route-container">
       {loading ? (
         <p>Loading...</p>
       ) : unArchivedTodos === true ? (
         <EmptySection
           Icon={BsArchiveFill}
-          message={"The archived todos will appear here!"}
+          message={"Your archived todos will appear here!"}
         />
       ) : (
         <ArchivedTodosContainer />
