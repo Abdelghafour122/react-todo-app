@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { BsTrash } from "react-icons/bs";
 import { FiEdit3 } from "react-icons/fi";
 import { MdOutlineDoneOutline } from "react-icons/md";
@@ -10,6 +10,10 @@ const LabelItem = ({ id, name, count }: Label) => {
   const [editable, setEditable] = useState(false);
   const labelNameRef = useRef<HTMLInputElement | null>(null);
 
+  useEffect(() => {
+    editable && labelNameRef.current?.focus();
+  }, [editable]);
+
   const handleEditLabelName = () => {
     console.log(labelNameRef.current?.value);
     labelNameRef.current?.value !== undefined &&
@@ -19,7 +23,7 @@ const LabelItem = ({ id, name, count }: Label) => {
           name: labelNameRef.current?.value,
           case: "name",
         })
-      : // REPLACE WITH A PROPER ERROR MESSAGE
+      : // REPLACE WITH A SNACKBAR
         console.log("cannot update label");
   };
 
