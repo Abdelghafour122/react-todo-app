@@ -108,7 +108,7 @@ const Todo = (todoInfo: TodoType) => {
                   onClick={() =>
                     archiveTodoItem({
                       id: todoInfo.id,
-                      archived: todoInfo.archived as boolean,
+                      archived: true,
                     })
                   }
                 >
@@ -120,7 +120,7 @@ const Todo = (todoInfo: TodoType) => {
                   onClick={() =>
                     archiveTodoItem({
                       id: todoInfo.id,
-                      archived: todoInfo.archived as boolean,
+                      archived: false,
                     })
                   }
                 >

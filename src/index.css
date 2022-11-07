@@ -92,6 +92,14 @@
     @apply overflow-hidden text-lg break-words mb-1;
   }
 
+  .backdrop {
+    @apply absolute top-0 left-0 h-full w-full flex items-center justify-center bg-zinc-700 bg-opacity-90 backdrop-blur-sm z-50;
+  }
+
+  .detailed-todo-p {
+    @apply max-w-2xl overflow-scroll scrollbar-none break-all;
+  }
+
   .todo-container {
     @apply w-full flex flex-wrap items-start justify-start gap-2;
   }

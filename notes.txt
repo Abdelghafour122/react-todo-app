@@ -1,22 +1,22 @@
 p width is relative to the flex-basis of the todo
 alternative icon for labels: MdLocalOffer
 
+ADD LIGHT MODE/ DARK MODE
+
 6/11
 CHECK OUT WHY USEMEMO ISN'T PROPERLY MEMOISING
 ADD LOADING STATES WHEN UPDATING LABEL NAMES
 FIX THE BELOW
+ADD A "TOGGLE COMPLETED" BUTTON IN DETAILED TODO
+ADD VALIDATION FOR TITLE LENGTH
 
 ! IF YOURE AT A LABELS PAGE & YOU DELETE THE LABEL, replace THE empty PAGE WITH SOMETHING ELSE
-THERE IS AN ARCHIVING PROBLEM
 
 later:
 findout if a checkbox is better than an li
 finish the add / delete label in todo
     found a bug: add fetching labels when clicking "add label" button in detailedTodo, clicking too fast on two labels will add only the second but increase both's counts by 1 
     always check if the labelsList is empty before fetching, don't fetch if not necessary
-
-.make standard classes in index.css for: 
-    backdrops
 
 
 Later retouches:

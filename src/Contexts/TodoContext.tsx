@@ -133,15 +133,15 @@ const TodoContext = ({ children }: TodoContextProps) => {
       );
   };
   const archiveTodoInDB = async (
-    updateTodoDeletedInput: ArchivedTodoParamsType
+    updateTodoArchivededInput: ArchivedTodoParamsType
   ) => {
     const editTodoDocRef = doc(
       todoDatabase,
       "todos",
-      updateTodoDeletedInput.id
+      updateTodoArchivededInput.id
     );
     await updateDoc(editTodoDocRef, {
-      archived: updateTodoDeletedInput.archived,
+      archived: updateTodoArchivededInput.archived,
     })
       .then(() => console.log("updated todos archived state successfuly."))
       .catch((err) =>
@@ -339,8 +339,8 @@ const TodoContext = ({ children }: TodoContextProps) => {
         payload: { id: todoItemId },
       });
     },
-    archiveTodoItem: ({ id: todoItemId, archived: todoItemArchived }) => {
-      archiveTodoInDB({
+    archiveTodoItem: async ({ id: todoItemId, archived: todoItemArchived }) => {
+      await archiveTodoInDB({
         id: todoItemId,
         archived: todoItemArchived,
       });

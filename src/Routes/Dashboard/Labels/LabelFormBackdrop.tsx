@@ -46,7 +46,7 @@ const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
   };
 
   return (
-    <div className="absolute top-0 left-0 h-full w-full flex items-center justify-center bg-zinc-700 bg-opacity-90 backdrop-blur-sm z-50">
+    <div className="backdrop">
       <div className="flex flex-col items-center justify-center basis-2/4">
         <div className="w-full py-3 flex items-center justify-between">
           <p className="text-2xl font-semibold text-stone-200 ">Labels</p>
