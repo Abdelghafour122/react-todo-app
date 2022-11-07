@@ -38,7 +38,7 @@ const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
       : (labelExists.current = false);
     if (!labelExists.current && labelValid.current && label.trim().length > 0) {
       addLabel({
-        name: label,
+        name: label.trim(),
         count: 0,
       });
     }

@@ -16,6 +16,7 @@ import Todos from "./Routes/Dashboard/Todos";
 import Finished from "./Routes/Dashboard/Finished";
 import Archived from "./Routes/Dashboard/Archived";
 import Trash from "./Routes/Dashboard/Trash";
+import FilteredTodos from "./Routes/FilteredTodos";
 document.body.classList.add("bg-zinc-700");
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                   <Route element={<Finished />} path="finished" />
                   <Route element={<Trash />} path="trash" />
                   <Route element={<Archived />} path="archived" />
+                  <Route element={<FilteredTodos />} path="filtered/:labelId" />
                 </Route>
               </Route>
               <Route element={<PrivateUnloggedRoute />}>

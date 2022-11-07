@@ -6,7 +6,6 @@ import { useTodoContext } from "../../../Contexts/TodoContext";
 import { Label } from "../../../Utils/types";
 
 const LabelItem = ({ id, name, count }: Label) => {
-  // const LabelItem = ({label}: Label) => {
   const { deleteLabel, editLabel } = useTodoContext();
   const [editable, setEditable] = useState(false);
   const labelNameRef = useRef<HTMLInputElement | null>(null);
@@ -16,7 +15,6 @@ const LabelItem = ({ id, name, count }: Label) => {
     labelNameRef.current?.value !== undefined &&
     labelNameRef.current?.value !== ""
       ? editLabel({
-          // id: label.id,
           id: id,
           name: labelNameRef.current?.value,
           case: "name",

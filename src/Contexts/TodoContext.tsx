@@ -38,7 +38,6 @@ import {
   getTodosList,
   todoDatabase,
 } from "../Utils/firestore";
-// import { app } from "../firebase";
 import {
   labelsInitialState,
   labelsReducerActions,
@@ -56,7 +55,6 @@ export function useTodoContext() {
   return useContext(TodosContext);
 }
 
-// export const todoDatabase = getFirestore(app);
 const todosCollection = collection(todoDatabase, "todos");
 const labelsCollection = collection(todoDatabase, "labels");
 
@@ -68,8 +66,6 @@ const TodoContext = ({ children }: TodoContextProps) => {
     labelsReducer,
     labelsInitialState.labelsList
   );
-
-  // const [LabelsList, setLabelsList] = useState<Labels>([]);
 
   const addTodoItemToDB = async (params: AddTodoParamsType) => {
     let documentId = "";
@@ -178,39 +174,18 @@ const TodoContext = ({ children }: TodoContextProps) => {
       "labels",
       updateLabelContentInput.id
     );
-
     if (updateLabelContentInput.case === "count") {
       await updateDoc(editLabelDocRef, {
         count: updateLabelContentInput.count,
       })
         .then(() => console.log("label count updated successfuly"))
         .catch((err) => console.log("error while updating label count.", err));
-      // setLabelsList([
-      //   ...LabelsList.map((label) =>
-      //     label.id === updateLabelContentInput.id
-      //       ? {
-      //           ...label,
-      //           count: updateLabelContentInput.count as number,
-      //         }
-      //       : label
-      //   ),
-      // ]);
     } else if (updateLabelContentInput.case === "name") {
       await updateDoc(editLabelDocRef, {
         name: updateLabelContentInput.name,
       })
         .then(() => console.log("label name updated successfuly"))
         .catch((err) => console.log("error while updating label name.", err));
-      // setLabelsList([
-      //   ...LabelsList.map((label) =>
-      //     label.id === updateLabelContentInput.id
-      //       ? {
-      //           ...label,
-      //           name: updateLabelContentInput.name as string,
-      //         }
-      //       : label
-      //   ),
-      // ]);
     }
   };
 
@@ -393,14 +368,6 @@ const TodoContext = ({ children }: TodoContextProps) => {
         type: labelsReducerActions.ADD_LABEL_ITEM,
         payload: { id: labelIdRef.current, name: labelName },
       });
-      // setLabelsList([
-      //   ...LabelsList,
-      //   {
-      //     id: labelIdRef.current,
-      //     name: labelName,
-      //     count: 0,
-      //   },
-      // ]);
     },
     deleteLabel: (deleteLabelParams: DeleteLabelParamsType) => {
       deleteLabelFromDB(deleteLabelParams.labelId);
@@ -425,9 +392,6 @@ const TodoContext = ({ children }: TodoContextProps) => {
           });
         }
       });
-      // setLabelsList([
-      //   ...LabelsList.filter((label) => label.id !== deleteLabelParams.labelId),
-      // ]);
       labelsDispatch({
         type: labelsReducerActions.DELETE_LABEL_ITEM,
         payload: { id: deleteLabelParams.labelId as string },
@@ -463,7 +427,6 @@ const TodoContext = ({ children }: TodoContextProps) => {
           },
         });
       }
-      console.log(editLabelParams);
     },
     addLabelToTodoItem: async ({
       todoId: todoItemId,
@@ -505,7 +468,6 @@ const TodoContext = ({ children }: TodoContextProps) => {
           },
         });
       }
-      console.log(labelsState);
     },
     removeLabelFromTodoItem: async (removeLabelParams) => {
       const labelCount = await getSpecificLabelCount(removeLabelParams.labelId);

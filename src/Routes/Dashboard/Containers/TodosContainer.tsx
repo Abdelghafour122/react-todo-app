@@ -11,7 +11,6 @@ const TodosContainer = (props: Props) => {
     <div className="section-global-container">
       <LittleSectionHeader header={"Ongoing Todos"} />
       <div className="todos-container todo-container">
-        {/* <div className="todos-container todo-container gap-2"> */}
         {todoList.map(
           (todo) =>
             todo.completed === false &&

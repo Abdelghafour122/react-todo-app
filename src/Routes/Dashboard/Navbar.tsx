@@ -13,14 +13,13 @@ import { useAuthentication } from "../../Contexts/AuthContext";
 import Tooltip from "./Navbar/Tooltip";
 import LabelFormBackdrop from "./Labels/LabelFormBackdrop";
 import { useTodoContext } from "../../Contexts/TodoContext";
-import LabelTooltip from "./Labels/LabelTooltip";
 import LabelsNavList from "./Labels/LabelsNavList";
 
 type Props = {};
 
 const Navbar = (props: Props) => {
   const { currentUser, userSignOut } = useAuthentication();
-  const { labelsArray, fetchLabels } = useTodoContext();
+  const { fetchLabels } = useTodoContext();
   const navigate = useNavigate();
   const [profilePic, setProfilePic] = useState<string | undefined>();
   const [openProfilePopup, setOpenProfilePopup] = useState(false);

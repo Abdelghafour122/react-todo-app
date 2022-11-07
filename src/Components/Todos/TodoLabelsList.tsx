@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useTodoContext } from "../../Contexts/TodoContext";
-import { Label, Labels } from "../../Utils/types";
+import React from "react";
+import { Labels } from "../../Utils/types";
 import LabelChip from "./LabelChip";
 
 type Props = {
@@ -9,25 +8,6 @@ type Props = {
 };
 
 const TodoLabelsList = ({ labelsList, todoId }: Props) => {
-  const { fetchLabels } = useTodoContext();
-
-  // TRY FETCHING THE LABELS WITH USEEFFECT
-  // LOOP THROUGH THE LABELS & FILTER USING IDS FROM LABELSLIST PROP
-
-  // const listRef = useRef<Labels>([] as Labels)
-  // const [listState, setListState] = useState()
-  // useEffect(()=>{
-  //   setListState( ()=> fetchLabels())
-  // }, [])
-
-  // const labelsListRef = useRef(labelsList);
-  // useEffect(() => {
-  //   //  labelsList !== undefined
-  //   labelsListRef.current = labelsList.filter((localLabel) =>
-  //     labelsArray.some((globalLabel) => globalLabel.id === localLabel.id)
-  //   );
-  // }, [labelsArray, labelsList]);
-
   return (
     <>
       {labelsList !== undefined ? (
