@@ -3,6 +3,7 @@ import { useTodoContext } from "../../Contexts/TodoContext";
 import ArchivedTodosContainer from "./Containers/ArchivedTodosContainer";
 import EmptySection from "./Placeholders/EmptySection";
 import { BsArchiveFill } from "react-icons/bs";
+import LoadingPage from "./LoadingPage";
 
 type Props = {};
 
@@ -29,7 +30,7 @@ const Archived = (props: Props) => {
   return (
     <div className="archived-todos route-container">
       {loading ? (
-        <p>Loading...</p>
+        <LoadingPage />
       ) : unArchivedTodos === true ? (
         <EmptySection
           Icon={BsArchiveFill}

@@ -6,6 +6,7 @@ import TodoForm from "./Todos/TodoForm";
 import TodosContainer from "./Containers/TodosContainer";
 import EmptySection from "./Placeholders/EmptySection";
 import Message from "./Todos/Message";
+import LoadingPage from "./LoadingPage";
 
 type Props = {};
 
@@ -54,18 +55,8 @@ const Todos = (props: Props) => {
         </div>
       )}
       <div className="route-container">
-        {/* {loading === true ? (
-            <p>Loading...</p>
-          ) : noOngoingTodos === true ? (
-            <EmptySection
-              Icon={HiLightBulb}
-              message={"Your ongoing todos will show up here!"}
-            />
-          ) : (
-            <TodosContainer />
-          )} */}
         {loading === true ? (
-          <p>Loading...</p>
+          <LoadingPage />
         ) : loading === false && noOngoingTodos === true ? (
           <EmptySection
             Icon={HiLightBulb}

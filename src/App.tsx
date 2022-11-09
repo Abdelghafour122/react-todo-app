@@ -19,6 +19,8 @@ import Trash from "./Routes/Dashboard/Trash";
 import FilteredTodos from "./Routes/FilteredTodos";
 document.body.classList.add("bg-neutral-700");
 
+console.log("app just rendered");
+
 function App() {
   return (
     <AuthContext>

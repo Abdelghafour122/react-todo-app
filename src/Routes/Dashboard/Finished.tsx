@@ -3,10 +3,9 @@ import { useTodoContext } from "../../Contexts/TodoContext";
 import EmptySection from "./Placeholders/EmptySection";
 import FinishedTodosContainer from "./Containers/FinishedTodosContainer";
 import { MdOutlineDone } from "react-icons/md";
+import LoadingPage from "./LoadingPage";
 
-type Props = {};
-
-const Finished = (props: Props) => {
+const Finished = () => {
   const { todoList } = useTodoContext();
   const [noFinishedTodos, setNoFinishedTodos] = useState<boolean>();
   const [loading, setLoading] = useState(true);
@@ -27,7 +26,7 @@ const Finished = (props: Props) => {
   return (
     <div className="finished-todos route-container">
       {loading ? (
-        <p>Loading...</p>
+        <LoadingPage />
       ) : noFinishedTodos === true || todoList.length === 0 ? (
         <EmptySection
           Icon={MdOutlineDone}

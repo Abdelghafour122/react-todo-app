@@ -3,6 +3,7 @@ import { BsTrashFill } from "react-icons/bs";
 import { useTodoContext } from "../../Contexts/TodoContext";
 import EmptySection from "./Placeholders/EmptySection";
 import DeletedTodosContainer from "./Containers/DeletedTodosContainer";
+import LoadingPage from "./LoadingPage";
 
 type Props = {};
 
@@ -25,7 +26,7 @@ const Trash = (props: Props) => {
   return (
     <div className="trashed-todos route-container">
       {loading ? (
-        <p>Loading...</p>
+        <LoadingPage />
       ) : undeletedTodos === true ? (
         <EmptySection
           message={"Your deleted todos will appear here!"}
