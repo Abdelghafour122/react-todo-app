@@ -3,6 +3,7 @@ import { VscChromeClose } from "react-icons/vsc";
 import { EditTodoParamsType } from "../../Utils/types";
 import { useTodoContext } from "../../Contexts/TodoContext";
 import { Timestamp } from "firebase/firestore";
+import { FaTimes } from "react-icons/fa";
 
 type Props = {
   handleCloseEditTodoBackdrop: () => void;
@@ -49,22 +50,23 @@ const EditTodoBackdrop = ({ handleCloseEditTodoBackdrop, todoInfo }: Props) => {
     }
   };
   return (
-    <div className="edit-todo absolute top-0 left-0 h-full w-full flex items-center justify-center bg-zinc-700 bg-opacity-90 backdrop-blur-sm z-50">
+    <div className="edit-todo backdrop">
       <div className="flex flex-col items-center justify-center basis-2/4">
         <div className="w-full py-3 flex items-center justify-between">
           <p className="text-2xl font-semibold text-stone-200 ">
             Edit the todo
           </p>
           <button
-            className="p-2 rounded-full hover:bg-stone-500 active:bg-stone-400"
+            className="p-2 rounded-full hover:bg-neutral-600 active:bg-neutral-500"
             onClick={handleCloseEditTodoBackdrop}
           >
-            <VscChromeClose color="rgb(231 229 228)" size="1.5rem" />
+            {/* <VscChromeClose color="rgb(231 229 228)" size="1.5rem" /> */}
+            <FaTimes color="rgb(231 229 228)" size="1.5rem" />
           </button>
         </div>
         <form
           action=""
-          className="flex flex-col gap-2 p-2 border-2 border-zinc-900 rounded-lg bg-stone-600 w-full"
+          className="flex flex-col gap-4 p-2 border-2 border-neutral-900 rounded-lg bg-neutral-700 w-full"
           onSubmit={handleSubmit}
         >
           <input

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { BsArchive, BsTrash } from "react-icons/bs";
 import { FiEdit3 } from "react-icons/fi";
 import { CgRemove } from "react-icons/cg";
-import { FaTrashRestore } from "react-icons/fa";
+import { FaTrash, FaTrashRestore } from "react-icons/fa";
 import { RiInboxUnarchiveLine } from "react-icons/ri";
 import { ImEnlarge2 } from "react-icons/im";
 import EditTodoBackdrop from "../../../Components/Todos/EditTodoBackdrop";
@@ -16,11 +16,23 @@ import {
 import DetailedTodoBackdrop from "./DetailedTodoBackdrop";
 import Snackbar from "../../../Components/Todos/Snackbar";
 import TodoLabelsList from "../../../Components/Todos/TodoLabelsList";
+import TodoActionsTooltip from "./TodoActionsTooltip";
+import VerifyPermanentDelete from "./VerifyPermanentDelete";
+
+import {
+  FaTrashAlt,
+  FaTrashRestoreAlt,
+  FaPen,
+  FaExpandAlt,
+  FaLightbulb,
+  FaSignOutAlt,
+  FaTimes,
+  FaArchive,
+} from "react-icons/fa";
 
 const Todo = (todoInfo: TodoType) => {
   const {
     removeTodoItem,
-    permanentlyRemoveTodoItem,
     restoreTodoItem,
     markAsCompleted,
     archiveTodoItem,
@@ -30,7 +42,17 @@ const Todo = (todoInfo: TodoType) => {
   const [openDetailedTodoBackdrop, setOpenDetailedTodoBackdrop] =
     useState(false);
   const [todoIsDone, setTodoIsDone] = useState(todoInfo.completed);
+  const [openVerifyDeleteBackdrop, setOpenVerifyDeleteBackdrop] =
+    useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const handleOpenVerifyDeleteBackdrop = () => {
+    return setOpenVerifyDeleteBackdrop(true);
+  };
+
+  const handleCloseVerifyDeleteBackdrop = () => {
+    return setOpenVerifyDeleteBackdrop(false);
+  };
 
   const handleOpenEditTodoBackdrop = () => {
     return setOpenEditTodoBackdrop(true);
@@ -95,16 +117,18 @@ const Todo = (todoInfo: TodoType) => {
         {todoInfo.deleted === undefined || todoInfo.deleted === false ? (
           <>
             <button
-              className="todo-action-button"
+              className="todo-action-button relative group"
               onClick={handleOpenEditTodoBackdrop}
             >
-              <FiEdit3 size={"1.3rem"} />
+              {/* <FiEdit3 size={"1.3rem"} /> */}
+              <FaPen size={"1.3rem"} />
+              <TodoActionsTooltip text={"Edit"} />
             </button>
             <>
               {todoInfo.archived === undefined ||
               todoInfo.archived === false ? (
                 <button
-                  className="todo-action-button"
+                  className="todo-action-button group relative"
                   onClick={() =>
                     archiveTodoItem({
                       id: todoInfo.id,
@@ -112,11 +136,13 @@ const Todo = (todoInfo: TodoType) => {
                     })
                   }
                 >
-                  <BsArchive size={"1.3rem"} />
+                  {/* <BsArchive size={"1.3rem"} /> */}
+                  <FaArchive size={"1.3rem"} />
+                  <TodoActionsTooltip text={"Archive"} />
                 </button>
               ) : (
                 <button
-                  className="todo-action-button"
+                  className="todo-action-button relative group"
                   onClick={() =>
                     archiveTodoItem({
                       id: todoInfo.id,
@@ -125,39 +151,47 @@ const Todo = (todoInfo: TodoType) => {
                   }
                 >
                   <RiInboxUnarchiveLine size={"1.3rem"} />
+                  <TodoActionsTooltip text={"Unarchive"} />
                 </button>
               )}
             </>
             <button
-              className="todo-action-button"
+              className="todo-action-button relative group"
               onClick={() =>
                 removeTodoItem({ id: todoInfo.id, deleted: todoInfo.deleted })
               }
             >
-              <BsTrash size={"1.3rem"} />
+              {/* <BsTrash size={"1.3rem"} /> */}
+              <FaTrashAlt size={"1.3rem"} />
+              <TodoActionsTooltip text={"Delete"} />
             </button>
             <button
-              className="todo-action-button"
+              className="todo-action-button relative group"
               onClick={handleOpenDetailedTodoBackdrop}
             >
-              <ImEnlarge2 size={"1.3rem"} />
+              {/* <ImEnlarge2 size={"1.3rem"} /> */}
+              <FaExpandAlt size={"1.3rem"} />
+              <TodoActionsTooltip text={"Enlarge"} />
             </button>
           </>
         ) : (
           <>
             <button
-              className="todo-action-button"
-              onClick={() => permanentlyRemoveTodoItem({ id: todoInfo.id })}
+              className="todo-action-button relative group"
+              onClick={() => handleOpenVerifyDeleteBackdrop()}
             >
-              <CgRemove size={"1.5rem"} color={"rgb(220 38 38)"} />
+              {/* <CgRemove size={"1.5rem"} color={"rgb(220 38 38)"} /> */}
+              <FaTrash size={"1.5rem"} color={"rgb(220 38 38)"} />
+              <TodoActionsTooltip text={"Delete forever"} />
             </button>
             <button
-              className="todo-action-button"
+              className="todo-action-button relative group"
               onClick={() =>
                 restoreTodoItem({ id: todoInfo.id, deleted: todoInfo.deleted })
               }
             >
               <FaTrashRestore size={"1.5rem"} color={"rgb(22 163 74)"} />
+              <TodoActionsTooltip text={"Restore"} />
             </button>
           </>
         )}
@@ -196,6 +230,12 @@ const Todo = (todoInfo: TodoType) => {
         text="Success message"
         handleCloseSnackbar={handleCloseSnackbar}
       /> */}
+      {openVerifyDeleteBackdrop ? (
+        <VerifyPermanentDelete
+          id={todoInfo.id}
+          handleCloseVerifyDeleteBackdrop={handleCloseVerifyDeleteBackdrop}
+        />
+      ) : null}
     </div>
   );
 };

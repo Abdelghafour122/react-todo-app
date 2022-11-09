@@ -22,7 +22,7 @@
   }
 
   .todo-actions-tooltip {
-    @apply absolute left-1/2 top-[110%] -translate-x-1/2 p-2 w-max rounded-md bg-zinc-900  text-stone-200 font-medium scale-0 group-hover:scale-100;
+    @apply absolute left-1/2 top-[110%] -translate-x-1/2 px-2 py-1 w-max rounded-md bg-zinc-500  text-stone-50 font-medium scale-0 group-hover:scale-100 shadow-md;
   }
 
   .form-title {
@@ -49,12 +49,12 @@
   .button {
     border: 2px solid theme("colors.slate.900");
     padding: 0.25rem 0.5rem;
-    @apply bg-stone-200 font-semibold rounded-md border-slate-900 text-slate-900 cursor-pointer;
-    @apply disabled:cursor-not-allowed disabled:bg-stone-600  hover:bg-stone-400 active:bg-stone-500;
+    @apply bg-neutral-200 font-semibold rounded-md border-slate-900 text-slate-900 cursor-pointer;
+    @apply disabled:cursor-not-allowed disabled:bg-neutral-600  hover:bg-neutral-400 active:bg-neutral-500;
   }
 
   .todo-action-button {
-    @apply p-2 rounded-full hover:bg-zinc-700 active:bg-zinc-500;
+    @apply p-2 rounded-full hover:bg-neutral-700 active:bg-neutral-500;
   }
 
   .form-info-message {
@@ -72,11 +72,11 @@
   .todo-form-input {
     border: 2px solid theme("colors.stone.900");
     @apply py-1 px-3 rounded-md outline-none;
-    @apply focus:border-blue-500 placeholder:text-stone-400 text-stone-100 bg-stone-900 caret-stone-100;
+    @apply focus:border-blue-500 placeholder:text-stone-400 text-stone-100 bg-neutral-900 caret-stone-100;
   }
 
   .todo {
-    @apply bg-zinc-800 text-stone-300 border border-stone-400 rounded-md flex flex-col items-start justify-between p-3 basis-1/5 gap-4;
+    @apply bg-neutral-800 text-stone-300 border border-neutral-400 rounded-md flex flex-col items-start justify-between p-3 basis-1/5 gap-4;
   }
 
   .todo-title {
@@ -93,7 +93,7 @@
   }
 
   .backdrop {
-    @apply absolute top-0 left-0 h-full w-full flex items-center justify-center bg-zinc-700 bg-opacity-90 backdrop-blur-sm z-50;
+    @apply absolute top-0 left-0 h-full w-full flex items-center justify-center bg-neutral-800 bg-opacity-70 backdrop-blur-sm z-50;
   }
 
   .detailed-todo-p {
@@ -125,6 +125,6 @@
   }
 
   .label-button {
-    @apply rounded-sm hover:bg-stone-700 active:bg-stone-400 p-2;
+    @apply rounded-sm hover:bg-neutral-700 active:bg-neutral-400 p-2;
   }
 }

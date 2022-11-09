@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { BsTrash } from "react-icons/bs";
-import { FiEdit3 } from "react-icons/fi";
+import { FaCheck, FaPen, FaTrashAlt } from "react-icons/fa";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import { useTodoContext } from "../../../Contexts/TodoContext";
 import { Label } from "../../../Utils/types";
@@ -59,11 +58,11 @@ const LabelItem = ({ id, name, count }: Label) => {
               handleEditLabelName();
             }}
           >
-            <MdOutlineDoneOutline size={"1.2rem"} color={"rgb(214 211 209)"} />
+            <FaCheck size={"1.2rem"} color={"rgb(214 211 209)"} />
           </button>
         ) : (
           <button className="label-button" onClick={() => setEditable(true)}>
-            <FiEdit3 size={"1.2rem"} color={"rgb(214 211 209)"} />
+            <FaPen size={"1.2rem"} color={"rgb(214 211 209)"} />
           </button>
         )}
         <button
@@ -73,7 +72,7 @@ const LabelItem = ({ id, name, count }: Label) => {
             deleteLabel({ labelId: id, labelCount: count })
           }
         >
-          <BsTrash size={"1.2rem"} color={"rgb(214 211 209)"} />
+          <FaTrashAlt size={"1.2rem"} color={"rgb(214 211 209)"} />
         </button>
       </div>
     </li>

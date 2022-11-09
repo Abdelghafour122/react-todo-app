@@ -8,6 +8,18 @@ import TodoActionsTooltip from "./TodoActionsTooltip";
 import LabelListDropdown from "../Labels/LabelListDropdown";
 import TodoLabelsList from "../../../Components/Todos/TodoLabelsList";
 
+import {
+  FaTrashAlt,
+  FaTrashRestoreAlt,
+  FaPen,
+  FaExpandAlt,
+  FaLightbulb,
+  FaSignOutAlt,
+  FaTimes,
+  FaArchive,
+  FaTags,
+} from "react-icons/fa";
+
 type Props = {
   handleCloseDetailedTodoBackdrop: () => void;
   detailedTodoInfo: DetailedTodoType;
@@ -22,7 +34,7 @@ const DetailedTodoBackdrop = ({
   const [openLabelsDrpdown, setOpenLabelsDropdown] = useState(false);
   return (
     <div className="detailed-todo backdrop">
-      <section className="details flex flex-col items-start justify-start gap-3 max-w-3xl min-w-2xl bg-zinc-800 p-3 rounded-md shadow-xl">
+      <section className="details flex flex-col items-start justify-start gap-3 max-w-3xl min-w-2xl bg-neutral-900 p-3 rounded-md shadow-xl">
         <div className="todo-info flex flex-col items-start justify-start w-full gap-3">
           {/* <h1 className="text-2xl leading-normal text-stone-100 font-bold rounded-md mb-0 w-[560px] break-all text-ellipsis overflow-hidden whitespace-nowrap"> */}
           <h1 className="text-2xl leading-normal text-stone-100 font-bold rounded-md mb-0 min-w-min w-[560px] max-h-[60px] break-all overflow-scroll scrollbar-none ">
@@ -56,7 +68,8 @@ const DetailedTodoBackdrop = ({
                   })
                 }
               >
-                <BsTrash size={"1.3rem"} />
+                {/* <BsTrash size={"1.3rem"} /> */}
+                <FaTrashAlt size={"1.3rem"} />
                 <TodoActionsTooltip text={"Delete"} />
               </button>
             </li>
@@ -68,12 +81,12 @@ const DetailedTodoBackdrop = ({
                   onClick={() =>
                     archiveTodoItem({
                       id: detailedTodoInfo.id,
-                      // archived: detailedTodoInfo.archived as boolean,
                       archived: true,
                     })
                   }
                 >
-                  <BsArchive size={"1.3rem"} />
+                  {/* <BsArchive size={"1.3rem"} /> */}
+                  <FaArchive size={"1.3rem"} />
                   <TodoActionsTooltip text={"Archive"} />
                 </button>
               ) : (
@@ -82,7 +95,6 @@ const DetailedTodoBackdrop = ({
                   onClick={() =>
                     archiveTodoItem({
                       id: detailedTodoInfo.id,
-                      // archived: !detailedTodoInfo.archived as boolean,
                       archived: false,
                     })
                   }
@@ -97,7 +109,8 @@ const DetailedTodoBackdrop = ({
                 className="todo-action-button group relative"
                 onClick={() => setOpenLabelsDropdown((prev) => !prev)}
               >
-                <MdOutlineNewLabel size={"1.3rem"} />
+                {/* <MdOutlineNewLabel size={"1.3rem"} /> */}
+                <FaTags size={"1.3rem"} />
                 <TodoActionsTooltip text={"Add Label"} />
               </button>
               {openLabelsDrpdown ? (

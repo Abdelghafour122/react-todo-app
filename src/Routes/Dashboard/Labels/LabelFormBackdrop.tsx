@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { MdOutlineDone } from "react-icons/md";
 import { VscChromeClose } from "react-icons/vsc";
+import { FaCheck, FaTimes } from "react-icons/fa";
 import { useTodoContext } from "../../../Contexts/TodoContext";
 import LabelContentHolder from "./LabelContentHolder";
 
@@ -49,21 +50,22 @@ const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
     <div className="backdrop">
       <div className="flex flex-col items-center justify-center basis-2/4">
         <div className="w-full py-3 flex items-center justify-between">
-          <p className="text-2xl font-semibold text-stone-200 ">Labels</p>
+          <p className="text-2xl font-semibold text-stone-50 ">Labels</p>
           <button
-            className="p-2 rounded-full hover:bg-stone-500 active:bg-stone-400"
+            className="p-2 rounded-full hover:bg-neutral-600 active:bg-neutral-500"
             onClick={handleCloseLabelsBackdrop}
           >
-            <VscChromeClose color="rgb(231 229 228)" size="1.5rem" />
+            {/* <VscChromeClose color="rgb(231 229 228)" size="1.5rem" /> */}
+            <FaTimes color="rgb(231 229 228)" size="1.5rem" />
           </button>
         </div>
-        <div className="flex flex-col gap-2 p-2 border-2 border-zinc-900 rounded-lg bg-stone-600 w-full">
+        <div className="flex flex-col gap-2 p-2 border-2 border-neutral-900 rounded-lg bg-neutral-700 w-full">
           <form action="" className="w-full" onSubmit={handleSubmit}>
             <div className="flex gap-2 w-full">
               <input
                 type="text"
                 placeholder="Add label"
-                className={`todo-form-input flex-1 font-semibold ${
+                className={`todo-form-input flex-1 text-xl font-semibold ${
                   !labelValid.current &&
                   "text-red-600 caret-red-600 border-red-600 focus:border-red-600"
                 } ${
@@ -77,11 +79,12 @@ const LabelFormBackdrop = ({ handleCloseLabelsBackdrop }: Props) => {
                 }
               />
               <button
-                className="rounded-sm hover:bg-stone-500 active:bg-stone-400 p-2 disabled:opacity-0 disabled:pointer-events-none transition-opacity duration-300"
+                className="rounded-sm hover:bg-neutral-500 active:bg-neutral-400 p-2 disabled:opacity-0 disabled:pointer-events-none transition-opacity duration-300"
                 onClick={handleSubmit}
                 disabled={!labelValid.current || label === ""}
               >
-                <MdOutlineDone size={"1.2rem"} />
+                {/* <MdOutlineDone size={"1.4rem"} /> */}
+                <FaCheck size={"1.4rem"} color="rgb(231 229 228)" />
               </button>
             </div>
           </form>

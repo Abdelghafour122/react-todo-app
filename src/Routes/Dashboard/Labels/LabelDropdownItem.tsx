@@ -13,7 +13,7 @@ const LabelDropdownItem = ({ label, currTodoId, added }: Props) => {
   return (
     <li className="w-full">
       {added ? (
-        <p className="p-1 font-semibold rounded-sm w-full flex items-center justify-between text-stone-300 bg-stone-800">
+        <p className="p-1 font-semibold rounded-sm w-full flex items-center justify-between text-stone-300 bg-amber-900">
           <span>{label.name}</span>
           <span className="italic font-bold">*Added</span>
         </p>

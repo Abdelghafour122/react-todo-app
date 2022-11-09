@@ -17,7 +17,7 @@ import Finished from "./Routes/Dashboard/Finished";
 import Archived from "./Routes/Dashboard/Archived";
 import Trash from "./Routes/Dashboard/Trash";
 import FilteredTodos from "./Routes/FilteredTodos";
-document.body.classList.add("bg-zinc-700");
+document.body.classList.add("bg-neutral-700");
 
 function App() {
   return (

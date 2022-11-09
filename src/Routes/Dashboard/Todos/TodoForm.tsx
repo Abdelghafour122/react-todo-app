@@ -1,6 +1,7 @@
 import React, { useState, SyntheticEvent } from "react";
 import { VscChromeClose } from "react-icons/vsc";
 import { useTodoContext } from "../../../Contexts/TodoContext";
+import { FaTimes } from "react-icons/fa";
 
 type Props = {
   handleCloseTodoFormBackdrop: () => void;
@@ -23,20 +24,20 @@ const TodoForm = ({ handleCloseTodoFormBackdrop }: Props) => {
   };
 
   return (
-    <div className="add-todo absolute top-0 left-0 h-full w-full flex items-center justify-center bg-zinc-700 bg-opacity-90 backdrop-blur-sm z-50">
+    <div className="add-todo backdrop">
       <div className="flex flex-col items-center justify-center basis-2/4">
         <div className="w-full py-3 flex items-center justify-between">
-          <p className="text-2xl font-semibold text-stone-200 ">Add a todo</p>
+          <p className="text-2xl font-semibold text-stone-50 ">Add a todo</p>
           <button
-            className="p-2 rounded-full hover:bg-stone-500 active:bg-stone-400"
+            className="p-2 rounded-full hover:bg-neutral-600 active:bg-neutral-500"
             onClick={handleCloseTodoFormBackdrop}
           >
-            <VscChromeClose color="rgb(231 229 228)" size="1.5rem" />
+            <FaTimes color="rgb(250 250 249)" size="1.5rem" />
           </button>
         </div>
         <form
           action=""
-          className="make-todo w-full flex flex-col  p-3 bg-stone-700 rounded-xl gap-5 border-2 border-slate-900"
+          className="make-todo w-full flex flex-col p-3 bg-neutral-700 rounded-xl gap-5 border-2 border-neutral-900"
           onSubmit={handleSubmit}
         >
           <input

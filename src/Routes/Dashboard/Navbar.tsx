@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { HiOutlineLightBulb, HiTag } from "react-icons/hi";
 import { FiEdit3 } from "react-icons/fi";
 import { BiPowerOff, BiLogOut } from "react-icons/bi";
-import { MdLabelOutline } from "react-icons/md";
+import { MdLabel, MdLabelOutline } from "react-icons/md";
 import { BsArchive, BsTrash } from "react-icons/bs";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import ProfileSettingsPopup from "../../Components/Dashboard/ProfileSettingsPopup";
@@ -14,6 +14,13 @@ import Tooltip from "./Navbar/Tooltip";
 import LabelFormBackdrop from "./Labels/LabelFormBackdrop";
 import { useTodoContext } from "../../Contexts/TodoContext";
 import LabelsNavList from "./Labels/LabelsNavList";
+import {
+  FaArchive,
+  FaCheck,
+  FaLightbulb,
+  FaSignOutAlt,
+  FaTrashAlt,
+} from "react-icons/fa";
 
 type Props = {};
 
@@ -48,24 +55,33 @@ const Navbar = (props: Props) => {
   const NAV_LINKS = [
     {
       linkName: "Todos",
-      icon: HiOutlineLightBulb,
+      // icon: HiOutlineLightBulb,
+      icon: FaLightbulb,
       execute: () => navigate(""),
     },
     {
       linkName: "Finished",
-      icon: MdOutlineDoneOutline,
+      // icon: MdOutlineDoneOutline,
+      icon: FaCheck,
       execute: () => navigate("finished"),
     },
     {
       linkName: "Archived",
-      icon: BsArchive,
+      // icon: BsArchive,
+      icon: FaArchive,
       execute: () => navigate("archived"),
     },
-    { linkName: "Trash", icon: BsTrash, execute: () => navigate("trash") },
+    {
+      linkName: "Trash",
+      //  icon: BsTrash,
+      icon: FaTrashAlt,
+
+      execute: () => navigate("trash"),
+    },
   ];
 
   return (
-    <nav className="py-2 px-2 h-full bg-stone-900">
+    <nav className="py-2 px-2 h-full bg-neutral-900">
       <div className="flex flex-col items-center justify-start gap-2 h-full w-max overflow-y-scroll scrollbar-hide">
         <p className="text-2xl text-orange-300 font-sans font-extrabold border-b-2 border-b-stone-500">
           Dooit
@@ -93,7 +109,8 @@ const Navbar = (props: Props) => {
                 className="p-3 bg-stone-700 transition-all rounded-[50%] duration-150 ease-linear hover:rounded-[10px] hover:bg-stone-600 active:bg-stone-500 focus:bg-stone-400 focus:rounded-[10px]"
                 onClick={handleOpenLabelsBackdrop}
               >
-                <MdLabelOutline color="rgb(253 186 116)" size={"1.7rem"} />
+                {/* <MdLabelOutline color="rgb(253 186 116)" size={"1.7rem"} /> */}
+                <MdLabel color="rgb(253 186 116)" size={"1.7rem"} />
               </button>
               <Tooltip tooltipContent={"Labels"} />
             </li>
@@ -104,7 +121,8 @@ const Navbar = (props: Props) => {
                 className="p-3 bg-stone-700 transition-all rounded-[50%] duration-150 ease-linear hover:rounded-[10px] hover:bg-stone-600 active:bg-stone-500 bottom-2 group"
                 onClick={userSignOut}
               >
-                <BiLogOut size={"1.7rem"} color={"#ff3535"} />
+                {/* <BiLogOut size={"1.7rem"} color={"#ff3535"} /> */}
+                <FaSignOutAlt size={"1.7rem"} color={"#ff3535"} />
                 <Tooltip tooltipContent={"Sign out"} />
               </button>
             </li>

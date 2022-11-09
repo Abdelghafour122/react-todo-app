@@ -15,8 +15,8 @@ const LabelListDropdown = ({
   currTodoId,
 }: Props) => {
   return (
-    <div className="label-list-drop absolute bg-zinc-900 left-[110%] top-0 p-1 w-max min-h-[6rem] max-h-[8rem] rounded-sm flex flex-col items-start justify-start gap-2 overflow-y-scroll scrollbar-none cursor-default shadow-xl">
-      <p className="text-stone-400 text-lg font-bold">Labels:</p>
+    <div className="label-list-drop absolute bg-zinc-800 left-[110%] top-0 p-1 w-max min-h-[6rem] max-h-[8rem] rounded-sm flex flex-col items-start justify-start gap-2 overflow-y-scroll scrollbar-none cursor-default shadow-xl">
+      <p className="text-stone-300 text-lg font-bold">Labels:</p>
       {labelsList.length === 0 ? (
         <NoLabelsDropdownMessage />
       ) : (
